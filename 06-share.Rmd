@@ -1,0 +1,287 @@
+# Lecture 3: Connectivity & Graph Exploration
+
+### Connectivity
+
+* **Connected Component**: Equivalence classes formed by the walk relation $u \sim v$ on undirected graphs.
+
+
+* **Strong Connectivity (Digraphs)**: $u$ and $v$ are strongly connected if there exists a directed walk from $u$ to $v$ **and** from $v$ to $u$.
+
+
+* **Strongly Connected Component (SCC)**: $C(u) = R_+(u) \cap R_-(u)$, where $R_+(u)$ is reachable from $u$, and $R_-(u)$ can reach $u$. Reaching set $R_-(u)$ is found using the inverse graph $G^T$ (represented by transpose adjacency matrix $A^T$).
+
+
+
+### Exploration Algorithms
+
+| Algorithm | Queue/Data Structure | Strategy | Complexity |
+| --- | --- | --- | --- |
+| **Generic Search** | Set $L$<br> | Visits arbitrary unvisited neighbor
+
+ | $O(V)$ steps (linear)
+
+ |
+| **DFS** | LIFO Stack
+
+ | Explores deeply along branches before backtracking
+
+ | $O(V + E)$ |
+| **BFS** | FIFO Queue
+
+ | Explores all immediate neighbors level-by-level
+
+ | $O(V + E)$ |
+
+---
+
+## Lecture 4: Planar Graphs
+
+### Definitions & Euler's Formula
+
+* **Planar Graph**: A graph that can be embedded (drawn) in a 2D plane such that no edges intersect except at their endpoints.
+
+
+* **Fáry's Theorem**: Every planar graph can be drawn using straight line segments.
+
+
+* **Euler's Formula**: For any plane-embedded graph with $v$ vertices, $e$ edges, $r$ regions, and $c$ components:
+
+$$v - e + r = c + 1$$
+
+
+
+For connected graphs ($c = 1$), this simplifies to $v - e + r = 2$.
+
+
+
+### Invariants & Non-Planarity Criteria
+
+* **Edge Bounds**:
+* Simple planar graph ($v \ge 3$): $e \le 3v - 6$.
+
+
+* Planar graph with no cycle of length $< 4$ (girth $\ge 4$): $e \le 2v - 4$.
+
+
+
+
+* **Degree Invariants**:
+* Average vertex degree in a planar graph: $< 6 - \frac{12}{n}$.
+
+
+* Every planar graph contains at least one vertex with degree $d(v) \le 5$.
+
+
+
+
+* **Kuratowski's Theorem**: A graph is non-planar **if and only if** it contains a subdivision of $K_5$ (complete graph on 5 vertices) or $K_{3,3}$ (complete bipartite graph on 3+3 vertices).
+
+
+
+---
+
+## Lecture 5 & 6: Trees, Spanning Trees & Minimum Spanning Trees (MST)
+
+### Tree Properties
+
+* **Tree**: A connected, acyclic graph.
+
+
+* **Forest**: An acyclic collection of trees. A forest on $n$ vertices with $c$ components has $n - c$ edges.
+
+
+* **Equivalent Tree Definitions** ($\vert{}V\vert{} = n$):
+1. Connected and acyclic.
+
+
+2. Connected with $n - 1$ edges.
+
+
+3. Acyclic with $n - 1$ edges.
+
+
+4. Unique path between any pair of vertices.
+
+
+
+
+* **Cayley's Formula**: Number of distinct labeled trees on $n$ vertices is $n^{n-2}$.
+
+
+
+### Rooted Trees
+
+* **Terminology**: Root, Parent, Child, Siblings, Leaf (no children), Depth (distance to root), Height (maximum depth).
+
+
+* **$m$-ary Tree**: Every node has at most $m$ children.
+
+
+* **Center of a Tree**: Single vertex or pair of adjacent vertices that minimizes maximum distance to any other node (eccentricity).
+
+
+
+### Minimum Spanning Tree Algorithms
+
+```
+     Kruskal's Algorithm               Prim's Algorithm
+[Sort all edges by weight]       [Start from single node u]
+            |                                |
+[Add edge if no cycle formed]     [Add minimum edge connecting]
+            |                     [visited to unvisited set]
+[Repeat until V-1 edges]                    |
+                                  [Repeat until V-1 edges]
+
+```
+
+* **Kruskal's Algorithm**: Edge-centric greedy approach. Sorts all edges by weight and iteratively adds the minimum-weight edge that does not form a cycle.
+
+
+* **Prim's Algorithm**: Vertex-centric greedy approach. Starts with a single vertex and iteratively expands the tree by adding the minimum-weight edge connecting the current tree to an unvisited vertex.
+
+
+
+---
+
+## Lecture 7 & 8: Graph Coloring & Applications
+
+### Definitions & Results
+
+* **$k$-Coloring**: Assignment $C: V \to \{1, \dots, k\}$ such that $C(u) \ne C(v)$ for all $uv \in E$.
+
+
+* **Chromatic Number $\chi(G)$**: Minimal $k$ required to color $G$.
+
+
+* **Key Chromatic Values**:
+* Bipartite Graphs: $\chi(G) = 2$
+
+* Cycles ($C_n$): $\chi(C_n) = 2$ (even $n$), $\chi(C_n) = 3$ (odd $n$)
+
+
+* Cliques ($K_n$): $\chi(K_n) = n$
+
+* Four-Color Theorem: Every planar graph has $\chi(G) \le 4$.
+
+
+
+
+
+### Applications of Graph Coloring
+
+1. **Conflict Allocation (e.g., Tropical Fish Tank Allocation)**: Vertices = entities (fish); Edges = conflicts; Colors = tanks required.
+
+
+2. **Scheduling Problems (e.g., Exam Scheduling)**: Vertices = courses; Edges = student overlap conflicts; Colors = minimum time slots needed.
+
+
+
+---
+
+## Lecture 9: Shortest Path Algorithms
+
+### Algorithms Taxonomy
+
+| Problem Type | Algorithm | Strategy | Constraints |
+| --- | --- | --- | --- |
+| **Unweighted** | BFS Exploration
+
+ | Level-by-level queue traversal
+
+ | All edge weights equal $1$<br> |
+| **Weighted (Non-negative)** | Dijkstra's Algorithm
+
+ | Greedy search via priority queue
+
+ | Requires non-negative edge weights $w(e) \ge 0$<br> |
+| **Negative Weights** | Modified Dijkstra / Bellman-Ford | Iterative relaxation | Detects negative weight cycles
+
+ |
+
+* **Dijkstra's Relaxation Step**:
+
+$$\text{If } \lambda(v) > \lambda(u) + w(u, v) \implies \lambda(v) = \lambda(u) + w(u, v)$$
+
+
+
+
+---
+
+## Lecture 10: Networks and Flows
+
+### Network Definitions
+
+* **Network**: A directed graph with source $s$, sink $t$, and arc capacities $c_{i,j} \ge 0$.
+
+
+* **Flow Constraints**:
+1. Capacity Constraint: $0 \le x_{i,j} \le c_{i,j}$
+
+2. Conservation (Kirchhoff's Law): $\sum_{k} x_{k,i} = \sum_{k} x_{i,k}$ for all vertices except source $s$ and sink $t$.
+
+
+
+
+
+### Ford-Fulkerson Algorithm & Max-Flow Min-Cut
+
+1. Initialize flow $x_{i,j} = 0$ everywhere.
+
+
+2. Search for an **Augmenting Path** from source to sink with bottleneck capacity $\Delta > 0$.
+
+
+3. Increase path flow by $\Delta$ and repeat until no augmenting path exists.
+
+
+
+* **Max-Flow Min-Cut Theorem**: The maximum flow value in a network equals the minimum capacity of a cut separating $s$ and $t$.
+
+
+
+---
+
+## Lecture 11 & 12: Matchings & Covers
+
+### Matchings Definitions
+
+* **Matching ($M$)**: A subset of edges in $G$ such that no two edges share a common vertex.
+
+
+* **Maximal Matching**: A matching that cannot be extended by adding any remaining edge.
+
+
+* **Maximum Matching**: A matching with the highest possible cardinality ($\nu(G)$).
+
+
+* **Perfect Matching**: A matching that covers every vertex in $V$ ($\text{deficiency} = 0$).
+
+
+* **Augmenting Path**: An $M$-alternating path whose endpoints are $M$-exposed. A matching $M$ is maximum **if and only if** it has no $M$-augmenting paths.
+
+
+
+### Graph Covers
+
+* **Line Cover**: Edge subset covering every vertex (requires $d(v) \ge 1$).
+
+
+* **Vertex Cover**: Vertex subset covering every edge in $E$.
+
+
+
+### Fundamental Matching Theorems
+
+* **Hall's Marriage Theorem**: A bipartite graph with sets $X, Y$ has a matching covering $X$ **if and only if** for every subset $S \subseteq X$, its neighborhood satisfies $\vert{}N(S)\vert{} \ge \vert{}S\vert{}$.
+
+
+* **Tutte-Berge Formula**:
+
+$$\nu(G) = \min_{U \subseteq V} \frac{1}{2} \left( \vert{}V\vert{} - \alpha(G \setminus U) + \vert{}U\vert{} \right)$$
+
+
+
+where $\alpha(G \setminus U)$ denotes the number of odd connected components in $G \setminus U$.
+
+
+

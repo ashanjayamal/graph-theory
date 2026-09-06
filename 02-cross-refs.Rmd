@@ -1,0 +1,70 @@
+# Graph Types, Operations & Representations
+
+### Graph Isomorphism & Counting
+
+* **Isomorphism**: Two graphs are isomorphic if there exists a 1-to-1 correspondence between their vertex sets that preserves adjacencies and non-adjacencies. Finding if two graphs are isomorphic is believed to be an NP-hard problem.
+
+
+* **Counting Simple Graphs**:
+* Maximum possible edges in a simple graph with $n$ vertices: $\frac{n(n-1)}{2}$.
+
+
+* Total possible labeled graphs with $n$ vertices: $2^{n(n-1)/2}$.
+
+
+* The number of non-isomorphic graphs $T_n$ satisfies: $\frac{2^{n(n-1)/2}}{n!} \le T_n \le 2^{n(n-1)/2}$.
+
+
+
+
+
+### Graph Transformations
+
+* **Complement Graph $\overline{G}$**: Given $G=(V,E)$, $\overline{G}=(V, E')$ shares the same vertex set, but its edges are precisely those missing from $G$.
+
+
+* **Line Graph $L(G)$**: Represents edge adjacencies in $G$. Each vertex in $L(G)$ corresponds to an edge in $G$, and two vertices in $L(G)$ are adjacent if their respective edges in $G$ share a common vertex.
+
+
+
+```
+Original Edge (u, v) ---- Original Edge (v, w)
+          \                      /
+           --- Line Graph Node --
+
+```
+
+### Eulerian & Hamiltonian Graphs
+
+* **Eulerian Trail**: A trail containing every edge of $G$.
+
+
+* **Eulerian Tour**: A closed Eulerian trail.
+
+
+* **Euler's Theorem**: A connected graph has an Euler tour **if and only if** every vertex has an **even degree**.
+
+
+* **Hamiltonian Cycle**: A cycle that visits every **vertex** of a graph exactly once.
+
+
+
+### Graph Representations
+
+* **Adjacency Matrix ($A$)**: An $n \times n$ matrix where $A(i, j) = 1$ if $(i, j) \in E$, else $0$.
+
+
+* **Incidence Matrix ($T$)**: An $n \times m$ matrix (vertices $\times$ edges):
+
+
+* Undirected: $T(i, k) = 1$ if vertex $i$ is incident with edge $k$.
+
+
+* Directed: $T(i, k) = -1$ if arc $k$ leaves vertex $i$; $T(j, k) = 1$ if arc $k$ enters vertex $j$.
+
+
+
+
+* **Adjacency List**: Sparse matrix structure mapping each node to its list of outward neighbors.
+
+

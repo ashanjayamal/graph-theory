@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Graph Theroy</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Graph Theroy" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Graph Theroy" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Ashan De Silva" />
+
+
+<meta name="date" content="2026-09-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="graph-types-operations-representations.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction to Graph Theory</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-is-graph-theory"><i class="fa fa-check"></i><b>1.1</b> What is Graph Theory?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#historical-foundations"><i class="fa fa-check"></i><b>1.2</b> Historical Foundations</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#the-seven-bridges-of-k%C3%B6nigsberg-1736"><i class="fa fa-check"></i><b>1.2.1</b> The Seven Bridges of Königsberg (1736)</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#hamiltons-icosian-game-1859"><i class="fa fa-check"></i><b>1.2.2</b> Hamilton’s Icosian Game (1859)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#modern-applications"><i class="fa fa-check"></i><b>1.3</b> Modern Applications</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#formal-definitions-and-basic-structures"><i class="fa fa-check"></i><b>1.4</b> Formal Definitions and Basic Structures</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#mathematical-definition-of-a-graph"><i class="fa fa-check"></i><b>1.4.1</b> Mathematical Definition of a Graph</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#loops-multiple-edges-and-simple-graphs"><i class="fa fa-check"></i><b>1.4.2</b> Loops, Multiple Edges, and Simple Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#vertex-degrees-and-handshaking"><i class="fa fa-check"></i><b>1.5</b> Vertex Degrees and Handshaking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#vertex-degree"><i class="fa fa-check"></i><b>1.5.1</b> Vertex Degree</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#the-handshaking-lemma"><i class="fa fa-check"></i><b>1.5.2</b> The Handshaking Lemma</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#special-classes-of-graphs"><i class="fa fa-check"></i><b>1.6</b> Special Classes of Graphs</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#complete-graphs-k_n"><i class="fa fa-check"></i><b>1.6.1</b> Complete Graphs (<span class="math inline">\(K_n\)</span>)</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#regular-graphs"><i class="fa fa-check"></i><b>1.6.2</b> Regular Graphs</a></li>
+<li class="chapter" data-level="1.6.3" data-path="index.html"><a href="index.html#bipartite-graphs"><i class="fa fa-check"></i><b>1.6.3</b> Bipartite Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#traversal-terminology-walks-trails-paths-circuits-and-cycles"><i class="fa fa-check"></i><b>1.7</b> Traversal Terminology: Walks, Trails, Paths, Circuits, and Cycles</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="index.html"><a href="index.html#definitions"><i class="fa fa-check"></i><b>1.7.1</b> Definitions</a></li>
+<li class="chapter" data-level="1.7.2" data-path="index.html"><a href="index.html#summary-table"><i class="fa fa-check"></i><b>1.7.2</b> Summary Table</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#directed-graphs-digraphs"><i class="fa fa-check"></i><b>1.8</b> Directed Graphs (Digraphs)</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="index.html"><a href="index.html#in-degree-and-out-degree"><i class="fa fa-check"></i><b>1.8.1</b> In-Degree and Out-Degree</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#chapter-1-exercises"><i class="fa fa-check"></i><b>1.9</b> Chapter 1 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html"><i class="fa fa-check"></i><b>2</b> Graph Types, Operations &amp; Representations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#graph-isomorphism-and-counting"><i class="fa fa-check"></i><b>2.1</b> Graph Isomorphism and Counting</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#graph-isomorphism"><i class="fa fa-check"></i><b>2.1.1</b> Graph Isomorphism</a></li>
+<li class="chapter" data-level="2.1.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#counting-simple-graphs"><i class="fa fa-check"></i><b>2.1.2</b> Counting Simple Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#graph-transformations-and-operations"><i class="fa fa-check"></i><b>2.2</b> Graph Transformations and Operations</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-complement-graph-overlineg"><i class="fa fa-check"></i><b>2.2.1</b> The Complement Graph (<span class="math inline">\(\overline{G}\)</span>)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-line-graph-lg"><i class="fa fa-check"></i><b>2.2.2</b> The Line Graph (<span class="math inline">\(L(G)\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#eulerian-and-hamiltonian-graphs"><i class="fa fa-check"></i><b>2.3</b> Eulerian and Hamiltonian Graphs</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#eulerian-graphs-edge-traversals"><i class="fa fa-check"></i><b>2.3.1</b> Eulerian Graphs (Edge Traversals)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#hamiltonian-graphs-vertex-traversals"><i class="fa fa-check"></i><b>2.3.2</b> Hamiltonian Graphs (Vertex Traversals)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#computer-representations-of-graphs"><i class="fa fa-check"></i><b>2.4</b> Computer Representations of Graphs</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-adjacency-matrix-a"><i class="fa fa-check"></i><b>2.4.1</b> The Adjacency Matrix (<span class="math inline">\(A\)</span>)</a></li>
+<li class="chapter" data-level="2.4.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-incidence-matrix-t"><i class="fa fa-check"></i><b>2.4.2</b> The Incidence Matrix (<span class="math inline">\(T\)</span>)</a></li>
+<li class="chapter" data-level="2.4.3" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-adjacency-list"><i class="fa fa-check"></i><b>2.4.3</b> The Adjacency List</a></li>
+<li class="chapter" data-level="2.4.4" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#representation-comparison"><i class="fa fa-check"></i><b>2.4.4</b> Representation Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#chapter-2-exercises"><i class="fa fa-check"></i><b>2.5</b> Chapter 2 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graph-types-operations-representations-1.html"><a href="graph-types-operations-representations-1.html"><i class="fa fa-check"></i><b>3</b> Graph Types, Operations &amp; Representations</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="graph-types-operations-representations-1.html"><a href="graph-types-operations-representations-1.html#graph-isomorphism-counting"><i class="fa fa-check"></i><b>3.0.1</b> Graph Isomorphism &amp; Counting</a></li>
+<li class="chapter" data-level="3.0.2" data-path="graph-types-operations-representations-1.html"><a href="graph-types-operations-representations-1.html#graph-transformations"><i class="fa fa-check"></i><b>3.0.2</b> Graph Transformations</a></li>
+<li class="chapter" data-level="3.0.3" data-path="graph-types-operations-representations-1.html"><a href="graph-types-operations-representations-1.html#eulerian-hamiltonian-graphs"><i class="fa fa-check"></i><b>3.0.3</b> Eulerian &amp; Hamiltonian Graphs</a></li>
+<li class="chapter" data-level="3.0.4" data-path="graph-types-operations-representations-1.html"><a href="graph-types-operations-representations-1.html#graph-representations"><i class="fa fa-check"></i><b>3.0.4</b> Graph Representations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html"><i class="fa fa-check"></i><b>4</b> Lecture 3: Connectivity &amp; Graph Exploration</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#connectivity"><i class="fa fa-check"></i><b>4.0.1</b> Connectivity</a></li>
+<li class="chapter" data-level="4.0.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#exploration-algorithms"><i class="fa fa-check"></i><b>4.0.2</b> Exploration Algorithms</a></li>
+<li class="chapter" data-level="4.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-4-planar-graphs"><i class="fa fa-check"></i><b>4.1</b> Lecture 4: Planar Graphs</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#definitions-eulers-formula"><i class="fa fa-check"></i><b>4.1.1</b> Definitions &amp; Euler’s Formula</a></li>
+<li class="chapter" data-level="4.1.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#invariants-non-planarity-criteria"><i class="fa fa-check"></i><b>4.1.2</b> Invariants &amp; Non-Planarity Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-5-6-trees-spanning-trees-minimum-spanning-trees-mst"><i class="fa fa-check"></i><b>4.2</b> Lecture 5 &amp; 6: Trees, Spanning Trees &amp; Minimum Spanning Trees (MST)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#tree-properties"><i class="fa fa-check"></i><b>4.2.1</b> Tree Properties</a></li>
+<li class="chapter" data-level="4.2.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#rooted-trees"><i class="fa fa-check"></i><b>4.2.2</b> Rooted Trees</a></li>
+<li class="chapter" data-level="4.2.3" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#minimum-spanning-tree-algorithms"><i class="fa fa-check"></i><b>4.2.3</b> Minimum Spanning Tree Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-7-8-graph-coloring-applications"><i class="fa fa-check"></i><b>4.3</b> Lecture 7 &amp; 8: Graph Coloring &amp; Applications</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#definitions-results"><i class="fa fa-check"></i><b>4.3.1</b> Definitions &amp; Results</a></li>
+<li class="chapter" data-level="4.3.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#applications-of-graph-coloring"><i class="fa fa-check"></i><b>4.3.2</b> Applications of Graph Coloring</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-9-shortest-path-algorithms"><i class="fa fa-check"></i><b>4.4</b> Lecture 9: Shortest Path Algorithms</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#algorithms-taxonomy"><i class="fa fa-check"></i><b>4.4.1</b> Algorithms Taxonomy</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-10-networks-and-flows"><i class="fa fa-check"></i><b>4.5</b> Lecture 10: Networks and Flows</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#network-definitions"><i class="fa fa-check"></i><b>4.5.1</b> Network Definitions</a></li>
+<li class="chapter" data-level="4.5.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#ford-fulkerson-algorithm-max-flow-min-cut"><i class="fa fa-check"></i><b>4.5.2</b> Ford-Fulkerson Algorithm &amp; Max-Flow Min-Cut</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-11-12-matchings-covers"><i class="fa fa-check"></i><b>4.6</b> Lecture 11 &amp; 12: Matchings &amp; Covers</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#matchings-definitions"><i class="fa fa-check"></i><b>4.6.1</b> Matchings Definitions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#graph-covers"><i class="fa fa-check"></i><b>4.6.2</b> Graph Covers</a></li>
+<li class="chapter" data-level="4.6.3" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#fundamental-matching-theorems"><i class="fa fa-check"></i><b>4.6.3</b> Fundamental Matching Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes</a></li>
+<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Graph Theroy</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Graph Theroy</h1>
+<p class="author"><em>Ashan De Silva</em></p>
+<p class="date"><em>2026-09-06</em></p>
+</div>
+<div id="introduction-to-graph-theory" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction to Graph Theory<a href="index.html#introduction-to-graph-theory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-graph-theory" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> What is Graph Theory?<a href="index.html#what-is-graph-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At its core, <strong>graph theory</strong> is the study of relationships. Whenever we have a collection of objects and connections between them, we can use a graph to model, analyze, and solve problems involving that structure.</p>
+<p>Unlike the graphs you might recall from introductory algebra (like <span class="math inline">\(y = x^2\)</span> or sine waves), a graph in discrete mathematics is a structural map. It consists of individual points and the lines that connect them.</p>
+<div class="float">
+<img src="fig/fig1.png" alt="A graph with 6 vertices and edges (Image Credit: Wikipedia)" />
+<div class="figcaption">A graph with 6 vertices and edges <em>(Image Credit: Wikipedia)</em></div>
+</div>
+<p>The objects are represented as points called <strong>vertices</strong> (or <strong>nodes</strong>), and the connections between them are called <strong>edges</strong>.
+<img src="fig/fig%202.png" style="width:50.0%" /></p>
+<p>Graphs give us a unified mathematical language to represent networks. Whether we are analyzing social networks, computer communication grids, or transit maps, graph theory provides the core framework to understand how systems are connected.</p>
+<hr />
+</div>
+<div id="historical-foundations" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Historical Foundations<a href="index.html#historical-foundations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To appreciate graph theory, it helps to understand the historical puzzles that sparked its development.</p>
+<div id="the-seven-bridges-of-königsberg-1736" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> The Seven Bridges of Königsberg (1736)<a href="index.html#the-seven-bridges-of-k%C3%B6nigsberg-1736" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Graph theory was born in the Prussian city of Königsberg (now Kaliningrad, Russia). The city was divided by the Pregel River, creating two large islands connected to each other and to the mainland riverbanks by seven bridges.</p>
+<div class="float">
+<img src="fig/fig12.png" alt="Image Source: Wikipedia" />
+<div class="figcaption">Image Source: Wikipedia</div>
+</div>
+<p>The citizens posed a classic recreational puzzle: <em>Is it possible to take a walk through the city in such a way that you cross every single one of the seven bridges exactly once, and end up back where you started?</em>
+<img src="fig/fig14.jpg" alt="Leonhard Euler (Image Credit: Wikipedia)" /></p>
+<p>In 1736, the Swiss mathematician <strong>Leonhard Euler</strong> solved this problem. He realized that the specific distances, land shapes, and physical geography did not matter; only the <strong>connections</strong> mattered. Euler simplified the map by replacing each landmass with a point (vertex) and each bridge with a line (edge).</p>
+<div class="float">
+<img src="fig/fig%203.png" alt="Image Credit: Wekipdea" />
+<div class="figcaption">Image Credit: Wekipdea</div>
+</div>
+<p>By abstracting the geography into a mathematical structure, Euler proved that such a walk was impossible. In doing so, he laid the foundation for topology and graph theory.</p>
+</div>
+<div id="hamiltons-icosian-game-1859" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Hamilton’s Icosian Game (1859)<a href="index.html#hamiltons-icosian-game-1859" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Over a century later, in 1859, Irish mathematician <strong>Sir William Rowan Hamilton</strong> created a commercial puzzle called the <em>Icosian Game</em>.</p>
+<div class="float">
+<img src="fig/fig13.png" alt="Porteat of Sir William Rowan Hamilton (Image Credit: Wikipedia)" />
+<div class="figcaption">Porteat of Sir William Rowan Hamilton (Image Credit: Wikipedia)</div>
+</div>
+<div class="float">
+<img src="https://www.puzzlemuseum.com/month/picm02/200201hamilton.jpg" alt="The Icosian Game(Image Credit: puzzlemuseum)" />
+<div class="figcaption">The Icosian Game(Image Credit: puzzlemuseum)</div>
+</div>
+<p>The game used a solid wooden regular dodecahedron—a 12-faced polyhedron with 20 corners. Each of the 20 corners was labeled with the name of a famous world city. The objective was to find a route along the edges of the dodecahedron that visited <strong>every city exactly once</strong> and returned to the starting point.</p>
+<p>While Euler’s bridge problem focused on visiting every <em>edge</em> once, Hamilton’s game focused on visiting every <em>vertex</em> once. These two historical problems led directly to two major areas of graph theory: <strong>Eulerian paths</strong> and <strong>Hamiltonian cycles</strong>.</p>
+<hr />
+</div>
+</div>
+<div id="modern-applications" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Modern Applications<a href="index.html#modern-applications" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Today, graph theory is an essential foundation for computer science, data analytics, and operational engineering.</p>
+<ul>
+<li><p><strong>Social Networks</strong>: Platforms model users as vertices and friendships or followers as edges. Graph theory algorithms help identify tight-knit communities, influential users, and recommendation loops.</p></li>
+<li><p><strong>Transportation Networks</strong>: Airline routes, train networks, and road grids are modeled as graphs. GPS platforms rely on these models to compute optimal routes.</p></li>
+<li><p><strong>The Web &amp; PageRank</strong>: The World Wide Web is a massive graph where web pages are vertices and hyperlinks are directed edges. Early search engines transformed web searches by using graph structure to rank relevance based on link density.</p></li>
+</ul>
+<hr />
+</div>
+<div id="formal-definitions-and-basic-structures" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Formal Definitions and Basic Structures<a href="index.html#formal-definitions-and-basic-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let us establish the formal mathematical definitions used throughout graph theory.</p>
+<div id="mathematical-definition-of-a-graph" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Mathematical Definition of a Graph<a href="index.html#mathematical-definition-of-a-graph" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <strong>graph</strong> <span class="math inline">\(G\)</span> is a pair <span class="math inline">\(G = (V, E)\)</span>, where:</p>
+<ul>
+<li><span class="math inline">\(V\)</span> is a non-empty set of <strong>vertices</strong> (or nodes).</li>
+<li><span class="math inline">\(E\)</span> is a set of <strong>edges</strong>, where each edge <span class="math inline">\(e \in E\)</span> is associated with an unordered pair of vertices <span class="math inline">\(\{u, v\} \subseteq V\)</span>.</li>
+</ul>
+<p>If an edge <span class="math inline">\(e\)</span> connects vertices <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, we write <span class="math inline">\(e = (u, v)\)</span> or <span class="math inline">\(e = uv\)</span>. We say that <span class="math inline">\(e\)</span> is <strong>incident</strong> with <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, and that <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are <strong>adjacent</strong> (or neighbors).</p>
+<div id="example" class="section level4 hasAnchor" number="1.4.1.1">
+<h4><span class="header-section-number">1.4.1.1</span> Example<a href="index.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="example">
+<p><span id="exm:unnamed-chunk-1" class="example"><strong>Example 1.1  </strong></span>Consider a graph <span class="math inline">\(G = (V, E)\)</span> defined by:</p>
+<ul>
+<li><span class="math inline">\(V = \{v_1, v_2, v_3, v_4, v_5\}\)</span></li>
+<li><span class="math inline">\(E = \{e_1, e_2, e_3, e_4, e_5, e_6\}\)</span> where:</li>
+<li><span class="math inline">\(e_1 = (v_1, v_2)\)</span></li>
+<li><span class="math inline">\(e_2 = (v_2, v_3)\)</span></li>
+<li><span class="math inline">\(e_3 = (v_3, v_4)\)</span></li>
+<li><span class="math inline">\(e_4 = (v_4, v_1)\)</span></li>
+<li><span class="math inline">\(e_5 = (v_1, v_3)\)</span></li>
+<li><span class="math inline">\(e_6 = (v_4, v_5)\)</span></li>
+</ul>
+</div>
+<p><img src="fig/fig%204.jpeg" /></p>
+<p>In this graph:</p>
+<ul>
+<li><span class="math inline">\(v_1\)</span> and <span class="math inline">\(v_3\)</span> are adjacent because <span class="math inline">\(e_5 = (v_1, v_3)\)</span> connects them.</li>
+<li><span class="math inline">\(v_2\)</span> and <span class="math inline">\(v_5\)</span> are <strong>not</strong> adjacent because there is no edge directly connecting them.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="loops-multiple-edges-and-simple-graphs" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Loops, Multiple Edges, and Simple Graphs<a href="index.html#loops-multiple-edges-and-simple-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Not all graphs are strictly constructed with single lines between distinct points.</p>
+<ul>
+<li><strong>Self-loop</strong>: An edge that joins a vertex to itself (e.g., <span class="math inline">\(e = (v_1, v_1)\)</span>).</li>
+<li><strong>Multiple Edges (Parallel Edges)</strong>: A collection of two or more edges that connect the exact same pair of distinct end vertices.</li>
+<li><strong>Simple Graph</strong>: A graph that contains <strong>no self-loops and no multiple edges</strong>.</li>
+</ul>
+<p><img src="fig/fig%205.jpeg" /></p>
+<p>Unless specified otherwise, standard graph theory problems assume a graph is <strong>simple</strong>.</p>
+<hr />
+</div>
+</div>
+<div id="vertex-degrees-and-handshaking" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Vertex Degrees and Handshaking<a href="index.html#vertex-degrees-and-handshaking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="vertex-degree" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Vertex Degree<a href="index.html#vertex-degree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>degree</strong> of a vertex <span class="math inline">\(v\)</span>, denoted by <span class="math inline">\(d(v)\)</span>, is the number of edges incident to <span class="math inline">\(v\)</span>. For simple graphs, it is equal to the number of neighbors connected to <span class="math inline">\(v\)</span>.</p>
+<p><em>(Note: If a vertex has a self-loop, that loop contributes <span class="math inline">\(2\)</span> to the vertex’s degree, as it touches the vertex twice.)</em></p>
+<div id="example-1" class="section level4 hasAnchor" number="1.5.1.1">
+<h4><span class="header-section-number">1.5.1.1</span> Example<a href="index.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="example">
+<p><span id="exm:unnamed-chunk-2" class="example"><strong>Example 1.2  </strong></span><img src="fig/fig%204.jpeg" />
+Using Example 1.1 above:</p>
+<ul>
+<li><span class="math inline">\(d(v_1) = 3\)</span> (connected by <span class="math inline">\(e_1, e_4, e_5\)</span>)</li>
+<li><span class="math inline">\(d(v_2) = 2\)</span> (connected by <span class="math inline">\(e_1, e_2\)</span>)</li>
+<li><span class="math inline">\(d(v_3) = 3\)</span> (connected by <span class="math inline">\(e_2, e_3, e_5\)</span>)</li>
+<li><span class="math inline">\(d(v_4) = 3\)</span> (connected by <span class="math inline">\(e_3, e_4, e_6\)</span>)</li>
+<li><span class="math inline">\(d(v_5) = 1\)</span> (connected by <span class="math inline">\(e_6\)</span>)</li>
+</ul>
+<p>Summing all degrees: <span class="math inline">\(3 + 2 + 3 + 3 + 1 = 12\)</span>. Notice that the total number of edges <span class="math inline">\(\vert{}E\vert{}\)</span> is <span class="math inline">\(6\)</span>. The sum of degrees (<span class="math inline">\(12\)</span>) is exactly twice the number of edges (<span class="math inline">\(2 \times 6\)</span>).</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="the-handshaking-lemma" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> The Handshaking Lemma<a href="index.html#the-handshaking-lemma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This observation holds true for all graphs.</p>
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-3" class="theorem"><strong>Theorem 1.1  (Handshaking Lemma) </strong></span>Let <span class="math inline">\(G = (V, E)\)</span> be any graph. Then the sum of the degrees of all vertices is equal to twice the number of edges:</p>
+<p><span class="math display">\[\sum_{v \in V} d(v) = 2\vert{}E\vert{}\]</span></p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-1" class="proof"><em>Proof</em>. </span><em>Intuition:</em></p>
+<p>Every edge <span class="math inline">\(e = (u, v)\)</span> has two endpoints. When we count the degree of vertex <span class="math inline">\(u\)</span>, edge <span class="math inline">\(e\)</span> contributes <span class="math inline">\(1\)</span>. When we count the degree of vertex <span class="math inline">\(v\)</span>, edge <span class="math inline">\(e\)</span> contributes <span class="math inline">\(1\)</span> again. Therefore, every edge contributes exactly <span class="math inline">\(2\)</span> to the sum total of degrees in the graph.</p>
+</div>
+<div class="corollary">
+<p><span id="cor:unnamed-chunk-5" class="corollary"><strong>Corollary 1.1  (The Parity of Odd-Degree Vertices) </strong></span>In any graph <span class="math inline">\(G\)</span>, the number of vertices that have an <strong>odd degree</strong> must be <strong>even</strong>.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-2" class="proof"><em>Proof</em>. </span>Partition the vertex set <span class="math inline">\(V\)</span> into two subsets: <span class="math inline">\(V_{\text{even}}\)</span> (vertices with even degree) and <span class="math inline">\(V_{\text{odd}}\)</span> (vertices with odd degree).</p>
+<p><span class="math display">\[\sum_{v \in V} d(v) = \sum_{v \in V_{\text{even}}} d(v) + \sum_{v \in V_{\text{odd}}} d(v) = 2\vert{}E\vert{}\]</span></p>
+<ol style="list-style-type: decimal">
+<li>The total sum <span class="math inline">\(2\vert{}E\vert{}\)</span> is always an even integer.</li>
+<li>The sum <span class="math inline">\(\sum_{v \in V_{\text{even}}} d(v)\)</span> is a sum of even integers, so it must be even.</li>
+<li>For the equation to balance, the sum <span class="math inline">\(\sum_{v \in V_{\text{odd}}} d(v)\)</span> must also be <strong>even</strong>.</li>
+<li>A sum of odd integers is even if and only if there is an <strong>even number</strong> of odd integers.</li>
+</ol>
+<p>Thus, the number of vertices with odd degree is always even.</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="special-classes-of-graphs" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Special Classes of Graphs<a href="index.html#special-classes-of-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Certain graph structures appear frequently throughout graph theory and computer science applications.</p>
+<div id="complete-graphs-k_n" class="section level3 hasAnchor" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Complete Graphs (<span class="math inline">\(K_n\)</span>)<a href="index.html#complete-graphs-k_n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unnamed-chunk-7" class="definition"><strong>Definition 1.1  </strong></span>A <strong>complete graph</strong> on <span class="math inline">\(n\)</span> vertices, denoted by <span class="math inline">\(K_n\)</span>, is a simple graph in which every pair of distinct vertices is connected by an edge.</p>
+</div>
+<div class="float">
+<img src="https://mathworld.wolfram.com/images/eps-svg/CompleteGraphs.svg" alt="Complete graphs: wolfram math world" />
+<div class="figcaption">Complete graphs: wolfram math world</div>
+</div>
+<ul>
+<li><strong>Number of Edges in <span class="math inline">\(K_n\)</span></strong>:
+To find the total number of edges, we count how many ways we can pick a pair of vertices from <span class="math inline">\(n\)</span> available vertices:</li>
+</ul>
+<p><span class="math display">\[\vert{}E\vert{} = \binom{n}{2} = \frac{n(n - 1)}{2}\]</span></p>
+</div>
+<div id="regular-graphs" class="section level3 hasAnchor" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Regular Graphs<a href="index.html#regular-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unnamed-chunk-8" class="definition"><strong>Definition 1.2  </strong></span>A graph is <strong><span class="math inline">\(k\)</span>-regular</strong> if every vertex has the same degree <span class="math inline">\(k\)</span>.</p>
+</div>
+<ul>
+<li>In a <span class="math inline">\(k\)</span>-regular graph with <span class="math inline">\(n\)</span> vertices, <span class="math inline">\(\sum d(v) = n \cdot k\)</span>. By the Handshaking Lemma:</li>
+</ul>
+<span class="math display">\[n \cdot k = 2\vert{}E\vert{} \implies \vert{}E\vert{} = \frac{n \cdot k}{2}\]</span>
+<center>
+<div class="float">
+<img src="https://mathworld.wolfram.com/images/eps-svg/RegularConnectedGraphs.svg" alt="Examples of regular graphs(Image credit: Wolfarm math world)" />
+<div class="figcaption">Examples of regular graphs(Image credit: Wolfarm math world)</div>
+</div>
+</center>
+<ul>
+<li><strong>Note</strong>: A complete graph <span class="math inline">\(K_n\)</span> is an <span class="math inline">\((n - 1)\)</span>-regular graph.</li>
+</ul>
+</div>
+<div id="bipartite-graphs" class="section level3 hasAnchor" number="1.6.3">
+<h3><span class="header-section-number">1.6.3</span> Bipartite Graphs<a href="index.html#bipartite-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unnamed-chunk-9" class="definition"><strong>Definition 1.3  </strong></span>A graph <span class="math inline">\(G = (V, E)\)</span> is <strong>bipartite</strong> if its vertex set <span class="math inline">\(V\)</span> can be partitioned into two disjoint subsets, <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span> (<span class="math inline">\(V = V_1 \cup V_2\)</span> and <span class="math inline">\(V_1 \cap V_2 = \emptyset\)</span>), such that every edge in <span class="math inline">\(E\)</span> connects a vertex in <span class="math inline">\(V_1\)</span> to a vertex in <span class="math inline">\(V_2\)</span>. No edges exist between two vertices within <span class="math inline">\(V_1\)</span> or within <span class="math inline">\(V_2\)</span>.</p>
+</div>
+<div class="float">
+<img src="https://mathworld.wolfram.com/images/eps-svg/BipartiteGraph.svg" alt="Image Credit: Mathworld Wolfarm" />
+<div class="figcaption">Image Credit: Mathworld Wolfarm</div>
+</div>
+<div id="complete-bipartite-graphs-k_n_1-n_2" class="section level4 hasAnchor" number="1.6.3.1">
+<h4><span class="header-section-number">1.6.3.1</span> Complete Bipartite Graphs (<span class="math inline">\(K_{n_1, n_2}\)</span>)<a href="index.html#complete-bipartite-graphs-k_n_1-n_2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A <strong>complete bipartite graph</strong> <span class="math inline">\(K_{n_1, n_2}\)</span> is a bipartite graph where every vertex in <span class="math inline">\(V_1\)</span> (with <span class="math inline">\(\vert{}V_1\vert{} = n_1\)</span>) is connected to every vertex in <span class="math inline">\(V_2\)</span> (with <span class="math inline">\(\vert{}V_2\vert{} = n_2\)</span>).</p>
+<ul>
+<li>Total Vertices: <span class="math inline">\(\vert{}V\vert{} = n_1 + n_2\)</span></li>
+<li>Total Edges: <span class="math inline">\(\vert{}E\vert{} = n_1 \cdot n_2\)</span></li>
+</ul>
+</div>
+<div id="characterization-theorem-of-bipartite-graphs" class="section level4 hasAnchor" number="1.6.3.2">
+<h4><span class="header-section-number">1.6.3.2</span> Characterization Theorem of Bipartite Graphs<a href="index.html#characterization-theorem-of-bipartite-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>How can we determine if a given graph is bipartite?</p>
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-10" class="theorem"><strong>Theorem 1.2  </strong></span>A graph <span class="math inline">\(G\)</span> is bipartite <strong>if and only if</strong> it contains <strong>no cycles of odd length</strong>.</p>
+</div>
+<p><img src="fig/fig7.png" /></p>
+<ul>
+<li>If a graph contains a triangle (<span class="math inline">\(C_3\)</span>), a pentagon (<span class="math inline">\(C_5\)</span>), or any other cycle with an odd number of edges, it cannot be partitioned into two valid bipartite sets.</li>
+</ul>
+<hr />
+</div>
+</div>
+</div>
+<div id="traversal-terminology-walks-trails-paths-circuits-and-cycles" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Traversal Terminology: Walks, Trails, Paths, Circuits, and Cycles<a href="index.html#traversal-terminology-walks-trails-paths-circuits-and-cycles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To navigate through a graph, we need clear definitions for moving along vertices and edges.</p>
+<p><img src="fig/fig8.png" /></p>
+<div id="definitions" class="section level3 hasAnchor" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> Definitions<a href="index.html#definitions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unnamed-chunk-11" class="definition"><strong>Definition 1.4  </strong></span></p>
+<ol style="list-style-type: decimal">
+<li><strong>Walk</strong>: A sequence of alternating vertices and edges, starting at vertex <span class="math inline">\(v_0\)</span> and ending at <span class="math inline">\(v_k\)</span>: <span class="math inline">\(v_0, e_1, v_1, e_2, \dots, e_k, v_k\)</span>. Vertices and edges <strong>may be repeated</strong>.</li>
+<li><strong>Trail</strong>: A walk in which <strong>no edge is repeated</strong>. Vertices may still be repeated.</li>
+<li><strong>Path</strong>: A trail in which <strong>no vertex is repeated</strong>. (Consequently, no edge is repeated either).</li>
+<li><strong>Closed Walk / Trail</strong>: A walk or trail that starts and ends at the exact same vertex (<span class="math inline">\(v_0 = v_k\)</span>).</li>
+<li><strong>Circuit</strong>: A <strong>closed trail</strong> (starts and ends at the same vertex, with no repeated edges).</li>
+<li><strong>Cycle</strong>: A <strong>closed path</strong> (starts and ends at the same vertex, with no repeated vertices other than the start and end).</li>
+</ol>
+</div>
+</div>
+<div id="summary-table" class="section level3 hasAnchor" number="1.7.2">
+<h3><span class="header-section-number">1.7.2</span> Summary Table<a href="index.html#summary-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Structure</th>
+<th>Repeated Vertices Allowed?</th>
+<th>Repeated Edges Allowed?</th>
+<th>Start and End at Same Vertex?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Walk</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Optional</td>
+</tr>
+<tr class="even">
+<td><strong>Trail</strong></td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Optional</td>
+</tr>
+<tr class="odd">
+<td><strong>Path</strong></td>
+<td><strong>No</strong></td>
+<td><strong>No</strong></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Circuit</strong></td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Cycle</strong></td>
+<td><strong>No</strong> (except start/end)</td>
+<td><strong>No</strong></td>
+<td><strong>Yes</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="directed-graphs-digraphs" class="section level2 hasAnchor" number="1.8">
+<h2><span class="header-section-number">1.8</span> Directed Graphs (Digraphs)<a href="index.html#directed-graphs-digraphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In many real-world networks, connections are one-way streets. For example, a web page may link to another, but that page might not link back.</p>
+<div class="definition">
+<p><span id="def:unnamed-chunk-12" class="definition"><strong>Definition 1.5  </strong></span>A <strong>directed graph</strong> (or <strong>digraph</strong>) consists of a vertex set <span class="math inline">\(V\)</span> and an edge set <span class="math inline">\(E\)</span> containing <strong>ordered pairs</strong> of vertices. An edge <span class="math inline">\(e = (u, v)\)</span> goes <strong>from <span class="math inline">\(u\)</span> to <span class="math inline">\(v\)</span></strong>.</p>
+</div>
+<p><img src="fig/fig9.png" /></p>
+<div id="in-degree-and-out-degree" class="section level3 hasAnchor" number="1.8.1">
+<h3><span class="header-section-number">1.8.1</span> In-Degree and Out-Degree<a href="index.html#in-degree-and-out-degree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unnamed-chunk-13" class="definition"><strong>Definition 1.6  </strong></span>Because edges have direction in a digraph, we split vertex degree into two separate counts:</p>
+<ul>
+<li><strong>In-degree (<span class="math inline">\(d_{\text{in}}(v)\)</span>)</strong>: The number of directed edges coming <strong>into</strong> vertex <span class="math inline">\(v\)</span>.</li>
+<li><strong>Out-degree (<span class="math inline">\(d_{\text{out}}(v)\)</span>)</strong>: The number of directed edges going <strong>out of</strong> vertex <span class="math inline">\(v\)</span>.</li>
+</ul>
+<p><img src="fig/fig10.png" /></p>
+</div>
+<p>In the example above:</p>
+<ul>
+<li><span class="math inline">\(d_{\text{in}}(v_1) = 0\)</span>, <span class="math inline">\(d_{\text{out}}(v_1) = 2\)</span></li>
+<li><span class="math inline">\(d_{\text{in}}(v_2) = 2\)</span>, <span class="math inline">\(d_{\text{out}}(v_2) = 0\)</span></li>
+<li><span class="math inline">\(d_{\text{in}}(v_3) = 1\)</span>, <span class="math inline">\(d_{\text{out}}(v_3) = 1\)</span></li>
+</ul>
+<div id="handshaking-lemma-for-directed-graphs" class="section level4 hasAnchor" number="1.8.1.1">
+<h4><span class="header-section-number">1.8.1.1</span> Handshaking Lemma for Directed Graphs<a href="index.html#handshaking-lemma-for-directed-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-14" class="theorem"><strong>Theorem 1.3  (Handshaking Lemma for Directed Graphs) </strong></span>In any directed graph, the sum of all in-degrees equals the sum of all out-degrees, which both equal the total number of directed edges:</p>
+<p><span class="math display">\[\sum_{v \in V} d_{\text{in}}(v) = \sum_{v \in V} d_{\text{out}}(v) = \vert{}E\vert{}\]</span></p>
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div id="chapter-1-exercises" class="section level2 hasAnchor" number="1.9">
+<h2><span class="header-section-number">1.9</span> Chapter 1 Exercises<a href="index.html#chapter-1-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="example">
+<p><span id="exm:unnamed-chunk-15" class="example"><strong>Example 1.3  </strong></span></p>
+<ol style="list-style-type: decimal">
+<li><strong>Degree Calculations</strong>: A simple graph has 8 vertices and 14 edges. If 4 vertices have degree 4, and 3 vertices have degree 3, what is the degree of the remaining vertex?</li>
+<li><strong>Bipartite Verification</strong>: Prove or disprove whether a single cycle graph <span class="math inline">\(C_6\)</span> (a cycle with 6 vertices) is bipartite. What about <span class="math inline">\(C_7\)</span>?</li>
+<li><strong>Complete Graph Proof</strong>: Use induction to show that the number of edges in a complete graph <span class="math inline">\(K_n\)</span> is given by <span class="math inline">\(\frac{n(n-1)}{2}\)</span>.</li>
+<li><strong>Handshaking Lemma</strong>: Is it possible to construct a simple graph with 5 vertices such that their degrees are <span class="math inline">\(3, 3, 3, 2, 1\)</span>? Explain using the Handshaking Lemma.</li>
+</ol>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="graph-types-operations-representations.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

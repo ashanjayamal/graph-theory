@@ -1,0 +1,1460 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{book}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\usepackage{svg}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\usepackage{booktabs}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Graph Theroy},
+  pdfauthor={Ashan De Silva},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Graph Theroy}
+\author{Ashan De Silva}
+\date{2026-09-06}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{definition}
+\newtheorem{hypothesis}{Hypothesis}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter{Introduction to Graph Theory}\label{introduction-to-graph-theory}
+
+\section{What is Graph Theory?}\label{what-is-graph-theory}
+
+At its core, \textbf{graph theory} is the study of relationships. Whenever we have a collection of objects and connections between them, we can use a graph to model, analyze, and solve problems involving that structure.
+
+Unlike the graphs you might recall from introductory algebra (like \(y = x^2\) or sine waves), a graph in discrete mathematics is a structural map. It consists of individual points and the lines that connect them.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={A graph with 6 vertices and edges (Image Credit: Wikipedia)}]{_main_files/fig/fig1.png}}
+\caption{A graph with 6 vertices and edges \emph{(Image Credit: Wikipedia)}}
+\end{figure}
+
+The objects are represented as points called \textbf{vertices} (or \textbf{nodes}), and the connections between them are called \textbf{edges}.
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{_main_files/fig/fig 2.png}
+
+Graphs give us a unified mathematical language to represent networks. Whether we are analyzing social networks, computer communication grids, or transit maps, graph theory provides the core framework to understand how systems are connected.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Historical Foundations}\label{historical-foundations}
+
+To appreciate graph theory, it helps to understand the historical puzzles that sparked its development.
+
+\subsection{The Seven Bridges of Königsberg (1736)}\label{the-seven-bridges-of-kuxf6nigsberg-1736}
+
+Graph theory was born in the Prussian city of Königsberg (now Kaliningrad, Russia). The city was divided by the Pregel River, creating two large islands connected to each other and to the mainland riverbanks by seven bridges.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Image Source: Wikipedia}]{_main_files/fig/fig12.png}}
+\caption{Image Source: Wikipedia}
+\end{figure}
+
+The citizens posed a classic recreational puzzle: \emph{Is it possible to take a walk through the city in such a way that you cross every single one of the seven bridges exactly once, and end up back where you started?}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Leonhard Euler (Image Credit: Wikipedia)}]{_main_files/fig/fig14.jpg}}
+
+In 1736, the Swiss mathematician \textbf{Leonhard Euler} solved this problem. He realized that the specific distances, land shapes, and physical geography did not matter; only the \textbf{connections} mattered. Euler simplified the map by replacing each landmass with a point (vertex) and each bridge with a line (edge).
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Image Credit: Wekipdea}]{_main_files/fig/fig 3.png}}
+\caption{Image Credit: Wekipdea}
+\end{figure}
+
+By abstracting the geography into a mathematical structure, Euler proved that such a walk was impossible. In doing so, he laid the foundation for topology and graph theory.
+
+\subsection{Hamilton's Icosian Game (1859)}\label{hamiltons-icosian-game-1859}
+
+Over a century later, in 1859, Irish mathematician \textbf{Sir William Rowan Hamilton} created a commercial puzzle called the \emph{Icosian Game}.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Porteat of Sir William Rowan Hamilton (Image Credit: Wikipedia)}]{_main_files/fig/fig13.png}}
+\caption{Porteat of Sir William Rowan Hamilton (Image Credit: Wikipedia)}
+\end{figure}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={The Icosian Game(Image Credit: puzzlemuseum)}]{_main_files/a088af0fedcc82c2004161d5e82374b9a661a20b.jpg}}
+\caption{The Icosian Game(Image Credit: puzzlemuseum)}
+\end{figure}
+
+The game used a solid wooden regular dodecahedron---a 12-faced polyhedron with 20 corners. Each of the 20 corners was labeled with the name of a famous world city. The objective was to find a route along the edges of the dodecahedron that visited \textbf{every city exactly once} and returned to the starting point.
+
+While Euler's bridge problem focused on visiting every \emph{edge} once, Hamilton's game focused on visiting every \emph{vertex} once. These two historical problems led directly to two major areas of graph theory: \textbf{Eulerian paths} and \textbf{Hamiltonian cycles}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Modern Applications}\label{modern-applications}
+
+Today, graph theory is an essential foundation for computer science, data analytics, and operational engineering.
+
+\begin{itemize}
+\item
+  \textbf{Social Networks}: Platforms model users as vertices and friendships or followers as edges. Graph theory algorithms help identify tight-knit communities, influential users, and recommendation loops.
+\item
+  \textbf{Transportation Networks}: Airline routes, train networks, and road grids are modeled as graphs. GPS platforms rely on these models to compute optimal routes.
+\item
+  \textbf{The Web \& PageRank}: The World Wide Web is a massive graph where web pages are vertices and hyperlinks are directed edges. Early search engines transformed web searches by using graph structure to rank relevance based on link density.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Formal Definitions and Basic Structures}\label{formal-definitions-and-basic-structures}
+
+Let us establish the formal mathematical definitions used throughout graph theory.
+
+\subsection{Mathematical Definition of a Graph}\label{mathematical-definition-of-a-graph}
+
+A \textbf{graph} \(G\) is a pair \(G = (V, E)\), where:
+
+\begin{itemize}
+\tightlist
+\item
+  \(V\) is a non-empty set of \textbf{vertices} (or nodes).
+\item
+  \(E\) is a set of \textbf{edges}, where each edge \(e \in E\) is associated with an unordered pair of vertices \(\{u, v\} \subseteq V\).
+\end{itemize}
+
+If an edge \(e\) connects vertices \(u\) and \(v\), we write \(e = (u, v)\) or \(e = uv\). We say that \(e\) is \textbf{incident} with \(u\) and \(v\), and that \(u\) and \(v\) are \textbf{adjacent} (or neighbors).
+
+\subsubsection{Example}\label{example}
+
+\begin{example}
+\protect\hypertarget{exm:unnamed-chunk-1}{}\label{exm:unnamed-chunk-1}
+
+Consider a graph \(G = (V, E)\) defined by:
+
+\begin{itemize}
+\tightlist
+\item
+  \(V = \{v_1, v_2, v_3, v_4, v_5\}\)
+\item
+  \(E = \{e_1, e_2, e_3, e_4, e_5, e_6\}\) where:
+\item
+  \(e_1 = (v_1, v_2)\)
+\item
+  \(e_2 = (v_2, v_3)\)
+\item
+  \(e_3 = (v_3, v_4)\)
+\item
+  \(e_4 = (v_4, v_1)\)
+\item
+  \(e_5 = (v_1, v_3)\)
+\item
+  \(e_6 = (v_4, v_5)\)
+\end{itemize}
+
+\end{example}
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig 4.jpeg}}
+
+In this graph:
+
+\begin{itemize}
+\tightlist
+\item
+  \(v_1\) and \(v_3\) are adjacent because \(e_5 = (v_1, v_3)\) connects them.
+\item
+  \(v_2\) and \(v_5\) are \textbf{not} adjacent because there is no edge directly connecting them.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Loops, Multiple Edges, and Simple Graphs}\label{loops-multiple-edges-and-simple-graphs}
+
+Not all graphs are strictly constructed with single lines between distinct points.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Self-loop}: An edge that joins a vertex to itself (e.g., \(e = (v_1, v_1)\)).
+\item
+  \textbf{Multiple Edges (Parallel Edges)}: A collection of two or more edges that connect the exact same pair of distinct end vertices.
+\item
+  \textbf{Simple Graph}: A graph that contains \textbf{no self-loops and no multiple edges}.
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig 5.jpeg}}
+
+Unless specified otherwise, standard graph theory problems assume a graph is \textbf{simple}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Vertex Degrees and Handshaking}\label{vertex-degrees-and-handshaking}
+
+\subsection{Vertex Degree}\label{vertex-degree}
+
+The \textbf{degree} of a vertex \(v\), denoted by \(d(v)\), is the number of edges incident to \(v\). For simple graphs, it is equal to the number of neighbors connected to \(v\).
+
+\emph{(Note: If a vertex has a self-loop, that loop contributes \(2\) to the vertex's degree, as it touches the vertex twice.)}
+
+\subsubsection{Example}\label{example-1}
+
+\begin{example}
+\protect\hypertarget{exm:unnamed-chunk-2}{}\label{exm:unnamed-chunk-2}\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig 4.jpeg}}
+Using Example 1.1 above:
+
+\begin{itemize}
+\tightlist
+\item
+  \(d(v_1) = 3\) (connected by \(e_1, e_4, e_5\))
+\item
+  \(d(v_2) = 2\) (connected by \(e_1, e_2\))
+\item
+  \(d(v_3) = 3\) (connected by \(e_2, e_3, e_5\))
+\item
+  \(d(v_4) = 3\) (connected by \(e_3, e_4, e_6\))
+\item
+  \(d(v_5) = 1\) (connected by \(e_6\))
+\end{itemize}
+
+Summing all degrees: \(3 + 2 + 3 + 3 + 1 = 12\). Notice that the total number of edges \(\vert{}E\vert{}\) is \(6\). The sum of degrees (\(12\)) is exactly twice the number of edges (\(2 \times 6\)).
+\end{example}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{The Handshaking Lemma}\label{the-handshaking-lemma}
+
+This observation holds true for all graphs.
+
+\begin{theorem}[Handshaking Lemma]
+\protect\hypertarget{thm:unnamed-chunk-3}{}\label{thm:unnamed-chunk-3}Let \(G = (V, E)\) be any graph. Then the sum of the degrees of all vertices is equal to twice the number of edges:
+
+\[\sum_{v \in V} d(v) = 2\vert{}E\vert{}\]
+\end{theorem}
+
+\begin{proof}
+\emph{Intuition:}
+
+Every edge \(e = (u, v)\) has two endpoints. When we count the degree of vertex \(u\), edge \(e\) contributes \(1\). When we count the degree of vertex \(v\), edge \(e\) contributes \(1\) again. Therefore, every edge contributes exactly \(2\) to the sum total of degrees in the graph.
+\end{proof}
+
+\begin{corollary}[The Parity of Odd-Degree Vertices]
+\protect\hypertarget{cor:unnamed-chunk-5}{}\label{cor:unnamed-chunk-5}In any graph \(G\), the number of vertices that have an \textbf{odd degree} must be \textbf{even}.
+\end{corollary}
+
+\begin{proof}
+Partition the vertex set \(V\) into two subsets: \(V_{\text{even}}\) (vertices with even degree) and \(V_{\text{odd}}\) (vertices with odd degree).
+
+\[\sum_{v \in V} d(v) = \sum_{v \in V_{\text{even}}} d(v) + \sum_{v \in V_{\text{odd}}} d(v) = 2\vert{}E\vert{}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The total sum \(2\vert{}E\vert{}\) is always an even integer.
+\item
+  The sum \(\sum_{v \in V_{\text{even}}} d(v)\) is a sum of even integers, so it must be even.
+\item
+  For the equation to balance, the sum \(\sum_{v \in V_{\text{odd}}} d(v)\) must also be \textbf{even}.
+\item
+  A sum of odd integers is even if and only if there is an \textbf{even number} of odd integers.
+\end{enumerate}
+
+Thus, the number of vertices with odd degree is always even.
+\end{proof}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Special Classes of Graphs}\label{special-classes-of-graphs}
+
+Certain graph structures appear frequently throughout graph theory and computer science applications.
+
+\subsection{\texorpdfstring{Complete Graphs (\(K_n\))}{Complete Graphs (K\_n)}}\label{complete-graphs-k_n}
+
+\begin{definition}
+\protect\hypertarget{def:unnamed-chunk-7}{}\label{def:unnamed-chunk-7}A \textbf{complete graph} on \(n\) vertices, denoted by \(K_n\), is a simple graph in which every pair of distinct vertices is connected by an edge.
+\end{definition}
+
+\begin{figure}
+\centering
+\pandocbounded{\includesvg[keepaspectratio]{_main_files/e11921f4d6ef553c24f07699de628ed8e56dfffb.svg}}
+\caption{Complete graphs: wolfram math world}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Number of Edges in \(K_n\)}:
+  To find the total number of edges, we count how many ways we can pick a pair of vertices from \(n\) available vertices:
+\end{itemize}
+
+\[\vert{}E\vert{} = \binom{n}{2} = \frac{n(n - 1)}{2}\]
+
+\subsection{Regular Graphs}\label{regular-graphs}
+
+\begin{definition}
+\protect\hypertarget{def:unnamed-chunk-8}{}\label{def:unnamed-chunk-8}A graph is \textbf{\(k\)-regular} if every vertex has the same degree \(k\).
+\end{definition}
+
+\begin{itemize}
+\tightlist
+\item
+  In a \(k\)-regular graph with \(n\) vertices, \(\sum d(v) = n \cdot k\). By the Handshaking Lemma:
+\end{itemize}
+
+\[n \cdot k = 2\vert{}E\vert{} \implies \vert{}E\vert{} = \frac{n \cdot k}{2}\]
+
+\begin{figure}
+\centering
+\pandocbounded{\includesvg[keepaspectratio]{_main_files/c9e340c32730dacf49f4c971ae9e354fbb74e5f5.svg}}
+\caption{Examples of regular graphs(Image credit: Wolfarm math world)}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Note}: A complete graph \(K_n\) is an \((n - 1)\)-regular graph.
+\end{itemize}
+
+\subsection{Bipartite Graphs}\label{bipartite-graphs}
+
+\begin{definition}
+\protect\hypertarget{def:unnamed-chunk-9}{}\label{def:unnamed-chunk-9}A graph \(G = (V, E)\) is \textbf{bipartite} if its vertex set \(V\) can be partitioned into two disjoint subsets, \(V_1\) and \(V_2\) (\(V = V_1 \cup V_2\) and \(V_1 \cap V_2 = \emptyset\)), such that every edge in \(E\) connects a vertex in \(V_1\) to a vertex in \(V_2\). No edges exist between two vertices within \(V_1\) or within \(V_2\).
+\end{definition}
+
+\begin{figure}
+\centering
+\pandocbounded{\includesvg[keepaspectratio]{_main_files/a270d025eae3b53f7b2528abd33c3bb7a72b1e50.svg}}
+\caption{Image Credit: Mathworld Wolfarm}
+\end{figure}
+
+\subsubsection{\texorpdfstring{Complete Bipartite Graphs (\(K_{n_1, n_2}\))}{Complete Bipartite Graphs (K\_\{n\_1, n\_2\})}}\label{complete-bipartite-graphs-k_n_1-n_2}
+
+A \textbf{complete bipartite graph} \(K_{n_1, n_2}\) is a bipartite graph where every vertex in \(V_1\) (with \(\vert{}V_1\vert{} = n_1\)) is connected to every vertex in \(V_2\) (with \(\vert{}V_2\vert{} = n_2\)).
+
+\begin{itemize}
+\tightlist
+\item
+  Total Vertices: \(\vert{}V\vert{} = n_1 + n_2\)
+\item
+  Total Edges: \(\vert{}E\vert{} = n_1 \cdot n_2\)
+\end{itemize}
+
+\subsubsection{Characterization Theorem of Bipartite Graphs}\label{characterization-theorem-of-bipartite-graphs}
+
+How can we determine if a given graph is bipartite?
+
+\begin{theorem}
+\protect\hypertarget{thm:unnamed-chunk-10}{}\label{thm:unnamed-chunk-10}A graph \(G\) is bipartite \textbf{if and only if} it contains \textbf{no cycles of odd length}.
+\end{theorem}
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig7.png}}
+
+\begin{itemize}
+\tightlist
+\item
+  If a graph contains a triangle (\(C_3\)), a pentagon (\(C_5\)), or any other cycle with an odd number of edges, it cannot be partitioned into two valid bipartite sets.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Traversal Terminology: Walks, Trails, Paths, Circuits, and Cycles}\label{traversal-terminology-walks-trails-paths-circuits-and-cycles}
+
+To navigate through a graph, we need clear definitions for moving along vertices and edges.
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig8.png}}
+
+\subsection{Definitions}\label{definitions}
+
+\begin{definition}
+\protect\hypertarget{def:unnamed-chunk-11}{}\label{def:unnamed-chunk-11}\leavevmode
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Walk}: A sequence of alternating vertices and edges, starting at vertex \(v_0\) and ending at \(v_k\): \(v_0, e_1, v_1, e_2, \dots, e_k, v_k\). Vertices and edges \textbf{may be repeated}.
+\item
+  \textbf{Trail}: A walk in which \textbf{no edge is repeated}. Vertices may still be repeated.
+\item
+  \textbf{Path}: A trail in which \textbf{no vertex is repeated}. (Consequently, no edge is repeated either).
+\item
+  \textbf{Closed Walk / Trail}: A walk or trail that starts and ends at the exact same vertex (\(v_0 = v_k\)).
+\item
+  \textbf{Circuit}: A \textbf{closed trail} (starts and ends at the same vertex, with no repeated edges).
+\item
+  \textbf{Cycle}: A \textbf{closed path} (starts and ends at the same vertex, with no repeated vertices other than the start and end).
+\end{enumerate}
+
+\end{definition}
+
+\subsection{Summary Table}\label{summary-table}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Structure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Repeated Vertices Allowed?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Repeated Edges Allowed?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Start and End at Same Vertex?
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Walk} & Yes & Yes & Optional \\
+\textbf{Trail} & Yes & \textbf{No} & Optional \\
+\textbf{Path} & \textbf{No} & \textbf{No} & No \\
+\textbf{Circuit} & Yes & \textbf{No} & \textbf{Yes} \\
+\textbf{Cycle} & \textbf{No} (except start/end) & \textbf{No} & \textbf{Yes} \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Directed Graphs (Digraphs)}\label{directed-graphs-digraphs}
+
+In many real-world networks, connections are one-way streets. For example, a web page may link to another, but that page might not link back.
+
+\begin{definition}
+\protect\hypertarget{def:unnamed-chunk-12}{}\label{def:unnamed-chunk-12}A \textbf{directed graph} (or \textbf{digraph}) consists of a vertex set \(V\) and an edge set \(E\) containing \textbf{ordered pairs} of vertices. An edge \(e = (u, v)\) goes \textbf{from \(u\) to \(v\)}.
+\end{definition}
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig9.png}}
+
+\subsection{In-Degree and Out-Degree}\label{in-degree-and-out-degree}
+
+\begin{definition}
+\protect\hypertarget{def:unnamed-chunk-13}{}\label{def:unnamed-chunk-13}Because edges have direction in a digraph, we split vertex degree into two separate counts:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{In-degree (\(d_{\text{in}}(v)\))}: The number of directed edges coming \textbf{into} vertex \(v\).
+\item
+  \textbf{Out-degree (\(d_{\text{out}}(v)\))}: The number of directed edges going \textbf{out of} vertex \(v\).
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig10.png}}
+\end{definition}
+
+In the example above:
+
+\begin{itemize}
+\tightlist
+\item
+  \(d_{\text{in}}(v_1) = 0\), \(d_{\text{out}}(v_1) = 2\)
+\item
+  \(d_{\text{in}}(v_2) = 2\), \(d_{\text{out}}(v_2) = 0\)
+\item
+  \(d_{\text{in}}(v_3) = 1\), \(d_{\text{out}}(v_3) = 1\)
+\end{itemize}
+
+\subsubsection{Handshaking Lemma for Directed Graphs}\label{handshaking-lemma-for-directed-graphs}
+
+\begin{theorem}[Handshaking Lemma for Directed Graphs]
+\protect\hypertarget{thm:unnamed-chunk-14}{}\label{thm:unnamed-chunk-14}In any directed graph, the sum of all in-degrees equals the sum of all out-degrees, which both equal the total number of directed edges:
+
+\[\sum_{v \in V} d_{\text{in}}(v) = \sum_{v \in V} d_{\text{out}}(v) = \vert{}E\vert{}\]
+\end{theorem}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chapter 1 Exercises}\label{chapter-1-exercises}
+
+\begin{example}
+\protect\hypertarget{exm:unnamed-chunk-15}{}\label{exm:unnamed-chunk-15}\leavevmode
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Degree Calculations}: A simple graph has 8 vertices and 14 edges. If 4 vertices have degree 4, and 3 vertices have degree 3, what is the degree of the remaining vertex?
+\item
+  \textbf{Bipartite Verification}: Prove or disprove whether a single cycle graph \(C_6\) (a cycle with 6 vertices) is bipartite. What about \(C_7\)?
+\item
+  \textbf{Complete Graph Proof}: Use induction to show that the number of edges in a complete graph \(K_n\) is given by \(\frac{n(n-1)}{2}\).
+\item
+  \textbf{Handshaking Lemma}: Is it possible to construct a simple graph with 5 vertices such that their degrees are \(3, 3, 3, 2, 1\)? Explain using the Handshaking Lemma.
+\end{enumerate}
+
+\end{example}
+
+\chapter{Graph Types, Operations \& Representations}\label{graph-types-operations-representations}
+
+\section{Graph Isomorphism and Counting}\label{graph-isomorphism-and-counting}
+
+When we draw graphs, we often place vertices in different positions on a page or bend edges around each other. However, graph theory focuses on connectivity rather than spatial layout. Two graphs that look entirely different on paper might actually share the exact same structural connections.
+
+\subsection{Graph Isomorphism}\label{graph-isomorphism}
+
+Two graphs \(G_1 = (V_1, E_1)\) and \(G_2 = (V_2, E_2)\) are \textbf{isomorphic} (denoted \(G_1 \cong G_2\)) if there exists a bijection (a one-to-one and onto mapping) \(f: V_1 \to V_2\) such that any two vertices \(u, v \in V_1\) are adjacent in \(G_1\) \textbf{if and only if} \(f(u)\) and \(f(v)\) are adjacent in \(G_2\).
+
+In simple terms, an isomorphism is a relabeling of vertices that preserves all connections and non-connections.
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig11.png}}
+
+\subsubsection{Invariants Under Isomorphism}\label{invariants-under-isomorphism}
+
+If two graphs are isomorphic, they must share structural properties called \textbf{graph invariants}. If any of these properties differ, the graphs cannot be isomorphic:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The same number of vertices (\(\vert{}V_1\vert{} = \vert{}V_2\vert{}\)).
+\item
+  The same number of edges (\(\vert{}E_1\vert{} = \vert{}E_2\vert{}\)).
+\item
+  The exact same degree sequence (the degrees of all vertices listed in non-increasing order).
+\item
+  The same subgraphs, cycles of specific lengths, and structural properties.
+\end{enumerate}
+
+\subsubsection{Example}\label{example-2}
+
+\begin{example}
+\protect\hypertarget{exm:unnamed-chunk-16}{}\label{exm:unnamed-chunk-16}Consider two graphs \(G_1\) and \(G_2\) with \(V_1 = \{1, 2, 3, 4\}\) and \(V_2 = \{a, b, c, d\}\).
+
+\begin{itemize}
+\tightlist
+\item
+  \(E_1 = \{(1,2), (2,3), (3,4), (4,1)\}\) (a 4-cycle \(C_4\))
+\item
+  \(E_2 = \{(a,b), (b,c), (c,d), (d,a)\}\) (a 4-cycle \(C_4\))
+\end{itemize}
+
+We can define the bijection \(f(1)=a, f(2)=b, f(3)=c, f(4)=d\). Since every edge \((i, j) \in E_1\) corresponds to \((f(i), f(j)) \in E_2\), \(G_1 \cong G_2\).
+\end{example}
+
+\emph{(Note: While checking if two graphs are isomorphic is easy once the mapping \(f\) is given, determining whether a mapping exists for two arbitrary large graphs is a famously difficult problem in computer science, known as the Graph Isomorphism problem.)}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Counting Simple Graphs}\label{counting-simple-graphs}
+
+How many distinct graphs can we form given a fixed set of \(n\) vertices?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Maximum Edges in a Simple Graph}:
+  In a simple graph with \(n\) vertices, every vertex can connect to at most \(n-1\) other vertices. Counting all pairs gives:
+\end{enumerate}
+
+\[\text{Maximum Edges} = \binom{n}{2} = \frac{n(n-1)}{2}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Total Labeled Graphs}:
+  If the \(n\) vertices are labeled (distinct), each of the \(\frac{n(n-1)}{2}\) potential edges can either be present (\(1\)) or absent (\(0\)). Thus, the total number of labeled simple graphs on \(n\) vertices is:
+\end{enumerate}
+
+\[N_{\text{labeled}} = 2^{\frac{n(n-1)}{2}}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Unlabeled (Non-Isomorphic) Graphs}:
+  If vertices are indistinguishable, we count non-isomorphic equivalence classes \(T_n\). Since there are at most \(n!\) ways to permute the labels of \(n\) vertices, \(T_n\) satisfies the bounds:
+\end{enumerate}
+
+\[\frac{2^{n(n-1)/2}}{n!} \le T_n \le 2^{n(n-1)/2}\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Graph Transformations and Operations}\label{graph-transformations-and-operations}
+
+We can construct new graphs from existing ones using structural transformations.
+
+\subsection{\texorpdfstring{The Complement Graph (\(\overline{G}\))}{The Complement Graph (\textbackslash overline\{G\})}}\label{the-complement-graph-overlineg}
+
+Given a simple graph \(G = (V, E)\), its \textbf{complement} \(\overline{G} = (V, E')\) shares the exact same vertex set \(V\), but its edge set \(E'\) consists of all edges that are \textbf{missing} from \(G\).
+
+\[e = (u, v) \in E' \iff e = (u, v) \notin E \quad \text{for } u \neq v\]
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}cc@{}}
+\toprule\noalign{}
+Original Graph \(G\) & Complement Graph \(\bar{G}\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig14.png}} & \pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig15.png}} \\
+\end{longtable}
+}
+
+\subsubsection{Properties of Complements}\label{properties-of-complements}
+
+\begin{itemize}
+\item
+  \(G \cup \overline{G} = K_n\) (The union of \(G\) and \(\overline{G}\) forms the complete graph \(K_n\)).
+\item
+  \(\vert{}E(G)\vert{} + \vert{}E(\overline{G})\vert{} = \frac{n(n-1)}{2}\).
+\item
+  A graph \(G\) is called \textbf{self-complementary} if \(G \cong \overline{G}\).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{The Line Graph (\(L(G)\))}{The Line Graph (L(G))}}\label{the-line-graph-lg}
+
+The \textbf{line graph} \(L(G)\) flips the structural roles of vertices and edges:
+
+\begin{itemize}
+\item
+  Every \textbf{vertex} in \(L(G)\) represents an \textbf{edge} in \(G\).
+\item
+  Two vertices in \(L(G)\) are adjacent \textbf{if and only if} their corresponding edges in \(G\) share a common endpoint.
+\end{itemize}
+
+\begin{verbatim}
+  Original Graph G                  Line Graph L(G)
+       e1=(u,v)                          (e1)
+        /    \                           /  \
+       /      \                         /    \
+   e2=(v,w)---e3=(w,u)               (e2)----(e3)
+\end{verbatim}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}cl@{}}
+\toprule\noalign{}
+Original Graph \(G\) & \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig19.png}} & \pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig21.png}} \\
+\end{longtable}
+}
+
+\subsubsection{Example}\label{example-3}
+
+\begin{example}
+\protect\hypertarget{exm:unnamed-chunk-17}{}\label{exm:unnamed-chunk-17}
+
+Let \(G = P_4\), a path graph with 4 vertices \(\{1, 2, 3, 4\}\) and 3 edges \(e_1=(1,2), e_2=(2,3), e_3=(3,4)\).
+
+\begin{itemize}
+\tightlist
+\item
+  In \(L(G)\), the vertices are \(\{e_1, e_2, e_3\}\).
+\item
+  Edge \(e_1\) shares vertex \(2\) with \(e_2\), so \((e_1, e_2)\) is an edge in \(L(G)\).
+\item
+  Edge \(e_2\) shares vertex \(3\) with \(e_3\), so \((e_2, e_3)\) is an edge in \(L(G)\).
+\item
+  Edge \(e_1\) and \(e_3\) share no vertices, so there is no edge between \(e_1\) and \(e_3\).
+\item
+  Thus, \(L(P_4) \cong P_3\).
+\end{itemize}
+
+\end{example}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Eulerian and Hamiltonian Graphs}\label{eulerian-and-hamiltonian-graphs}
+
+Two classic traversal problems focus on traversing either every \textbf{edge} or every \textbf{vertex} of a graph.
+
+\subsection{Eulerian Graphs (Edge Traversals)}\label{eulerian-graphs-edge-traversals}
+
+\begin{itemize}
+\item
+  \textbf{Eulerian Trail}: A trail that visits every \textbf{edge} of \(G\) exactly once.
+\item
+  \textbf{Eulerian Tour (or Circuit)}: A closed Eulerian trail that starts and ends at the same vertex.
+\item
+  \textbf{Eulerian Graph}: A graph that contains an Eulerian tour.
+\end{itemize}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Euler Cricuit}]{_main_files/fig/fig16.png}}
+\caption{Euler Cricuit}
+\end{figure}
+
+Sequence: 1 \(\rightarrow\) 2 \(\rightarrow\) 3 \(\rightarrow\) 4 \(\rightarrow\) 1 \(\rightarrow\) 3 \(\rightarrow\) 4 \(\rightarrow\) 2 \(\rightarrow\) 1
+
+\subsubsection{Euler's Theorem}\label{eulers-theorem}
+
+\begin{theorem}
+\protect\hypertarget{thm:unnamed-chunk-18}{}\label{thm:unnamed-chunk-18}A connected graph \(G\) contains an Eulerian tour \textbf{if and only if} every vertex in \(G\) has an \textbf{even degree}.
+\end{theorem}
+
+\begin{theorem}[Eulerian Trail]
+\protect\hypertarget{thm:unnamed-chunk-19}{}\label{thm:unnamed-chunk-19}A connected graph \(G\) contains an open Eulerian trail (starting at \(u\) and ending at \(v\), where \(u \neq v\)) \textbf{if and only if} \(u\) and \(v\) have \textbf{odd degrees}, and all other vertices have \textbf{even degrees}.
+\end{theorem}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Hamiltonian Graphs (Vertex Traversals)}\label{hamiltonian-graphs-vertex-traversals}
+
+\begin{definition}
+\protect\hypertarget{def:unnamed-chunk-20}{}\label{def:unnamed-chunk-20}\leavevmode
+
+\begin{itemize}
+\item
+  \textbf{Hamiltonian Path}: A path that visits every \textbf{vertex} of \(G\) exactly once.
+\item
+  \textbf{Hamiltonian Cycle}: A closed cycle that visits every \textbf{vertex} of \(G\) exactly once.
+\item
+  \textbf{Hamiltonian Graph}: A graph that contains a Hamiltonian cycle.
+\end{itemize}
+
+\end{definition}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Hamiltonian Cycle}]{_main_files/fig/fig17.png}}
+\caption{Hamiltonian Cycle}
+\end{figure}
+
+Sequence: 1 \(\rightarrow\) 2 \(\rightarrow\) 3 \(\rightarrow\) 4 \(\rightarrow\) 1
+
+\subsubsection{Eulerian vs.~Hamiltonian Summary}\label{eulerian-vs.-hamiltonian-summary}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Feature
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Eulerian Graph
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Hamiltonian Graph
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Core Requirement} & Traverses every \textbf{edge} exactly once & Visits every \textbf{vertex} exactly once \\
+\textbf{Characterization} & Exact necessary \& sufficient conditions known (Degree parity) & No known simple characterization (NP-complete problem) \\
+\textbf{Verification} & Simple degree-counting algorithm & Computationally difficult for large graphs \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Computer Representations of Graphs}\label{computer-representations-of-graphs}
+
+To analyse graphs computationally, we must store their structure using concrete data structures.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Graph \(G\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Adjacency Matrix \(A\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/fig/fig18.png}} & \(
+\begin{array}{c|ccc}
+\text{Vertices:} & 1 & 2 & 3 \\ \hline
+1 & 0 & 1 & 1 \\
+2 & 1 & 0 & 1 \\
+3 & 1 & 1 & 0
+\end{array}
+\) \\
+\end{longtable}
+}
+
+\subsection{\texorpdfstring{The Adjacency Matrix (\(A\))}{The Adjacency Matrix (A)}}\label{the-adjacency-matrix-a}
+
+For a graph \(G = (V, E)\) with \(n\) labeled vertices \(\{1, 2, \dots, n\}\), the \textbf{adjacency matrix} \(A\) is an \(n \times n\) matrix where:
+
+\[A(i, j) = \begin{cases} 1 & \text{if } (i, j) \in E \\ 0 & \text{if } (i, j) \notin E \end{cases}\]
+
+\subsubsection{Matrix Properties}\label{matrix-properties}
+
+\begin{itemize}
+\item
+  \textbf{Undirected Graphs}: \(A\) is symmetric (\(A(i, j) = A(j, i)\)). The sum of entries in row \(i\) equals the degree \(d(v_i)\).
+\item
+  \textbf{Simple Graphs}: The diagonal entries \(A(i, i) = 0\) because simple graphs have no self-loops.
+\item
+  \textbf{Paths of Length \(k\)}: The entry \(A^k(i, j)\) in the \(k\)-th matrix power gives the exact number of distinct walks of length \(k\) between vertex \(i\) and vertex \(j\).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{The Incidence Matrix (\(T\))}{The Incidence Matrix (T)}}\label{the-incidence-matrix-t}
+
+For a graph with \(n\) vertices and \(m\) edges, the \textbf{incidence matrix} \(T\) is an \(n \times m\) matrix mapping vertices (rows) directly to edges (columns).
+
+\subsubsection{Undirected Graphs}\label{undirected-graphs}
+
+\[T(i, k) = \begin{cases} 1 & \text{if vertex } i \text{ is incident with edge } k \\ 0 & \text{otherwise} \end{cases}\]
+
+\subsubsection{Directed Graphs (Digraphs)}\label{directed-graphs-digraphs-1}
+
+\[T(i, k) = \begin{cases} -1 & \text{if directed edge } k \text{ leaves vertex } i \\ 1 & \text{if directed edge } k \text{ enters vertex } i \\ 0 & \text{if vertex } i \text{ is not incident with edge } k \end{cases}\]
+
+\subsubsection{Example 2.3}\label{example-2.3}
+
+Consider a directed graph with vertices \(\{v_1, v_2, v_3\}\) and edges \(e_1 = (v_1, v_2), e_2 = (v_2, v_3), e_3 = (v_1, v_3)\):
+
+\[\text{Incidence Matrix } T = \begin{pmatrix}  e_1 & e_2 & e_3 \\ -1 & 0 & -1 \\  1 & -1 & 0 \\  0 & 1 & 1  \end{pmatrix}\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{The Adjacency List}\label{the-adjacency-list}
+
+An \textbf{adjacency list} maintains an array or list of size \(n\), where each entry \(i\) points to a list of all vertices adjacent to vertex \(i\).
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Vertex & Neighbors \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & -\(\rightarrow\) {[}2{]} \(\rightarrow\) {[}3{]} \\
+2 & -\(\rightarrow\) {[}1{]} \(\rightarrow\) {[}3{]} \\
+3 & -\(\rightarrow\) {[}1{]} \(\rightarrow\) {[}2{]} \\
+\end{longtable}
+}
+
+\subsection{Representation Comparison}\label{representation-comparison}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Representation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Memory Complexity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Edge Lookup \((u, v)\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ideal Use Case
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Adjacency Matrix} & \(O(n^2)\) & \(O(1)\) constant time & \\
+\textbf{Dense Graphs} (where \(\vert{}E\vert{} \approx n^2\)) & & & \\
+\textbf{Incidence Matrix} & \(O(n \cdot m)\) & \(O(m)\) search time & \\
+\textbf{Theoretical Algorithms \& Flows} & & & \\
+\textbf{Adjacency List} & \(O(n + m)\) & \(O(d(u))\) list search time & \\
+\textbf{Sparse Graphs} (where \(\vert{}E\vert{} \ll n^2\)) & & & \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chapter 2 Exercises}\label{chapter-2-exercises}
+
+\begin{exercise}
+\protect\hypertarget{exr:unnamed-chunk-21}{}\label{exr:unnamed-chunk-21}\leavevmode
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Graph Isomorphism}: Are \(K_{3,3}\) and a cycle \(C_6\) with extra cross-edges isomorphic? List two graph invariants you can use to justify your answer.
+\item
+  \textbf{Complement Construction}: Draw the complement of a path graph \(P_4\). Is \(P_4\) self-complementary?
+\item
+  \textbf{Eulerian vs Hamiltonian}: Construct a graph that contains an Eulerian circuit but does \textbf{not} contain a Hamiltonian cycle.
+\item
+  \textbf{Adjacency Matrix Powers}: Given the adjacency matrix \(A = \begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix}\), compute \(A^2\) and interpret what the entry \(A^2(1, 1)\) represents.
+\end{enumerate}
+
+\end{exercise}
+
+\chapter{Graph Types, Operations \& Representations}\label{graph-types-operations-representations-1}
+
+\subsection{Graph Isomorphism \& Counting}\label{graph-isomorphism-counting}
+
+\begin{itemize}
+\item
+  \textbf{Isomorphism}: Two graphs are isomorphic if there exists a 1-to-1 correspondence between their vertex sets that preserves adjacencies and non-adjacencies. Finding if two graphs are isomorphic is believed to be an NP-hard problem.
+\item
+  \textbf{Counting Simple Graphs}:
+\item
+  Maximum possible edges in a simple graph with \(n\) vertices: \(\frac{n(n-1)}{2}\).
+\item
+  Total possible labeled graphs with \(n\) vertices: \(2^{n(n-1)/2}\).
+\item
+  The number of non-isomorphic graphs \(T_n\) satisfies: \(\frac{2^{n(n-1)/2}}{n!} \le T_n \le 2^{n(n-1)/2}\).
+\end{itemize}
+
+\subsection{Graph Transformations}\label{graph-transformations}
+
+\begin{itemize}
+\item
+  \textbf{Complement Graph \(\overline{G}\)}: Given \(G=(V,E)\), \(\overline{G}=(V, E')\) shares the same vertex set, but its edges are precisely those missing from \(G\).
+\item
+  \textbf{Line Graph \(L(G)\)}: Represents edge adjacencies in \(G\). Each vertex in \(L(G)\) corresponds to an edge in \(G\), and two vertices in \(L(G)\) are adjacent if their respective edges in \(G\) share a common vertex.
+\end{itemize}
+
+\begin{verbatim}
+Original Edge (u, v) ---- Original Edge (v, w)
+          \                      /
+           --- Line Graph Node --
+\end{verbatim}
+
+\subsection{Eulerian \& Hamiltonian Graphs}\label{eulerian-hamiltonian-graphs}
+
+\begin{itemize}
+\item
+  \textbf{Eulerian Trail}: A trail containing every edge of \(G\).
+\item
+  \textbf{Eulerian Tour}: A closed Eulerian trail.
+\item
+  \textbf{Euler's Theorem}: A connected graph has an Euler tour \textbf{if and only if} every vertex has an \textbf{even degree}.
+\item
+  \textbf{Hamiltonian Cycle}: A cycle that visits every \textbf{vertex} of a graph exactly once.
+\end{itemize}
+
+\subsection{Graph Representations}\label{graph-representations}
+
+\begin{itemize}
+\item
+  \textbf{Adjacency Matrix (\(A\))}: An \(n \times n\) matrix where \(A(i, j) = 1\) if \((i, j) \in E\), else \(0\).
+\item
+  \textbf{Incidence Matrix (\(T\))}: An \(n \times m\) matrix (vertices \(\times\) edges):
+\item
+  Undirected: \(T(i, k) = 1\) if vertex \(i\) is incident with edge \(k\).
+\item
+  Directed: \(T(i, k) = -1\) if arc \(k\) leaves vertex \(i\); \(T(j, k) = 1\) if arc \(k\) enters vertex \(j\).
+\item
+  \textbf{Adjacency List}: Sparse matrix structure mapping each node to its list of outward neighbors.
+\end{itemize}
+
+\chapter{Lecture 3: Connectivity \& Graph Exploration}\label{lecture-3-connectivity-graph-exploration}
+
+\subsection{Connectivity}\label{connectivity}
+
+\begin{itemize}
+\item
+  \textbf{Connected Component}: Equivalence classes formed by the walk relation \(u \sim v\) on undirected graphs.
+\item
+  \textbf{Strong Connectivity (Digraphs)}: \(u\) and \(v\) are strongly connected if there exists a directed walk from \(u\) to \(v\) \textbf{and} from \(v\) to \(u\).
+\item
+  \textbf{Strongly Connected Component (SCC)}: \(C(u) = R_+(u) \cap R_-(u)\), where \(R_+(u)\) is reachable from \(u\), and \(R_-(u)\) can reach \(u\). Reaching set \(R_-(u)\) is found using the inverse graph \(G^T\) (represented by transpose adjacency matrix \(A^T\)).
+\end{itemize}
+
+\subsection{Exploration Algorithms}\label{exploration-algorithms}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Algorithm
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Queue/Data Structure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Strategy
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Complexity
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Generic Search} & Set \(L\) & Visits arbitrary unvisited neighbor & \\
+\end{longtable}
+}
+
+\textbar{} \(O(V)\) steps (linear)
+
+\textbar{}
+\textbar{} \textbf{DFS} \textbar{} LIFO Stack
+
+\textbar{} Explores deeply along branches before backtracking
+
+\textbar{} \(O(V + E)\) \textbar{}
+\textbar{} \textbf{BFS} \textbar{} FIFO Queue
+
+\textbar{} Explores all immediate neighbors level-by-level
+
+\textbar{} \(O(V + E)\) \textbar{}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lecture 4: Planar Graphs}\label{lecture-4-planar-graphs}
+
+\subsection{Definitions \& Euler's Formula}\label{definitions-eulers-formula}
+
+\begin{itemize}
+\item
+  \textbf{Planar Graph}: A graph that can be embedded (drawn) in a 2D plane such that no edges intersect except at their endpoints.
+\item
+  \textbf{Fáry's Theorem}: Every planar graph can be drawn using straight line segments.
+\item
+  \textbf{Euler's Formula}: For any plane-embedded graph with \(v\) vertices, \(e\) edges, \(r\) regions, and \(c\) components:
+\end{itemize}
+
+\[v - e + r = c + 1\]
+
+For connected graphs (\(c = 1\)), this simplifies to \(v - e + r = 2\).
+
+\subsection{Invariants \& Non-Planarity Criteria}\label{invariants-non-planarity-criteria}
+
+\begin{itemize}
+\item
+  \textbf{Edge Bounds}:
+\item
+  Simple planar graph (\(v \ge 3\)): \(e \le 3v - 6\).
+\item
+  Planar graph with no cycle of length \(< 4\) (girth \(\ge 4\)): \(e \le 2v - 4\).
+\item
+  \textbf{Degree Invariants}:
+\item
+  Average vertex degree in a planar graph: \(< 6 - \frac{12}{n}\).
+\item
+  Every planar graph contains at least one vertex with degree \(d(v) \le 5\).
+\item
+  \textbf{Kuratowski's Theorem}: A graph is non-planar \textbf{if and only if} it contains a subdivision of \(K_5\) (complete graph on 5 vertices) or \(K_{3,3}\) (complete bipartite graph on 3+3 vertices).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lecture 5 \& 6: Trees, Spanning Trees \& Minimum Spanning Trees (MST)}\label{lecture-5-6-trees-spanning-trees-minimum-spanning-trees-mst}
+
+\subsection{Tree Properties}\label{tree-properties}
+
+\begin{itemize}
+\item
+  \textbf{Tree}: A connected, acyclic graph.
+\item
+  \textbf{Forest}: An acyclic collection of trees. A forest on \(n\) vertices with \(c\) components has \(n - c\) edges.
+\item
+  \textbf{Equivalent Tree Definitions} (\(\vert{}V\vert{} = n\)):
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Connected and acyclic.
+\item
+  Connected with \(n - 1\) edges.
+\item
+  Acyclic with \(n - 1\) edges.
+\item
+  Unique path between any pair of vertices.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cayley's Formula}: Number of distinct labeled trees on \(n\) vertices is \(n^{n-2}\).
+\end{itemize}
+
+\subsection{Rooted Trees}\label{rooted-trees}
+
+\begin{itemize}
+\item
+  \textbf{Terminology}: Root, Parent, Child, Siblings, Leaf (no children), Depth (distance to root), Height (maximum depth).
+\item
+  \textbf{\(m\)-ary Tree}: Every node has at most \(m\) children.
+\item
+  \textbf{Center of a Tree}: Single vertex or pair of adjacent vertices that minimizes maximum distance to any other node (eccentricity).
+\end{itemize}
+
+\subsection{Minimum Spanning Tree Algorithms}\label{minimum-spanning-tree-algorithms}
+
+\begin{verbatim}
+     Kruskal's Algorithm               Prim's Algorithm
+[Sort all edges by weight]       [Start from single node u]
+            |                                |
+[Add edge if no cycle formed]     [Add minimum edge connecting]
+            |                     [visited to unvisited set]
+[Repeat until V-1 edges]                    |
+                                  [Repeat until V-1 edges]
+\end{verbatim}
+
+\begin{itemize}
+\item
+  \textbf{Kruskal's Algorithm}: Edge-centric greedy approach. Sorts all edges by weight and iteratively adds the minimum-weight edge that does not form a cycle.
+\item
+  \textbf{Prim's Algorithm}: Vertex-centric greedy approach. Starts with a single vertex and iteratively expands the tree by adding the minimum-weight edge connecting the current tree to an unvisited vertex.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lecture 7 \& 8: Graph Coloring \& Applications}\label{lecture-7-8-graph-coloring-applications}
+
+\subsection{Definitions \& Results}\label{definitions-results}
+
+\begin{itemize}
+\item
+  \textbf{\(k\)-Coloring}: Assignment \(C: V \to \{1, \dots, k\}\) such that \(C(u) \ne C(v)\) for all \(uv \in E\).
+\item
+  \textbf{Chromatic Number \(\chi(G)\)}: Minimal \(k\) required to color \(G\).
+\item
+  \textbf{Key Chromatic Values}:
+\item
+  Bipartite Graphs: \(\chi(G) = 2\)
+\item
+  Cycles (\(C_n\)): \(\chi(C_n) = 2\) (even \(n\)), \(\chi(C_n) = 3\) (odd \(n\))
+\item
+  Cliques (\(K_n\)): \(\chi(K_n) = n\)
+\item
+  Four-Color Theorem: Every planar graph has \(\chi(G) \le 4\).
+\end{itemize}
+
+\subsection{Applications of Graph Coloring}\label{applications-of-graph-coloring}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Conflict Allocation (e.g., Tropical Fish Tank Allocation)}: Vertices = entities (fish); Edges = conflicts; Colors = tanks required.
+\item
+  \textbf{Scheduling Problems (e.g., Exam Scheduling)}: Vertices = courses; Edges = student overlap conflicts; Colors = minimum time slots needed.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lecture 9: Shortest Path Algorithms}\label{lecture-9-shortest-path-algorithms}
+
+\subsection{Algorithms Taxonomy}\label{algorithms-taxonomy}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Problem Type & Algorithm & Strategy & Constraints \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Unweighted} & BFS Exploration & & \\
+\end{longtable}
+}
+
+\textbar{} Level-by-level queue traversal
+
+\textbar{} All edge weights equal \(1\) \textbar{}
+\textbar{} \textbf{Weighted (Non-negative)} \textbar{} Dijkstra's Algorithm
+
+\textbar{} Greedy search via priority queue
+
+\textbar{} Requires non-negative edge weights \(w(e) \ge 0\) \textbar{}
+\textbar{} \textbf{Negative Weights} \textbar{} Modified Dijkstra / Bellman-Ford \textbar{} Iterative relaxation \textbar{} Detects negative weight cycles
+
+\textbar{}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Dijkstra's Relaxation Step}:
+\end{itemize}
+
+\[\text{If } \lambda(v) > \lambda(u) + w(u, v) \implies \lambda(v) = \lambda(u) + w(u, v)\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lecture 10: Networks and Flows}\label{lecture-10-networks-and-flows}
+
+\subsection{Network Definitions}\label{network-definitions}
+
+\begin{itemize}
+\item
+  \textbf{Network}: A directed graph with source \(s\), sink \(t\), and arc capacities \(c_{i,j} \ge 0\).
+\item
+  \textbf{Flow Constraints}:
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Capacity Constraint: \(0 \le x_{i,j} \le c_{i,j}\)
+\item
+  Conservation (Kirchhoff's Law): \(\sum_{k} x_{k,i} = \sum_{k} x_{i,k}\) for all vertices except source \(s\) and sink \(t\).
+\end{enumerate}
+
+\subsection{Ford-Fulkerson Algorithm \& Max-Flow Min-Cut}\label{ford-fulkerson-algorithm-max-flow-min-cut}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Initialize flow \(x_{i,j} = 0\) everywhere.
+\item
+  Search for an \textbf{Augmenting Path} from source to sink with bottleneck capacity \(\Delta > 0\).
+\item
+  Increase path flow by \(\Delta\) and repeat until no augmenting path exists.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Max-Flow Min-Cut Theorem}: The maximum flow value in a network equals the minimum capacity of a cut separating \(s\) and \(t\).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Lecture 11 \& 12: Matchings \& Covers}\label{lecture-11-12-matchings-covers}
+
+\subsection{Matchings Definitions}\label{matchings-definitions}
+
+\begin{itemize}
+\item
+  \textbf{Matching (\(M\))}: A subset of edges in \(G\) such that no two edges share a common vertex.
+\item
+  \textbf{Maximal Matching}: A matching that cannot be extended by adding any remaining edge.
+\item
+  \textbf{Maximum Matching}: A matching with the highest possible cardinality (\(\nu(G)\)).
+\item
+  \textbf{Perfect Matching}: A matching that covers every vertex in \(V\) (\(\text{deficiency} = 0\)).
+\item
+  \textbf{Augmenting Path}: An \(M\)-alternating path whose endpoints are \(M\)-exposed. A matching \(M\) is maximum \textbf{if and only if} it has no \(M\)-augmenting paths.
+\end{itemize}
+
+\subsection{Graph Covers}\label{graph-covers}
+
+\begin{itemize}
+\item
+  \textbf{Line Cover}: Edge subset covering every vertex (requires \(d(v) \ge 1\)).
+\item
+  \textbf{Vertex Cover}: Vertex subset covering every edge in \(E\).
+\end{itemize}
+
+\subsection{Fundamental Matching Theorems}\label{fundamental-matching-theorems}
+
+\begin{itemize}
+\item
+  \textbf{Hall's Marriage Theorem}: A bipartite graph with sets \(X, Y\) has a matching covering \(X\) \textbf{if and only if} for every subset \(S \subseteq X\), its neighborhood satisfies \(\vert{}N(S)\vert{} \ge \vert{}S\vert{}\).
+\item
+  \textbf{Tutte-Berge Formula}:
+\end{itemize}
+
+\[\nu(G) = \min_{U \subseteq V} \frac{1}{2} \left( \vert{}V\vert{} - \alpha(G \setminus U) + \vert{}U\vert{} \right)\]
+
+where \(\alpha(G \setminus U)\) denotes the number of odd connected components in \(G \setminus U\).
+
+\chapter{Footnotes and citations}\label{footnotes-and-citations}
+
+\section{Footnotes}\label{footnotes}
+
+Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
+
+\section{Citations}\label{citations}
+
+Reference items in your bibliography file(s) using \texttt{@key}.
+
+For example, we are using the \textbf{bookdown} package \citep{R-bookdown} (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015} (this citation was added manually in an external file book.bib).
+Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
+
+The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
+
+\chapter{Blocks}\label{blocks}
+
+\section{Equations}\label{equations}
+
+Here is an equation.
+
+\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  \label{eq:binom}
+\end{equation}
+
+You may refer to using \texttt{\textbackslash{}@ref(eq:binom)}, like see Equation \eqref{eq:binom}.
+
+\section{Theorems and proofs}\label{theorems-and-proofs}
+
+Labeled theorems can be referenced in text using \texttt{\textbackslash{}@ref(thm:tri)}, for example, check out this smart theorem \ref{thm:tri}.
+
+\begin{theorem}
+\protect\hypertarget{thm:tri}{}\label{thm:tri}For a right triangle, if \(c\) denotes the \emph{length} of the hypotenuse
+and \(a\) and \(b\) denote the lengths of the \textbf{other} two sides, we have
+\[a^2 + b^2 = c^2\]
+\end{theorem}
+
+Read more here \url{https://pkg.yihui.org/bookdown/markdown-extensions-by-bookdown.html}.
+
+\section{Callout blocks}\label{callout-blocks}
+
+The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: \url{https://yihui.org/rmarkdown-cookbook/custom-blocks.html}
+
+\chapter{Sharing your book}\label{sharing-your-book}
+
+\section{Publishing}\label{publishing}
+
+HTML books can be published online, see: \url{https://pkg.yihui.org/bookdown/publishing.html}
+
+\section{404 pages}\label{pages}
+
+By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a \texttt{\_404.Rmd} or \texttt{\_404.md} file to your project root and use code and/or Markdown syntax.
+
+\section{Metadata for sharing}\label{metadata-for-sharing}
+
+Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the \texttt{index.Rmd} YAML. To setup, set the \texttt{url} for your book and the path to your \texttt{cover-image} file. Your book's \texttt{title} and \texttt{description} are also used.
+
+This \texttt{gitbook} uses the same social sharing data across all chapters in your book- all links shared will look the same.
+
+Specify your book's source repository on GitHub using the \texttt{edit} key under the configuration options in the \texttt{\_output.yml} file, which allows users to suggest an edit by linking to a chapter's source file.
+
+Read more about the features of this output format here:
+
+\url{https://pkgs.rstudio.com/bookdown/reference/gitbook.html}
+
+Or use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?bookdown}\SpecialCharTok{::}\NormalTok{gitbook}
+\end{Highlighting}
+\end{Shaded}
+
+
+\bibliography{book.bib,packages.bib}
+
+\end{document}
