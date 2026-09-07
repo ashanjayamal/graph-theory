@@ -1,30 +1,197 @@
-# Blocks
+# Chapter 6: Graph Colorings & Chromatic Numbers
 
-## Equations
+## 6.1 Vertex Coloring and Chromatic Number
 
-Here is an equation.
+Graph coloring is one of the most widely studied areas of graph theory, with applications ranging from scheduling algorithms and register allocation in compilers to radio frequency assignment.
 
-\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  (\#eq:binom)
-\end{equation} 
+### Definitions
 
-You may refer to using `\@ref(eq:binom)`, like see Equation \@ref(eq:binom).
+* **Proper Vertex $k$-Coloring**: An assignment of $k$ colors to the vertices of a graph $G = (V, E)$ such that no two adjacent vertices share the same color.
 
-
-## Theorems and proofs
-
-Labeled theorems can be referenced in text using `\@ref(thm:tri)`, for example, check out this smart theorem \@ref(thm:tri).
-
-::: {.theorem #tri}
-For a right triangle, if $c$ denotes the *length* of the hypotenuse
-and $a$ and $b$ denote the lengths of the **other** two sides, we have
-$$a^2 + b^2 = c^2$$
-:::
-
-Read more here <https://pkg.yihui.org/bookdown/markdown-extensions-by-bookdown.html>.
-
-## Callout blocks
+$$f: V \to \{1, 2, \dots, k\} \quad \text{such that } (u, v) \in E \implies f(u) \neq f(v)$$
 
 
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: https://yihui.org/rmarkdown-cookbook/custom-blocks.html
+* **$k$-Colorable**: A graph $G$ is $k$-colorable if it admits a proper vertex $k$-coloring.
+* **Chromatic Number $\chi(G)$**: The minimum number of colors required to properly color the vertices of $G$.
+
+```
+       Proper 3-Coloring of C5                    Color Classes
+               (Red)                              Color 1 (Red):   {1}
+              /     \                             Color 2 (Blue):  {2, 4}
+        (Blue)       (Green)                      Color 3 (Green): {3, 5}
+         |               |
+       (Green)-------(Blue)
+
+```
+
+### Independent Sets and Color Classes
+
+In a proper vertex coloring, all vertices assigned the same color form an **independent set** (a set of vertices with no pairwise adjacent edges).
+
+* A proper $k$-coloring partitions the vertex set $V$ into $k$ disjoint independent sets called **color classes** $V_1, V_2, \dots, V_k$.
+* **Independence Number $\alpha(G)$**: The size of the largest independent set in $G$.
+
+Because each color class $V_i$ can contain at most $\alpha(G)$ vertices, we obtain the fundamental lower bound:
+
+
+$$\chi(G) \ge \frac{\vert{}V\vert{}}{\alpha(G)}$$
+
+---
+
+## 6.2 Chromatic Numbers for Standard Graph Families
+
+The chromatic number varies significantly depending on the structural symmetry and density of the graph.
+
+| Graph Family | Notation | Chromatic Number $\chi(G)$ | Description / Condition |
+| --- | --- | --- | --- |
+| **Empty Graph** | $E_n$ | $1$ | No edges; all vertices can share 1 color. |
+| **Complete Graph** | $K_n$ | $n$ | Every vertex is adjacent to every other vertex. |
+| **Bipartite Graph** | $K_{m,n}$ | $2$ | Vertices can be partitioned into 2 independent sets. |
+| **Tree / Forest** | $T$ | $2$ | Every tree with $n \ge 2$ is 2-colorable (bipartite). |
+| **Cycle Graph** | $C_n$ | $\begin{cases} 2 & \text{if } n \text{ is even} \\ 3 & \text{if } n \text{ is odd} \end{cases}$ | Odd cycles require 3 colors due to parity loop closure. |
+| **Wheel Graph** | $W_n$ | $\begin{cases} 3 & \text{if } n \text{ is even} \\ 4 & \text{if } n \text{ is odd} \end{cases}$ | Central hub vertex connects to an outer cycle $C_{n-1}$. |
+
+---
+
+## 6.3 Bounds on Chromatic Numbers
+
+Determining the exact chromatic number $\chi(G)$ for arbitrary graphs is an NP-hard problem. Consequently, we rely on structural invariants to establish upper and lower bounds.
+
+### Lower Bounds
+
+1. **Clique Number Bounds:**
+* **Clique ($K_r$)**: A complete subgraph where every pair of vertices is adjacent.
+* **Clique Number $\omega(G)$**: The size of the largest clique in $G$.
+* Since every vertex in a clique of size $\omega(G)$ requires a distinct color:
+
+$$\chi(G) \ge \omega(G)$$
+
+
+
+
+2. **Independence Number Bounds:**
+
+$$\chi(G) \ge \frac{\vert{}V\vert{}}{\alpha(G)}$$
+
+
+
+---
+
+### Upper Bounds
+
+1. **Maximum Degree Bound:**
+If a graph $G$ has maximum vertex degree $\Delta(G)$, a simple greedy coloring algorithm guarantees that:
+
+$$\chi(G) \le \Delta(G) + 1$$
+
+
+2. **Brooks' Theorem (1941):**
+Can we improve upon the naive $\Delta(G) + 1$ bound? For almost all connected graphs, yes.
+**Theorem (Brooks' Theorem):**
+For any connected, simple graph $G$,
+
+$$\chi(G) \le \Delta(G)$$
+
+
+
+**unless** $G$ is a **complete graph** ($K_n$) or an **odd cycle** ($C_2k+1$), in which case $\chi(G) = \Delta(G) + 1$.
+
+---
+
+## 6.4 Planar Graph Coloring and Map Theorems
+
+Map coloring was the historical driving force behind the development of graph coloring theory.
+
+```
+                  Dual Graph Transformation
+        Map Regions                        Dual Graph
+      +-------------+                      (R1)-------(R2)
+      |   R1 | R2   |                       |    \   /  |
+      +------+------+   =======>            |     (R3)  |
+      |     R3      |                       |    /   \  |
+      +-------------+                      (R4)-------(R5)
+
+```
+
+### The Dual Graph
+
+Any political map can be converted into a planar graph by placing a vertex inside each region (country/province) and drawing an edge between two vertices if their corresponding regions share a common border.
+
+### Planar Coloring Theorems
+
+1. **Six Color Theorem:**
+Every simple planar graph is 6-colorable ($\chi(G) \le 6$).
+*Proof Sketch:* Uses the planar invariant that every planar graph contains a vertex $v$ with $d(v) \le 5$, followed by induction on $\vert{}V\vert{}$.
+2. **Five Color Theorem (Heawood, 1890):**
+Every simple planar graph is 5-colorable ($\chi(G) \le 5$).
+3. **The Four Color Theorem (Appel & Haken, 1976):**
+**Theorem:** Every simple planar graph is 4-colorable.
+
+$$\text{If } G \text{ is planar} \implies \chi(G) \le 4$$
+
+
+
+*(Note: The Four Color Theorem was the first major mathematical theorem to be proved using a computer, verifying 1,936 reducible configuration cases.)*
+
+---
+
+## 6.5 Edge Coloring & Chromatic Index
+
+Instead of coloring vertices, edge coloring assigns colors to edges such that no two adjacent edges (edges sharing a common vertex) have the same color.
+
+### Definitions
+
+* **Proper Edge $k$-Coloring**: A mapping $c: E \to \{1, 2, \dots, k\}$ such that $e_1 \cap e_2 \neq \emptyset \implies c(e_1) \neq c(e_2)$.
+* **Chromatic Index $\chi'(G)$**: The minimum number of colors needed to properly color the edges of $G$.
+
+```
+         Proper Edge Coloring of K3               Vizing's Bound
+                   (1)                            Delta(G) = 2
+                  /   \                           Chi'(G)  = 3
+           Red   /     \  Blue                    Class 1: Chi'(G) = Delta(G)
+                /       \                         Class 2: Chi'(G) = Delta(G) + 1
+              (2)-------(3)
+                 Green
+
+```
+
+### Fundamental Bounds on Edge Coloring
+
+1. **Trivial Lower Bound:**
+Since a vertex with degree $\Delta(G)$ has $\Delta(G)$ incident edges that must all receive different colors:
+
+$$\chi'(G) \ge \Delta(G)$$
+
+
+2. **Vizing's Theorem (1964):**
+**Theorem:** For any simple graph $G$, the chromatic index $\chi'(G)$ satisfies:
+
+$$\Delta(G) \le \chi'(G) \le \Delta(G) + 1$$
+
+
+This remarkable result partitions all simple graphs into two distinct categories:
+* **Class 1 Graphs**: $\chi'(G) = \Delta(G)$ (e.g., all bipartite graphs).
+* **Class 2 Graphs**: $\chi'(G) = \Delta(G) + 1$ (e.g., odd cycles $C_{2k+1}$).
+
+
+
+---
+
+## Chapter 6 Comparison Table
+
+| Metric / Theorem | Target Element | Bound / Formula | Key Conditions / Exceptions |
+| --- | --- | --- | --- |
+| **Clique Bound** | Vertices | $\chi(G) \ge \omega(G)$ | Lower bound based on complete subgraphs |
+| **Brooks' Theorem** | Vertices | $\chi(G) \le \Delta(G)$ | Excludes $K_n$ and odd cycles $C_{2k+1}$ |
+| **Four Color Theorem** | Vertices | $\chi(G) \le 4$ | Applies strictly to planar graphs |
+| **Vizing's Theorem** | Edges | $\chi'(G) \in \{\Delta(G), \Delta(G) + 1\}$ | Holds for all simple graphs |
+
+---
+
+## Chapter 6 Exercises
+
+1. **Chromatic Number Calculation**: Determine the chromatic number $\chi(G)$ and independence number $\alpha(G)$ for the Grötzsch graph (or an odd cycle $C_7$).
+2. **Brooks' Theorem Verification**: Identify whether the complete bipartite graph $K_{3,3}$ satisfies $\chi(G) \le \Delta(G)$.
+3. **Planar Map Coloring**: Construct a planar graph with 6 vertices that has $\chi(G) = 4$.
+4. **Vizing's Classification**: Classify the cycle graphs $C_5$ and $C_6$ into Class 1 or Class 2 according to Vizing's Theorem.
+

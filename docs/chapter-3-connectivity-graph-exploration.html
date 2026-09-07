@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Chapter 3: Connectivity &amp; Graph Exploration | Graph Theroy</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Chapter 3: Connectivity &amp; Graph Exploration | Graph Theroy" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/fig/cover.jpg" />
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Chapter 3: Connectivity &amp; Graph Exploration | Graph Theroy" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="twitter:image" content="/fig/cover.jpg" />
+
+<meta name="author" content="Ashan De Silva" />
+
+
+<meta name="date" content="2026-09-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="graph-types-operations-representations.html"/>
+<link rel="next" href="planar-graphs.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction to Graph Theory</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-is-graph-theory"><i class="fa fa-check"></i><b>1.1</b> What is Graph Theory?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#historical-foundations"><i class="fa fa-check"></i><b>1.2</b> Historical Foundations</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#the-seven-bridges-of-k%C3%B6nigsberg-1736"><i class="fa fa-check"></i><b>1.2.1</b> The Seven Bridges of Königsberg (1736)</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#hamiltons-icosian-game-1859"><i class="fa fa-check"></i><b>1.2.2</b> Hamilton’s Icosian Game (1859)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#modern-applications"><i class="fa fa-check"></i><b>1.3</b> Modern Applications</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#formal-definitions-and-basic-structures"><i class="fa fa-check"></i><b>1.4</b> Formal Definitions and Basic Structures</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#mathematical-definition-of-a-graph"><i class="fa fa-check"></i><b>1.4.1</b> Mathematical Definition of a Graph</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#loops-multiple-edges-and-simple-graphs"><i class="fa fa-check"></i><b>1.4.2</b> Loops, Multiple Edges, and Simple Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#vertex-degrees-and-handshaking"><i class="fa fa-check"></i><b>1.5</b> Vertex Degrees and Handshaking</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#vertex-degree"><i class="fa fa-check"></i><b>1.5.1</b> Vertex Degree</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#the-handshaking-lemma"><i class="fa fa-check"></i><b>1.5.2</b> The Handshaking Lemma</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#special-classes-of-graphs"><i class="fa fa-check"></i><b>1.6</b> Special Classes of Graphs</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#complete-graphs-k_n"><i class="fa fa-check"></i><b>1.6.1</b> Complete Graphs (<span class="math inline">\(K_n\)</span>)</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#regular-graphs"><i class="fa fa-check"></i><b>1.6.2</b> Regular Graphs</a></li>
+<li class="chapter" data-level="1.6.3" data-path="index.html"><a href="index.html#bipartite-graphs"><i class="fa fa-check"></i><b>1.6.3</b> Bipartite Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#traversal-terminology-walks-trails-paths-circuits-and-cycles"><i class="fa fa-check"></i><b>1.7</b> Traversal Terminology: Walks, Trails, Paths, Circuits, and Cycles</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="index.html"><a href="index.html#definitions"><i class="fa fa-check"></i><b>1.7.1</b> Definitions</a></li>
+<li class="chapter" data-level="1.7.2" data-path="index.html"><a href="index.html#summary-table"><i class="fa fa-check"></i><b>1.7.2</b> Summary Table</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#directed-graphs-digraphs"><i class="fa fa-check"></i><b>1.8</b> Directed Graphs (Digraphs)</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="index.html"><a href="index.html#in-degree-and-out-degree"><i class="fa fa-check"></i><b>1.8.1</b> In-Degree and Out-Degree</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#chapter-1-exercises"><i class="fa fa-check"></i><b>1.9</b> Chapter 1 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html"><i class="fa fa-check"></i><b>2</b> Graph Types, Operations &amp; Representations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#graph-isomorphism-and-counting"><i class="fa fa-check"></i><b>2.1</b> Graph Isomorphism and Counting</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#graph-isomorphism"><i class="fa fa-check"></i><b>2.1.1</b> Graph Isomorphism</a></li>
+<li class="chapter" data-level="2.1.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#counting-simple-graphs"><i class="fa fa-check"></i><b>2.1.2</b> Counting Simple Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#graph-transformations-and-operations"><i class="fa fa-check"></i><b>2.2</b> Graph Transformations and Operations</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-complement-graph-overlineg"><i class="fa fa-check"></i><b>2.2.1</b> The Complement Graph (<span class="math inline">\(\overline{G}\)</span>)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-line-graph-lg"><i class="fa fa-check"></i><b>2.2.2</b> The Line Graph (<span class="math inline">\(L(G)\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#eulerian-and-hamiltonian-graphs"><i class="fa fa-check"></i><b>2.3</b> Eulerian and Hamiltonian Graphs</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#eulerian-graphs-edge-traversals"><i class="fa fa-check"></i><b>2.3.1</b> Eulerian Graphs (Edge Traversals)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#hamiltonian-graphs-vertex-traversals"><i class="fa fa-check"></i><b>2.3.2</b> Hamiltonian Graphs (Vertex Traversals)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#computer-representations-of-graphs"><i class="fa fa-check"></i><b>2.4</b> Computer Representations of Graphs</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-adjacency-matrix-a"><i class="fa fa-check"></i><b>2.4.1</b> The Adjacency Matrix (<span class="math inline">\(A\)</span>)</a></li>
+<li class="chapter" data-level="2.4.2" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-incidence-matrix-t"><i class="fa fa-check"></i><b>2.4.2</b> The Incidence Matrix (<span class="math inline">\(T\)</span>)</a></li>
+<li class="chapter" data-level="2.4.3" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#the-adjacency-list"><i class="fa fa-check"></i><b>2.4.3</b> The Adjacency List</a></li>
+<li class="chapter" data-level="2.4.4" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#representation-comparison"><i class="fa fa-check"></i><b>2.4.4</b> Representation Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="graph-types-operations-representations.html"><a href="graph-types-operations-representations.html#chapter-2-exercises"><i class="fa fa-check"></i><b>2.5</b> Chapter 2 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html"><i class="fa fa-check"></i><b>3</b> Chapter 3: Connectivity &amp; Graph Exploration</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#graph-connectivity"><i class="fa fa-check"></i><b>3.1</b> 3.1 Graph Connectivity</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#connectivity-in-undirected-graphs"><i class="fa fa-check"></i><b>3.1.1</b> Connectivity in Undirected Graphs</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#strong-connectivity-in-directed-graphs"><i class="fa fa-check"></i><b>3.1.2</b> Strong Connectivity in Directed Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#graph-exploration-algorithms"><i class="fa fa-check"></i><b>3.2</b> Graph Exploration Algorithms</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#generic-search-algorithm"><i class="fa fa-check"></i><b>3.2.1</b> Generic Search Algorithm</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#depth-first-search-dfs"><i class="fa fa-check"></i><b>3.2.2</b> Depth-First Search (DFS)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#breadth-first-search-bfs"><i class="fa fa-check"></i><b>3.2.3</b> Breadth-First Search (BFS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#comparison-of-exploration-algorithms"><i class="fa fa-check"></i><b>3.3</b> Comparison of Exploration Algorithms</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-connectivity-graph-exploration.html"><a href="chapter-3-connectivity-graph-exploration.html#chapter-3-exercises"><i class="fa fa-check"></i><b>3.4</b> Chapter 3 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="planar-graphs.html"><a href="planar-graphs.html"><i class="fa fa-check"></i><b>4</b> Planar Graphs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="planar-graphs.html"><a href="planar-graphs.html#planarity-and-embeddings"><i class="fa fa-check"></i><b>4.1</b> Planarity and Embeddings</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="planar-graphs.html"><a href="planar-graphs.html#definitions-1"><i class="fa fa-check"></i><b>4.1.1</b> Definitions</a></li>
+<li class="chapter" data-level="4.1.2" data-path="planar-graphs.html"><a href="planar-graphs.html#f%C3%A1rys-theorem"><i class="fa fa-check"></i><b>4.1.2</b> Fáry’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="planar-graphs.html"><a href="planar-graphs.html#eulers-formula-and-regions"><i class="fa fa-check"></i><b>4.2</b> Euler’s Formula and Regions</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="planar-graphs.html"><a href="planar-graphs.html#eulers-formula"><i class="fa fa-check"></i><b>4.2.1</b> Euler’s Formula</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="planar-graphs.html"><a href="planar-graphs.html#invariants-and-non-planarity-bounds"><i class="fa fa-check"></i><b>4.3</b> Invariants and Non-Planarity Bounds</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="planar-graphs.html"><a href="planar-graphs.html#edge-bounds-for-simple-planar-graphs"><i class="fa fa-check"></i><b>4.3.1</b> Edge Bounds for Simple Planar Graphs</a></li>
+<li class="chapter" data-level="4.3.2" data-path="planar-graphs.html"><a href="planar-graphs.html#degree-bounds"><i class="fa fa-check"></i><b>4.3.2</b> Degree Bounds</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="planar-graphs.html"><a href="planar-graphs.html#characterizing-non-planar-graphs"><i class="fa fa-check"></i><b>4.4</b> Characterizing Non-Planar Graphs</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="planar-graphs.html"><a href="planar-graphs.html#proving-non-planarity"><i class="fa fa-check"></i><b>4.4.1</b> Proving Non-Planarity</a></li>
+<li class="chapter" data-level="4.4.2" data-path="planar-graphs.html"><a href="planar-graphs.html#kuratowskis-theorem"><i class="fa fa-check"></i><b>4.4.2</b> Kuratowski’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="planar-graphs.html"><a href="planar-graphs.html#chapter-4-summary-table"><i class="fa fa-check"></i><b>4.5</b> Chapter 4 Summary Table</a></li>
+<li class="chapter" data-level="4.6" data-path="planar-graphs.html"><a href="planar-graphs.html#chapter-4-exercises"><i class="fa fa-check"></i><b>4.6</b> Chapter 4 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html"><i class="fa fa-check"></i><b>5</b> Trees &amp; Spanning Trees</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#basic-properties-of-trees"><i class="fa fa-check"></i><b>5.1</b> Basic Properties of Trees</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#definitions-2"><i class="fa fa-check"></i><b>5.1.1</b> Definitions</a></li>
+<li class="chapter" data-level="5.1.2" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#equivalent-characterizations-of-trees"><i class="fa fa-check"></i><b>5.1.2</b> Equivalent Characterizations of Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#spanning-trees"><i class="fa fa-check"></i><b>5.2</b> 5.2 Spanning Trees</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#definition"><i class="fa fa-check"></i><b>5.2.1</b> Definition</a></li>
+<li class="chapter" data-level="5.2.2" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#counting-spanning-trees"><i class="fa fa-check"></i><b>5.2.2</b> Counting Spanning Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#fundamental-cycles-and-cutsets"><i class="fa fa-check"></i><b>5.3</b> 5.3 Fundamental Cycles and Cutsets</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#fundamental-cycles"><i class="fa fa-check"></i><b>5.3.1</b> Fundamental Cycles</a></li>
+<li class="chapter" data-level="5.3.2" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#fundamental-cutsets"><i class="fa fa-check"></i><b>5.3.2</b> Fundamental Cutsets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#minimum-spanning-trees-mst"><i class="fa fa-check"></i><b>5.4</b> 5.4 Minimum Spanning Trees (MST)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#the-minimum-spanning-tree-problem"><i class="fa fa-check"></i><b>5.4.1</b> The Minimum Spanning Tree Problem</a></li>
+<li class="chapter" data-level="5.4.2" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#key-theoretical-properties-of-msts"><i class="fa fa-check"></i><b>5.4.2</b> Key Theoretical Properties of MSTs</a></li>
+<li class="chapter" data-level="5.4.3" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#greedy-mst-algorithms"><i class="fa fa-check"></i><b>5.4.3</b> Greedy MST Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#chapter-5-comparison-table"><i class="fa fa-check"></i><b>5.5</b> Chapter 5 Comparison Table</a></li>
+<li class="chapter" data-level="5.6" data-path="trees-spanning-trees.html"><a href="trees-spanning-trees.html#chapter-5-exercises"><i class="fa fa-check"></i><b>5.6</b> Chapter 5 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html"><i class="fa fa-check"></i><b>6</b> Chapter 6: Graph Colorings &amp; Chromatic Numbers</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#vertex-coloring-and-chromatic-number"><i class="fa fa-check"></i><b>6.1</b> 6.1 Vertex Coloring and Chromatic Number</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#definitions-3"><i class="fa fa-check"></i><b>6.1.1</b> Definitions</a></li>
+<li class="chapter" data-level="6.1.2" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#independent-sets-and-color-classes"><i class="fa fa-check"></i><b>6.1.2</b> Independent Sets and Color Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#chromatic-numbers-for-standard-graph-families"><i class="fa fa-check"></i><b>6.2</b> 6.2 Chromatic Numbers for Standard Graph Families</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#bounds-on-chromatic-numbers"><i class="fa fa-check"></i><b>6.3</b> 6.3 Bounds on Chromatic Numbers</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#lower-bounds"><i class="fa fa-check"></i><b>6.3.1</b> Lower Bounds</a></li>
+<li class="chapter" data-level="6.3.2" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#upper-bounds"><i class="fa fa-check"></i><b>6.3.2</b> Upper Bounds</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#planar-graph-coloring-and-map-theorems"><i class="fa fa-check"></i><b>6.4</b> 6.4 Planar Graph Coloring and Map Theorems</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#the-dual-graph"><i class="fa fa-check"></i><b>6.4.1</b> The Dual Graph</a></li>
+<li class="chapter" data-level="6.4.2" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#planar-coloring-theorems"><i class="fa fa-check"></i><b>6.4.2</b> Planar Coloring Theorems</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#edge-coloring-chromatic-index"><i class="fa fa-check"></i><b>6.5</b> 6.5 Edge Coloring &amp; Chromatic Index</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#definitions-4"><i class="fa fa-check"></i><b>6.5.1</b> Definitions</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#fundamental-bounds-on-edge-coloring"><i class="fa fa-check"></i><b>6.5.2</b> Fundamental Bounds on Edge Coloring</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#chapter-6-comparison-table"><i class="fa fa-check"></i><b>6.6</b> Chapter 6 Comparison Table</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-graph-colorings-chromatic-numbers.html"><a href="chapter-6-graph-colorings-chromatic-numbers.html#chapter-6-exercises"><i class="fa fa-check"></i><b>6.7</b> Chapter 6 Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html"><i class="fa fa-check"></i><b>7</b> Lecture 3: Connectivity &amp; Graph Exploration</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#connectivity"><i class="fa fa-check"></i><b>7.0.1</b> Connectivity</a></li>
+<li class="chapter" data-level="7.0.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#exploration-algorithms"><i class="fa fa-check"></i><b>7.0.2</b> Exploration Algorithms</a></li>
+<li class="chapter" data-level="7.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-4-planar-graphs"><i class="fa fa-check"></i><b>7.1</b> Lecture 4: Planar Graphs</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#definitions-eulers-formula"><i class="fa fa-check"></i><b>7.1.1</b> Definitions &amp; Euler’s Formula</a></li>
+<li class="chapter" data-level="7.1.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#invariants-non-planarity-criteria"><i class="fa fa-check"></i><b>7.1.2</b> Invariants &amp; Non-Planarity Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-5-6-trees-spanning-trees-minimum-spanning-trees-mst"><i class="fa fa-check"></i><b>7.2</b> Lecture 5 &amp; 6: Trees, Spanning Trees &amp; Minimum Spanning Trees (MST)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#tree-properties"><i class="fa fa-check"></i><b>7.2.1</b> Tree Properties</a></li>
+<li class="chapter" data-level="7.2.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#rooted-trees"><i class="fa fa-check"></i><b>7.2.2</b> Rooted Trees</a></li>
+<li class="chapter" data-level="7.2.3" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#minimum-spanning-tree-algorithms"><i class="fa fa-check"></i><b>7.2.3</b> Minimum Spanning Tree Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-7-8-graph-coloring-applications"><i class="fa fa-check"></i><b>7.3</b> Lecture 7 &amp; 8: Graph Coloring &amp; Applications</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#definitions-results"><i class="fa fa-check"></i><b>7.3.1</b> Definitions &amp; Results</a></li>
+<li class="chapter" data-level="7.3.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#applications-of-graph-coloring"><i class="fa fa-check"></i><b>7.3.2</b> Applications of Graph Coloring</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-9-shortest-path-algorithms"><i class="fa fa-check"></i><b>7.4</b> Lecture 9: Shortest Path Algorithms</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#algorithms-taxonomy"><i class="fa fa-check"></i><b>7.4.1</b> Algorithms Taxonomy</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-10-networks-and-flows"><i class="fa fa-check"></i><b>7.5</b> Lecture 10: Networks and Flows</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#network-definitions"><i class="fa fa-check"></i><b>7.5.1</b> Network Definitions</a></li>
+<li class="chapter" data-level="7.5.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#ford-fulkerson-algorithm-max-flow-min-cut"><i class="fa fa-check"></i><b>7.5.2</b> Ford-Fulkerson Algorithm &amp; Max-Flow Min-Cut</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#lecture-11-12-matchings-covers"><i class="fa fa-check"></i><b>7.6</b> Lecture 11 &amp; 12: Matchings &amp; Covers</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#matchings-definitions"><i class="fa fa-check"></i><b>7.6.1</b> Matchings Definitions</a></li>
+<li class="chapter" data-level="7.6.2" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#graph-covers"><i class="fa fa-check"></i><b>7.6.2</b> Graph Covers</a></li>
+<li class="chapter" data-level="7.6.3" data-path="lecture-3-connectivity-graph-exploration.html"><a href="lecture-3-connectivity-graph-exploration.html#fundamental-matching-theorems"><i class="fa fa-check"></i><b>7.6.3</b> Fundamental Matching Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Graph Theroy</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-3-connectivity-graph-exploration" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Chapter 3: Connectivity &amp; Graph Exploration<a href="chapter-3-connectivity-graph-exploration.html#chapter-3-connectivity-graph-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="graph-connectivity" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 3.1 Graph Connectivity<a href="chapter-3-connectivity-graph-exploration.html#graph-connectivity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Understanding how vertices are linked to one another is a fundamental concept in graph theory. Connectivity determines whether information, traffic, or signals can flow between different points in a network.</p>
+<div id="connectivity-in-undirected-graphs" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Connectivity in Undirected Graphs<a href="chapter-3-connectivity-graph-exploration.html#connectivity-in-undirected-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In an undirected graph <span class="math inline">\(G = (V, E)\)</span>, two vertices <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are connected if there exists a walk between them.</p>
+<ul>
+<li><p><strong>Reachability Relation (<span class="math inline">\(\sim\)</span>)</strong>: We define a relation <span class="math inline">\(u \sim v\)</span> if there exists a walk starting at vertex <span class="math inline">\(u\)</span> and ending at vertex <span class="math inline">\(v\)</span>.</p></li>
+<li><p><strong>Equivalence Classes</strong>: The relation <span class="math inline">\(\sim\)</span> is an equivalence relation because it satisfies three key properties:</p></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p><strong>Reflexive</strong>: <span class="math inline">\(u \sim u\)</span> (a trivial walk of length <span class="math inline">\(0\)</span> exists from <span class="math inline">\(u\)</span> to itself).</p></li>
+<li><p><strong>Symmetric</strong>: If <span class="math inline">\(u \sim v\)</span>, then <span class="math inline">\(v \sim u\)</span> (since edges in undirected graphs can be traversed in either direction).</p></li>
+<li><p><strong>Transitive</strong>: If <span class="math inline">\(u \sim v\)</span> and <span class="math inline">\(v \sim w\)</span>, then <span class="math inline">\(u \sim w\)</span> (by concatenating the two walks).</p></li>
+</ol>
+<p>Because <span class="math inline">\(\sim\)</span> is an equivalence relation, it partitions the set of vertices <span class="math inline">\(V\)</span> into disjoint equivalence classes called <strong>connected components</strong>.</p>
+<p><img src="fig/fig22.png" /></p>
+<p>A graph is <strong>connected</strong> if it consists of exactly one connected component (meaning every vertex can reach every other vertex). Otherwise, it is <strong>disconnected</strong>.</p>
+<hr />
+</div>
+<div id="strong-connectivity-in-directed-graphs" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Strong Connectivity in Directed Graphs<a href="chapter-3-connectivity-graph-exploration.html#strong-connectivity-in-directed-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In directed graphs (digraphs), edge directions matter. The existence of a path from <span class="math inline">\(u\)</span> to <span class="math inline">\(v\)</span> does not guarantee a path from <span class="math inline">\(v\)</span> to <span class="math inline">\(u\)</span>.</p>
+<ul>
+<li><p><strong>Strong Connectivity</strong>: Two vertices <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> in a digraph are <strong>strongly connected</strong> if there exists a directed walk from <span class="math inline">\(u\)</span> to <span class="math inline">\(v\)</span> <strong>and</strong> a directed walk from <span class="math inline">\(v\)</span> to <span class="math inline">\(u\)</span>.</p></li>
+<li><p><strong>Strongly Connected Component (SCC)</strong>: A maximal subgraph where every pair of vertices is mutually reachable.</p></li>
+</ul>
+<p><img src="fig/fig23.png" /></p>
+<div id="computing-strongly-connected-components" class="section level4 hasAnchor" number="3.1.2.1">
+<h4><span class="header-section-number">3.1.2.1</span> Computing Strongly Connected Components<a href="chapter-3-connectivity-graph-exploration.html#computing-strongly-connected-components" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To formally define the SCC containing a vertex <span class="math inline">\(u\)</span>, denoted as <span class="math inline">\(C(u)\)</span>, we look at two reaching sets:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Forward Reachable Set (<span class="math inline">\(R_+(u)\)</span>)</strong>: The set of all vertices <span class="math inline">\(v\)</span> reachable from <span class="math inline">\(u\)</span> via directed paths.</p></li>
+<li><p><strong>Backward Reachable Set (<span class="math inline">\(R_-(u)\)</span>)</strong>: The set of all vertices <span class="math inline">\(v\)</span> that can reach <span class="math inline">\(u\)</span> via directed paths.</p></li>
+</ol>
+<p>The strongly connected component of <span class="math inline">\(u\)</span> is the intersection of these two sets:</p>
+<p><span class="math display">\[C(u) = R_+(u) \cap R_-(u)\]</span></p>
+<pre><code>                 R+(u): Nodes u can reach
+                          \
+                           \  Intersection: C(u)
+                            v /
+                           ( u )
+                            ^ \
+                           /   \
+                          /     v
+                 R-(u): Nodes that can reach u
+</code></pre>
+<p><strong>Algorithmic Insight</strong>: Computing <span class="math inline">\(R_+(u)\)</span> is straightforward—we run a standard search starting at <span class="math inline">\(u\)</span>. To compute <span class="math inline">\(R_-(u)\)</span>, we find all nodes that can reach <span class="math inline">\(u\)</span> in <span class="math inline">\(G\)</span>, which is equivalent to finding all nodes reachable <strong>from</strong> <span class="math inline">\(u\)</span> in the <strong>transpose graph <span class="math inline">\(G^T\)</span></strong> (where every directed edge is reversed). Matrix-wise, <span class="math inline">\(G^T\)</span> corresponds to the transpose of the adjacency matrix, <span class="math inline">\(A^T\)</span>.</p>
+<hr />
+</div>
+</div>
+</div>
+<div id="graph-exploration-algorithms" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Graph Exploration Algorithms<a href="chapter-3-connectivity-graph-exploration.html#graph-exploration-algorithms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Graph exploration algorithms systematically visit the vertices and edges of a graph. They form the foundation for solving complex problems such as finding shortest paths, cycle detection, and identifying connected components.</p>
+<div id="generic-search-algorithm" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Generic Search Algorithm<a href="chapter-3-connectivity-graph-exploration.html#generic-search-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The generic search algorithm maintains a set <span class="math inline">\(L\)</span> of candidate vertices to explore.</p>
+<div id="generic-search-steps" class="section level4 hasAnchor" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> Generic Search Steps<a href="chapter-3-connectivity-graph-exploration.html#generic-search-steps" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><p>Initialize a set of discovered vertices <span class="math inline">\(L = \{s\}\)</span>, where <span class="math inline">\(s\)</span> is the starting vertex. Mark <span class="math inline">\(s\)</span> as visited.</p></li>
+<li><p>While <span class="math inline">\(L\)</span> is not empty:</p></li>
+</ol>
+<ul>
+<li><p>Select an arbitrary vertex <span class="math inline">\(u \in L\)</span>.</p></li>
+<li><p>Find an unvisited neighbor <span class="math inline">\(v\)</span> adjacent to <span class="math inline">\(u\)</span>.</p></li>
+<li><p>If such a <span class="math inline">\(v\)</span> exists, mark <span class="math inline">\(v\)</span> as visited and add <span class="math inline">\(v\)</span> to <span class="math inline">\(L\)</span>.</p></li>
+<li><p>If no unvisited neighbors exist for <span class="math inline">\(u\)</span>, remove <span class="math inline">\(u\)</span> from <span class="math inline">\(L\)</span>.</p></li>
+<li><p><strong>Complexity</strong>: Takes <span class="math inline">\(O(V)\)</span> main steps, but the specific execution order depends entirely on the data structure used to manage <span class="math inline">\(L\)</span>.</p></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="depth-first-search-dfs" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Depth-First Search (DFS)<a href="chapter-3-connectivity-graph-exploration.html#depth-first-search-dfs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Depth-First Search explores a graph by going as deep as possible along each branch before backtracking.</p>
+<ul>
+<li><p><strong>Data Structure</strong>: Last-In, First-Out (<strong>LIFO</strong>) Stack (or recursion).</p></li>
+<li><p><strong>Strategy</strong>: Pick a start vertex, move to an unvisited neighbor, and immediately continue exploring from that new neighbor. When a vertex has no unvisited neighbors, backtrack to the previous vertex.</p></li>
+</ul>
+<pre><code>                     DFS Exploration Order
+                              (1)
+                             /   \
+                           [1]   [4]
+                           /       \
+                         (2)       (4)
+                        /
+                      [2]
+                      /
+                    (3)
+</code></pre>
+<div class="float">
+<img src="fig/fig24.gif" alt="Animated example of a depth-first search (Image Source: Wikipedia" />
+<div class="figcaption">Animated example of a depth-first search (Image Source: Wikipedia</div>
+</div>
+<div id="dfs-algorithm-steps" class="section level4 hasAnchor" number="3.2.2.1">
+<h4><span class="header-section-number">3.2.2.1</span> DFS Algorithm Steps<a href="chapter-3-connectivity-graph-exploration.html#dfs-algorithm-steps" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Push the starting vertex <span class="math inline">\(s\)</span> onto the stack.</li>
+<li>While the stack is not empty:</li>
+</ol>
+<ul>
+<li><p>Pop the top vertex <span class="math inline">\(u\)</span>.</p></li>
+<li><p>If <span class="math inline">\(u\)</span> is not visited, mark it as visited.</p></li>
+<li><p>Push all unvisited neighbors of <span class="math inline">\(u\)</span> onto the stack.</p></li>
+<li><p><strong>Time Complexity</strong>: <span class="math inline">\(O(V + E)\)</span> when using an adjacency list.</p></li>
+<li><p><strong>Primary Applications</strong>: Detecting cycles, topological sorting, finding strongly connected components, and pathfinding in mazes.</p></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="breadth-first-search-bfs" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Breadth-First Search (BFS)<a href="chapter-3-connectivity-graph-exploration.html#breadth-first-search-bfs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Breadth-First Search explores the graph layer-by-layer, visiting all immediate neighbors of a vertex before moving deeper.</p>
+<ul>
+<li><p><strong>Data Structure</strong>: First-In, First-Out (<strong>FIFO</strong>) Queue.</p></li>
+<li><p><strong>Strategy</strong>: Visit the starting node, then visit all of its direct neighbors (distance 1), then all neighbors of those neighbors (distance 2), and so on.</p></li>
+</ul>
+<pre><code>                     BFS Exploration Order
+                              (1)  &lt;-- Level 0
+                             /   \
+                           [1]   [1]
+                           /       \
+                         (2)-------(3) &lt;-- Level 1
+                          |
+                         [2]
+                          |
+                         (4)           &lt;-- Level 2
+</code></pre>
+<center>
+<div class="float">
+<img src="fig/fig25.gif" alt="Animated example of a BFS (Image Source: Wikipedia)" />
+<div class="figcaption">Animated example of a BFS (Image Source: Wikipedia)</div>
+</div>
+Black = explored, grey = queued to be explored later on
+</center>
+<div id="bfs-algorithm-steps" class="section level4 hasAnchor" number="3.2.3.1">
+<h4><span class="header-section-number">3.2.3.1</span> BFS Algorithm Steps<a href="chapter-3-connectivity-graph-exploration.html#bfs-algorithm-steps" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Enqueue the starting vertex <span class="math inline">\(s\)</span> into the queue and mark it as visited.</li>
+<li>While the queue is not empty:</li>
+</ol>
+<ul>
+<li><p>Dequeue the front vertex <span class="math inline">\(u\)</span>.</p></li>
+<li><p>For each unvisited neighbor <span class="math inline">\(v\)</span> of <span class="math inline">\(u\)</span>:</p></li>
+<li><p>Mark <span class="math inline">\(v\)</span> as visited.</p></li>
+<li><p>Enqueue <span class="math inline">\(v\)</span>.</p></li>
+<li><p><strong>Time Complexity</strong>: <span class="math inline">\(O(V + E)\)</span> when using an adjacency list.</p></li>
+<li><p><strong>Primary Applications</strong>: Finding the shortest path in unweighted graphs, finding connected components, and computing graph diameter.</p></li>
+</ul>
+<hr />
+</div>
+</div>
+</div>
+<div id="comparison-of-exploration-algorithms" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Comparison of Exploration Algorithms<a href="chapter-3-connectivity-graph-exploration.html#comparison-of-exploration-algorithms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Algorithm</th>
+<th>Data Structure</th>
+<th>Traversal Strategy</th>
+<th>Edge Types Discovered</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Generic Search</strong></td>
+<td>Unordered Set <span class="math inline">\(L\)</span><br></td>
+<td>Arbitrary selection</td>
+<td>General reachability</td>
+<td><span class="math inline">\(O(V)\)</span> main steps</td>
+</tr>
+<tr class="even">
+<td><strong>DFS</strong></td>
+<td>LIFO Stack</td>
+<td>Deep exploration via backtracking</td>
+<td>Tree edges, Back edges, Forward edges, Cross edges</td>
+<td><span class="math inline">\(O(V + E)\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>BFS</strong></td>
+<td>FIFO Queue</td>
+<td>Level-by-level exploration</td>
+<td>Tree edges, Cross edges</td>
+<td><span class="math inline">\(O(V + E)\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="chapter-3-exercises" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Chapter 3 Exercises<a href="chapter-3-connectivity-graph-exploration.html#chapter-3-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p><strong>Strongly Connected Components</strong>: Given a directed graph <span class="math inline">\(G\)</span>, explain why taking the intersection <span class="math inline">\(R_+(u) \cap R_-(u)\)</span> guarantees that all vertices in the resulting set belong to the same strongly connected component.</p></li>
+<li><p><strong>Algorithm Execution</strong>: Trace both BFS and DFS on a simple cycle graph <span class="math inline">\(C_5\)</span> starting at vertex <span class="math inline">\(v_1\)</span>. List the order in which vertices are visited for each algorithm.</p></li>
+<li><p><strong>Shortest Paths</strong>: Prove that the tree generated by running Breadth-First Search (BFS) on an unweighted graph provides the shortest path (in terms of edge count) from the start vertex to all other reachable vertices.</p></li>
+<li><p><strong>Graph Transpose</strong>: Show that if <span class="math inline">\(A\)</span> is the adjacency matrix of a digraph <span class="math inline">\(G\)</span>, then the transpose matrix <span class="math inline">\(A^T\)</span> represents the graph <span class="math inline">\(G^T\)</span> where all edge directions are reversed.</p></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="graph-types-operations-representations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="planar-graphs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

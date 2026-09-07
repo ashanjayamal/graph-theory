@@ -1,287 +1,253 @@
-# Lecture 3: Connectivity & Graph Exploration
+# Planar Graphs
 
-### Connectivity
+## Planarity and Embeddings
 
-* **Connected Component**: Equivalence classes formed by the walk relation $u \sim v$ on undirected graphs.
+In real-world applications—such as designing printed circuit boards (PCBs), microchip layouts, and urban road networks—it is often necessary to draw or construct a graph without any edges crossing over one another.
 
+### Definitions
 
-* **Strong Connectivity (Digraphs)**: $u$ and $v$ are strongly connected if there exists a directed walk from $u$ to $v$ **and** from $v$ to $u$.
-
-
-* **Strongly Connected Component (SCC)**: $C(u) = R_+(u) \cap R_-(u)$, where $R_+(u)$ is reachable from $u$, and $R_-(u)$ can reach $u$. Reaching set $R_-(u)$ is found using the inverse graph $G^T$ (represented by transpose adjacency matrix $A^T$).
-
+```{definition}
+* **Planar Graph**: A graph that can be drawn in a two-dimensional plane such that no two edges intersect except at a common vertex.
 
 
-### Exploration Algorithms
+* **Plane Graph (Plane Embedding)**: A specific drawing of a planar graph on a plane where no edges cross.
+```
 
-| Algorithm | Queue/Data Structure | Strategy | Complexity |
-| --- | --- | --- | --- |
-| **Generic Search** | Set $L$<br> | Visits arbitrary unvisited neighbor
 
- | $O(V)$ steps (linear)
+```
+  Non-Planar Representation of K4          Plane Embedding of K4
+              (1)---(2)                            (1)---(2)
+               | \ / |                              | \ / |
+               |  X  |                              |  (4) |
+               | / \ |                              | / \ |
+              (3)---(4)                            (3)-----+
 
- |
-| **DFS** | LIFO Stack
+```
 
- | Explores deeply along branches before backtracking
+*(Note: $K_4$ drawn with crossed diagonal edges is still a planar graph because it is isomorphic to a plane embedding where one vertex is pulled outside.)*
 
- | $O(V + E)$ |
-| **BFS** | FIFO Queue
+### Fáry's Theorem
 
- | Explores all immediate neighbors level-by-level
+A natural question arises: if a graph can be drawn without crossing edges using curved lines, can it also be drawn using only straight lines?
 
- | $O(V + E)$ |
+```{theorem,name="Fáry's Theorem, 1948"}
+
+Every simple planar graph can be embedded in the plane using straight-line segments for all of its edges.
+```
+---
+
+## Euler's Formula and Regions
+
+When a planar graph is drawn as a plane graph, its edges divide the plane into contiguous, enclosed areas called **regions** (or faces).
+
+* **Boundary of a Region**: The set of edges enclosing that region.
+* **Unbounded (Outer) Region**: The single infinite region surrounding the entire drawing. Every plane graph has exactly one outer region.
+
+![Image Credit: gatevidyalay.com](fig/fig26.png){width=30%}
+
+In the plane graph above, there are 5 vertices ($v=5$), 6 edges ($e=6$), and 3 bounded regions plus 1 unbounded outer region, giving 4 total regions ($r=4$).
 
 ---
 
-## Lecture 4: Planar Graphs
+### Euler's Formula
 
-### Definitions & Euler's Formula
+The fundamental relationship connecting the number of vertices, edges, and regions of a planar graph was discovered by Leonhard Euler.
 
-* **Planar Graph**: A graph that can be embedded (drawn) in a 2D plane such that no edges intersect except at their endpoints.
+```{theorem,name="Euler's Formula"}
 
+For any connected plane graph with $v$ vertices, $e$ edges, and $r$ regions:
 
-* **Fáry's Theorem**: Every planar graph can be drawn using straight line segments.
+$$v - e + r = 2$$
+```
 
+#### Generalized Euler's Formula
 
-* **Euler's Formula**: For any plane-embedded graph with $v$ vertices, $e$ edges, $r$ regions, and $c$ components:
+If a planar graph is disconnected and consists of $c$ connected components, the formula generalizes to:
+
 
 $$v - e + r = c + 1$$
 
+#### Proof of Euler's Formula (By Induction on Edges)
+
+**Base Case**:
+
+Consider a connected graph with no cycles (a tree). A tree on $v$ vertices has $e = v - 1$ edges and creates no enclosed areas, leaving only $1$ outer region ($r = 1$).
 
 
-For connected graphs ($c = 1$), this simplifies to $v - e + r = 2$.
+$$v - (v - 1) + 1 = 2$$
 
 
+The formula holds for the base case.
 
-### Invariants & Non-Planarity Criteria
+**Inductive Step**:
 
-* **Edge Bounds**:
-* Simple planar graph ($v \ge 3$): $e \le 3v - 6$.
+Assume $v - e + r = 2$ holds for all connected plane graphs with $k$ edges. Let $G$ be a connected plane graph with $k + 1$ edges.
 
+1. Since $G$ is not a tree, it must contain at least one cycle.
+2. Select an edge $e^*$ that belongs to a cycle. Removing $e^*$ breaks the cycle, merging two adjacent regions into one.
+3. The new graph $G' = G \setminus \{e^*\}$ has $v'=v$ vertices, $e'=e-1$ edges, and $r'=r-1$ regions.
+4. By the induction hypothesis, $v' - e' + r' = 2$.
+5. Substituting the values: $v - (e - 1) + (r - 1) = 2 \implies v - e + r = 2$.
 
-* Planar graph with no cycle of length $< 4$ (girth $\ge 4$): $e \le 2v - 4$.
-
-
-
-
-* **Degree Invariants**:
-* Average vertex degree in a planar graph: $< 6 - \frac{12}{n}$.
-
-
-* Every planar graph contains at least one vertex with degree $d(v) \le 5$.
-
-
-
-
-* **Kuratowski's Theorem**: A graph is non-planar **if and only if** it contains a subdivision of $K_5$ (complete graph on 5 vertices) or $K_{3,3}$ (complete bipartite graph on 3+3 vertices).
-
-
+By mathematical induction, Euler's formula holds for all connected plane graphs.
 
 ---
 
-## Lecture 5 & 6: Trees, Spanning Trees & Minimum Spanning Trees (MST)
+## Invariants and Non-Planarity Bounds
 
-### Tree Properties
+Euler's formula allows us to derive strict upper bounds on how many edges a simple graph can have while remaining planar.
 
-* **Tree**: A connected, acyclic graph.
+### Edge Bounds for Simple Planar Graphs
 
+```{theorem,name="General Edge Bound"}
 
-* **Forest**: An acyclic collection of trees. A forest on $n$ vertices with $c$ components has $n - c$ edges.
-
-
-* **Equivalent Tree Definitions** ($\vert{}V\vert{} = n$):
-1. Connected and acyclic.
+In any simple connected planar graph with $v \ge 3$ vertices and $e$ edges:
 
 
-2. Connected with $n - 1$ edges.
-
-
-3. Acyclic with $n - 1$ edges.
-
-
-4. Unique path between any pair of vertices.
-
-
-
-
-* **Cayley's Formula**: Number of distinct labeled trees on $n$ vertices is $n^{n-2}$.
-
-
-
-### Rooted Trees
-
-* **Terminology**: Root, Parent, Child, Siblings, Leaf (no children), Depth (distance to root), Height (maximum depth).
-
-
-* **$m$-ary Tree**: Every node has at most $m$ children.
-
-
-* **Center of a Tree**: Single vertex or pair of adjacent vertices that minimizes maximum distance to any other node (eccentricity).
-
-
-
-### Minimum Spanning Tree Algorithms
-
+$$e \le 3v - 6$$
 ```
-     Kruskal's Algorithm               Prim's Algorithm
-[Sort all edges by weight]       [Start from single node u]
-            |                                |
-[Add edge if no cycle formed]     [Add minimum edge connecting]
-            |                     [visited to unvisited set]
-[Repeat until V-1 edges]                    |
-                                  [Repeat until V-1 edges]
+
+```{proof}
+
+1. Every region in a simple planar graph must be bounded by at least 3 edges (since a simple graph has no self-loops or double edges, the smallest cycle length is 3).
+2. Summing the degree of all regions gives $\sum \text{deg}(r_i) \ge 3r$.
+3. Since every edge bounds at most 2 regions, $\sum \text{deg}(r_i) = 2e$. Thus, $2e \ge 3r \implies r \le \frac{2}{3}e$.
+4. Substitute $r \le \frac{2}{3}e$ into Euler's formula ($v - e + r = 2$):
+
+$$v - e + \frac{2}{3}e \ge 2 \implies v - \frac{1}{3}e \ge 2 \implies e \le 3v - 6$$
 
 ```
 
-* **Kruskal's Algorithm**: Edge-centric greedy approach. Sorts all edges by weight and iteratively adds the minimum-weight edge that does not form a cycle.
+---
+
+```{theorem,name="Girth Bound"}
+
+If a simple planar graph has a **girth** (length of its shortest cycle) of at least 4 (i.e., it contains no triangles), then:
 
 
-* **Prim's Algorithm**: Vertex-centric greedy approach. Starts with a single vertex and iteratively expands the tree by adding the minimum-weight edge connecting the current tree to an unvisited vertex.
+$$e \le 2v - 4$$
+```
 
+```{proof}
 
+Since the graph has no triangles, every region is bounded by at least 4 edges. Therefore, $2e \ge 4r \implies r \le \frac{1}{2}e$.
+Substituting this into Euler's formula gives $v - e + \frac{1}{2}e \ge 2 \implies e \le 2v - 4$.
+```
 
 ---
 
-## Lecture 7 & 8: Graph Coloring & Applications
+### Degree Bounds
 
-### Definitions & Results
+```{theorem}
 
-* **$k$-Coloring**: Assignment $C: V \to \{1, \dots, k\}$ such that $C(u) \ne C(v)$ for all $uv \in E$.
+Every simple planar graph contains at least one vertex with degree $d(v) \le 5$.
+```
 
+```{proof}
 
-* **Chromatic Number $\chi(G)$**: Minimal $k$ required to color $G$.
-
-
-* **Key Chromatic Values**:
-* Bipartite Graphs: $\chi(G) = 2$
-
-* Cycles ($C_n$): $\chi(C_n) = 2$ (even $n$), $\chi(C_n) = 3$ (odd $n$)
+Suppose every vertex in a simple planar graph $G$ has degree $d(v) \ge 6$.
+By the Handshaking Lemma:
 
 
-* Cliques ($K_n$): $\chi(K_n) = n$
-
-* Four-Color Theorem: Every planar graph has $\chi(G) \le 4$.
+$$2e = \sum d(v) \ge 6v \implies e \ge 3v$$
 
 
+However, Theorem 1 states that $e \le 3v - 6$, creating a direct contradiction ($3v \le e \le 3v - 6$). Therefore, $G$ must contain at least one vertex with $d(v) \le 5$.
+```
+---
+
+## Characterizing Non-Planar Graphs
+
+Not all graphs are planar. The two canonical non-planar graphs are:
+
+1. **$K_5$**: The complete graph on 5 vertices.
+
+
+2. **$K_{3,3}$**: The complete bipartite graph on 3+3 vertices (often called the *utility graph*).
 
 
 
-### Applications of Graph Coloring
+```
+         K5 (Complete Graph)              K3,3 (Utility Graph)
+               (1)                            (u1)   (u2)   (u3)
+              / | \                            | \   / | \   / |
+            (2) | (3)                          |  \ /  |  \ /  |
+            | \ | / |                          |   X   |   X   |
+            (4)-(5)-+                          |  / \  |  / \  |
+                                              (v1)   (v2)   (v3)
 
-1. **Conflict Allocation (e.g., Tropical Fish Tank Allocation)**: Vertices = entities (fish); Edges = conflicts; Colors = tanks required.
+```
+
+![Image credit:https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e](fig/fig27.png)
 
 
-2. **Scheduling Problems (e.g., Exam Scheduling)**: Vertices = courses; Edges = student overlap conflicts; Colors = minimum time slots needed.
+### Proving Non-Planarity
 
 
+```{example,name="$K_5$ is Non-Planar"}
+
+For $K_5$, $v = 5$ and $e = \binom{5}{2} = 10$.
+Using Theorem 1 ($e \le 3v - 6$):
+
+
+$$10 \le 3(5) - 6 = 9 \quad \text{(False)}$$
+
+
+Since $10 \le 9$ is false, $K_5$ cannot be planar.
+
+```
+
+```{example,name="$K_{3,3}$ is Non-Planar"}
+
+For $K_{3,3}$, $v = 6$ and $e = 3 \times 3 = 9$.
+Since $K_{3,3}$ is bipartite, it contains no odd cycles (girth $\ge 4$). Using Theorem 2 ($e \le 2v - 4$):
+
+
+$$9 \le 2(6) - 4 = 8 \quad \text{(False)}$$
+
+
+Since $9 \le 8$ is false, $K_{3,3}$ cannot be planar.
+```
 
 ---
 
-## Lecture 9: Shortest Path Algorithms
+### Kuratowski's Theorem
 
-### Algorithms Taxonomy
+How can we determine if an arbitrary complex graph is planar?
 
-| Problem Type | Algorithm | Strategy | Constraints |
-| --- | --- | --- | --- |
-| **Unweighted** | BFS Exploration
+* **Edge Subdivision**: Inserting a vertex of degree 2 into an edge, splitting it into two adjacent edges.
+* **Subdivision of a Graph**: A graph obtained by performing a sequence of edge subdivisions on $G$.
 
- | Level-by-level queue traversal
+```
+     Original Edge               Subdivided Edge
+        (u)---(v)                 (u)---(w)---(v)
 
- | All edge weights equal $1$<br> |
-| **Weighted (Non-negative)** | Dijkstra's Algorithm
+```
 
- | Greedy search via priority queue
+```{theorem ,name="Kuratowski's Theorem(1930)"}
 
- | Requires non-negative edge weights $w(e) \ge 0$<br> |
-| **Negative Weights** | Modified Dijkstra / Bellman-Ford | Iterative relaxation | Detects negative weight cycles
+A finite graph is planar **if and only if** it does not contain a subgraph that is a subdivision of $K_5$ or $K_{3,3}$.
+```
+---
 
- |
+## Chapter 4 Summary Table
 
-* **Dijkstra's Relaxation Step**:
-
-$$\text{If } \lambda(v) > \lambda(u) + w(u, v) \implies \lambda(v) = \lambda(u) + w(u, v)$$
-
-
-
+| Property / Bound | Formula / Condition | Context / Application |
+| --- | --- | --- |
+| **Euler's Formula** | $v - e + r = 2$<br> | Connected plane graphs |
+| **General Edge Bound** | $e \le 3v - 6$<br> | Simple planar graphs ($v \ge 3$) |
+| **Triangle-Free Edge Bound** | $e \le 2v - 4$<br> | Planar graphs with girth $\ge 4$<br> |
+| **Minimum Degree Invariant** | $\min d(v) \le 5$<br> | All simple planar graphs |
+| **Non-Planarity Criterion** | Subdivisions of $K_5$ or $K_{3,3}$<br> | Kuratowski's Theorem |
 
 ---
 
-## Lecture 10: Networks and Flows
+## Chapter 4 Exercises
 
-### Network Definitions
-
-* **Network**: A directed graph with source $s$, sink $t$, and arc capacities $c_{i,j} \ge 0$.
-
-
-* **Flow Constraints**:
-1. Capacity Constraint: $0 \le x_{i,j} \le c_{i,j}$
-
-2. Conservation (Kirchhoff's Law): $\sum_{k} x_{k,i} = \sum_{k} x_{i,k}$ for all vertices except source $s$ and sink $t$.
-
-
-
-
-
-### Ford-Fulkerson Algorithm & Max-Flow Min-Cut
-
-1. Initialize flow $x_{i,j} = 0$ everywhere.
-
-
-2. Search for an **Augmenting Path** from source to sink with bottleneck capacity $\Delta > 0$.
-
-
-3. Increase path flow by $\Delta$ and repeat until no augmenting path exists.
-
-
-
-* **Max-Flow Min-Cut Theorem**: The maximum flow value in a network equals the minimum capacity of a cut separating $s$ and $t$.
-
-
-
----
-
-## Lecture 11 & 12: Matchings & Covers
-
-### Matchings Definitions
-
-* **Matching ($M$)**: A subset of edges in $G$ such that no two edges share a common vertex.
-
-
-* **Maximal Matching**: A matching that cannot be extended by adding any remaining edge.
-
-
-* **Maximum Matching**: A matching with the highest possible cardinality ($\nu(G)$).
-
-
-* **Perfect Matching**: A matching that covers every vertex in $V$ ($\text{deficiency} = 0$).
-
-
-* **Augmenting Path**: An $M$-alternating path whose endpoints are $M$-exposed. A matching $M$ is maximum **if and only if** it has no $M$-augmenting paths.
-
-
-
-### Graph Covers
-
-* **Line Cover**: Edge subset covering every vertex (requires $d(v) \ge 1$).
-
-
-* **Vertex Cover**: Vertex subset covering every edge in $E$.
-
-
-
-### Fundamental Matching Theorems
-
-* **Hall's Marriage Theorem**: A bipartite graph with sets $X, Y$ has a matching covering $X$ **if and only if** for every subset $S \subseteq X$, its neighborhood satisfies $\vert{}N(S)\vert{} \ge \vert{}S\vert{}$.
-
-
-* **Tutte-Berge Formula**:
-
-$$\nu(G) = \min_{U \subseteq V} \frac{1}{2} \left( \vert{}V\vert{} - \alpha(G \setminus U) + \vert{}U\vert{} \right)$$
-
-
-
-where $\alpha(G \setminus U)$ denotes the number of odd connected components in $G \setminus U$.
+1. **Euler's Formula Application**: A connected plane graph has 12 vertices, and every vertex has degree 3. How many edges and regions does the graph have?
+2. **Polyhedron Proof**: Prove that no convex polyhedron can be constructed such that every face is bounded by 6 or more edges.
+3. **Planarity Verification**: A simple planar graph $G$ has 10 vertices and is bipartite. What is the maximum number of edges $G$ can have?
+4. **Kuratowski Subdivision**: Draw $K_5$ and subdivide one of its edges by adding a new vertex. Is the resulting graph planar? Explain using Kuratowski's Theorem.
 
 
 
