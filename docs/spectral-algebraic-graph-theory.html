@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Planar Graphs | Graph Theory</title>
+  <title>Chapter 8 Spectral &amp; Algebraic Graph Theory | Graph Theory</title>
   <meta name="description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta property="og:title" content="Chapter 8 Spectral &amp; Algebraic Graph Theory | Graph Theory" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
   <meta property="og:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta name="twitter:title" content="Chapter 8 Spectral &amp; Algebraic Graph Theory | Graph Theory" />
   
   <meta name="twitter:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="twitter:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-3-connectivity-graph-exploration.html"/>
-<link rel="next" href="trees-spanning-trees.html"/>
+<link rel="prev" href="network-flows-matching.html"/>
+<link rel="next" href="chapter-9-np-completeness-approximation-algorithms.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -419,230 +419,174 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="planar-graphs" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Planar Graphs<a href="planar-graphs.html#planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="planarity-and-embeddings" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Planarity and Embeddings<a href="planar-graphs.html#planarity-and-embeddings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In real-world applications—such as designing printed circuit boards (PCBs), microchip layouts, and urban road networks—it is often necessary to draw or construct a graph without any edges crossing over one another.</p>
-<div id="definitions-1" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Definitions<a href="planar-graphs.html#definitions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="definition">
-<p><span id="def:unnamed-chunk-22" class="definition"><strong>Definition 4.1  </strong></span></p>
+<div id="spectral-algebraic-graph-theory" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Spectral &amp; Algebraic Graph Theory<a href="spectral-algebraic-graph-theory.html#spectral-algebraic-graph-theory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="matrices-associated-with-graphs" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Matrices Associated with Graphs<a href="spectral-algebraic-graph-theory.html#matrices-associated-with-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Algebraic graph theory uses linear algebra to study graph structure. By representing graphs as matrices, structural invariants like connectivity, number of components, walks, and spanning trees can be analyzed through matrix properties and eigenvalues.</p>
+<div id="the-adjacency-matrix-a-1" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> The Adjacency Matrix (<span class="math inline">\(A\)</span>)<a href="spectral-algebraic-graph-theory.html#the-adjacency-matrix-a-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For a simple, undirected graph <span class="math inline">\(G = (V, E)\)</span> with <span class="math inline">\(n\)</span> vertices:</p>
+<p><span class="math display">\[A_{ij} = \begin{cases} 1 &amp; \text{if } (v_i, v_j) \in E \\ 0 &amp; \text{otherwise} \end{cases}\]</span></p>
+<div id="key-properties-1" class="section level4 hasAnchor" number="8.1.1.1">
+<h4><span class="header-section-number">8.1.1.1</span> Key Properties<a href="spectral-algebraic-graph-theory.html#key-properties-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li><p><strong>Planar Graph</strong>: A graph that can be drawn in a two-dimensional plane such that no two edges intersect except at a common vertex.</p></li>
-<li><p><strong>Plane Graph (Plane Embedding)</strong>: A specific drawing of a planar graph on a plane where no edges cross.</p></li>
+<li><strong>Symmetry</strong>: <span class="math inline">\(A = A^T\)</span>, meaning all <span class="math inline">\(n\)</span> eigenvalues <span class="math inline">\(\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n\)</span> are real numbers.</li>
+<li><strong>Trace</strong>: <span class="math inline">\(\text{Tr}(A) = \sum_{i=1}^n A_{ii} = 0\)</span> (since simple graphs have no self-loops).</li>
+<li><strong>Walk Counting</strong>: The <span class="math inline">\((i, j)\)</span>-th entry of <span class="math inline">\(A^k\)</span> gives the exact number of walks of length <span class="math inline">\(k\)</span> between vertex <span class="math inline">\(v_i\)</span> and vertex <span class="math inline">\(v_j\)</span>.</li>
+<li><strong>Edge Sum</strong>: <span class="math inline">\(\text{Tr}(A^2) = 2\vert{}E\vert{}\)</span>, and <span class="math inline">\(\text{Tr}(A^3) = 6 \times (\text{Number of Triangles in } G)\)</span>.</li>
 </ul>
-</div>
-<pre><code>  Non-Planar Representation of K4          Plane Embedding of K4
-              (1)---(2)                            (1)---(2)
-               | \ / |                              | \ / |
-               |  X  |                              |  (4) |
-               | / \ |                              | / \ |
-              (3)---(4)                            (3)-----+
-</code></pre>
-<p><em>(Note: <span class="math inline">\(K_4\)</span> drawn with crossed diagonal edges is still a planar graph because it is isomorphic to a plane embedding where one vertex is pulled outside.)</em></p>
-</div>
-<div id="fárys-theorem" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Fáry’s Theorem<a href="planar-graphs.html#f%C3%A1rys-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A natural question arises: if a graph can be drawn without crossing edges using curved lines, can it also be drawn using only straight lines?</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-23" class="theorem"><strong>Theorem 4.1  (Fáry's Theorem, 1948) </strong></span>Every simple planar graph can be embedded in the plane using straight-line segments for all of its edges.</p>
-</div>
 <hr />
 </div>
 </div>
-<div id="eulers-formula-and-regions" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Euler’s Formula and Regions<a href="planar-graphs.html#eulers-formula-and-regions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When a planar graph is drawn as a plane graph, its edges divide the plane into contiguous, enclosed areas called <strong>regions</strong> (or faces).</p>
+<div id="the-degree-matrix-d" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> The Degree Matrix (<span class="math inline">\(D\)</span>)<a href="spectral-algebraic-graph-theory.html#the-degree-matrix-d" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A diagonal <span class="math inline">\(n \times n\)</span> matrix containing vertex degrees along its main diagonal:</p>
+<p><span class="math display">\[D_{ij} = \begin{cases} d(v_i) &amp; \text{if } i = j \\ 0 &amp; \text{if } i \neq j \end{cases}\]</span></p>
+<hr />
+</div>
+<div id="the-laplacian-matrix-l" class="section level3 hasAnchor" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> The Laplacian Matrix (<span class="math inline">\(L\)</span>)<a href="spectral-algebraic-graph-theory.html#the-laplacian-matrix-l" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Laplacian matrix bridges graph topology and differential operators on graphs:</p>
+<p><span class="math display">\[L = D - A\]</span></p>
+<p><span class="math display">\[L_{ij} = \begin{cases} d(v_i) &amp; \text{if } i = j \\ -1 &amp; \text{if } i \neq j \text{ and } (v_i, v_j) \in E \\ 0 &amp; \text{otherwise} \end{cases}\]</span></p>
+<div id="key-properties-2" class="section level4 hasAnchor" number="8.1.3.1">
+<h4><span class="header-section-number">8.1.3.1</span> Key Properties<a href="spectral-algebraic-graph-theory.html#key-properties-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li><strong>Boundary of a Region</strong>: The set of edges enclosing that region.</li>
-<li><strong>Unbounded (Outer) Region</strong>: The single infinite region surrounding the entire drawing. Every plane graph has exactly one outer region.</li>
+<li><strong>Symmetric &amp; Positive Semi-Definite</strong>: All eigenvalues of <span class="math inline">\(L\)</span> are real and non-negative:</li>
 </ul>
-<div class="float">
-<img src="fig/fig26.png" style="width:30.0%" alt="Image Credit: gatevidyalay.com" />
-<div class="figcaption">Image Credit: gatevidyalay.com</div>
-</div>
-<p>In the plane graph above, there are 5 vertices (<span class="math inline">\(v=5\)</span>), 6 edges (<span class="math inline">\(e=6\)</span>), and 3 bounded regions plus 1 unbounded outer region, giving 4 total regions (<span class="math inline">\(r=4\)</span>).</p>
-<hr />
-<div id="eulers-formula" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Euler’s Formula<a href="planar-graphs.html#eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The fundamental relationship connecting the number of vertices, edges, and regions of a planar graph was discovered by Leonhard Euler.</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-24" class="theorem"><strong>Theorem 4.2  (Euler's Formula) </strong></span>For any connected plane graph with <span class="math inline">\(v\)</span> vertices, <span class="math inline">\(e\)</span> edges, and <span class="math inline">\(r\)</span> regions:</p>
-<p><span class="math display">\[v - e + r = 2\]</span></p>
-</div>
-<div id="generalized-eulers-formula" class="section level4 hasAnchor" number="4.2.1.1">
-<h4><span class="header-section-number">4.2.1.1</span> Generalized Euler’s Formula<a href="planar-graphs.html#generalized-eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>If a planar graph is disconnected and consists of <span class="math inline">\(c\)</span> connected components, the formula generalizes to:</p>
-<p><span class="math display">\[v - e + r = c + 1\]</span></p>
-</div>
-<div id="proof-of-eulers-formula-by-induction-on-edges" class="section level4 hasAnchor" number="4.2.1.2">
-<h4><span class="header-section-number">4.2.1.2</span> Proof of Euler’s Formula (By Induction on Edges)<a href="planar-graphs.html#proof-of-eulers-formula-by-induction-on-edges" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><strong>Base Case</strong>:</p>
-<p>Consider a connected graph with no cycles (a tree). A tree on <span class="math inline">\(v\)</span> vertices has <span class="math inline">\(e = v - 1\)</span> edges and creates no enclosed areas, leaving only <span class="math inline">\(1\)</span> outer region (<span class="math inline">\(r = 1\)</span>).</p>
-<p><span class="math display">\[v - (v - 1) + 1 = 2\]</span></p>
-<p>The formula holds for the base case.</p>
-<p><strong>Inductive Step</strong>:</p>
-<p>Assume <span class="math inline">\(v - e + r = 2\)</span> holds for all connected plane graphs with <span class="math inline">\(k\)</span> edges. Let <span class="math inline">\(G\)</span> be a connected plane graph with <span class="math inline">\(k + 1\)</span> edges.</p>
-<ol style="list-style-type: decimal">
-<li>Since <span class="math inline">\(G\)</span> is not a tree, it must contain at least one cycle.</li>
-<li>Select an edge <span class="math inline">\(e^*\)</span> that belongs to a cycle. Removing <span class="math inline">\(e^*\)</span> breaks the cycle, merging two adjacent regions into one.</li>
-<li>The new graph <span class="math inline">\(G&#39; = G \setminus \{e^*\}\)</span> has <span class="math inline">\(v&#39;=v\)</span> vertices, <span class="math inline">\(e&#39;=e-1\)</span> edges, and <span class="math inline">\(r&#39;=r-1\)</span> regions.</li>
-<li>By the induction hypothesis, <span class="math inline">\(v&#39; - e&#39; + r&#39; = 2\)</span>.</li>
-<li>Substituting the values: <span class="math inline">\(v - (e - 1) + (r - 1) = 2 \implies v - e + r = 2\)</span>.</li>
-</ol>
-<p>By mathematical induction, Euler’s formula holds for all connected plane graphs.</p>
-<hr />
-</div>
-</div>
-</div>
-<div id="invariants-and-non-planarity-bounds" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Invariants and Non-Planarity Bounds<a href="planar-graphs.html#invariants-and-non-planarity-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Euler’s formula allows us to derive strict upper bounds on how many edges a simple graph can have while remaining planar.</p>
-<div id="edge-bounds-for-simple-planar-graphs" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Edge Bounds for Simple Planar Graphs<a href="planar-graphs.html#edge-bounds-for-simple-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-25" class="theorem"><strong>Theorem 4.3  (General Edge Bound) </strong></span>In any simple connected planar graph with <span class="math inline">\(v \ge 3\)</span> vertices and <span class="math inline">\(e\)</span> edges:</p>
-<p><span class="math display">\[e \le 3v - 6\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-3" class="proof"><em>Proof</em>. </span></p>
-<ol style="list-style-type: decimal">
-<li>Every region in a simple planar graph must be bounded by at least 3 edges (since a simple graph has no self-loops or double edges, the smallest cycle length is 3).</li>
-<li>Summing the degree of all regions gives <span class="math inline">\(\sum \text{deg}(r_i) \ge 3r\)</span>.</li>
-<li>Since every edge bounds at most 2 regions, <span class="math inline">\(\sum \text{deg}(r_i) = 2e\)</span>. Thus, <span class="math inline">\(2e \ge 3r \implies r \le \frac{2}{3}e\)</span>.</li>
-<li>Substitute <span class="math inline">\(r \le \frac{2}{3}e\)</span> into Euler’s formula (<span class="math inline">\(v - e + r = 2\)</span>):</li>
-</ol>
-<p><span class="math display">\[v - e + \frac{2}{3}e \ge 2 \implies v - \frac{1}{3}e \ge 2 \implies e \le 3v - 6\]</span></p>
-</div>
-<hr />
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-27" class="theorem"><strong>Theorem 4.4  (Girth Bound) </strong></span>If a simple planar graph has a <strong>girth</strong> (length of its shortest cycle) of at least 4 (i.e., it contains no triangles), then:</p>
-<p><span class="math display">\[e \le 2v - 4\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-4" class="proof"><em>Proof</em>. </span>Since the graph has no triangles, every region is bounded by at least 4 edges. Therefore, <span class="math inline">\(2e \ge 4r \implies r \le \frac{1}{2}e\)</span>.
-Substituting this into Euler’s formula gives <span class="math inline">\(v - e + \frac{1}{2}e \ge 2 \implies e \le 2v - 4\)</span>.</p>
-</div>
-<hr />
-</div>
-<div id="degree-bounds" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Degree Bounds<a href="planar-graphs.html#degree-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-29" class="theorem"><strong>Theorem 4.5  </strong></span>Every simple planar graph contains at least one vertex with degree <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-5" class="proof"><em>Proof</em>. </span>Suppose every vertex in a simple planar graph <span class="math inline">\(G\)</span> has degree <span class="math inline">\(d(v) \ge 6\)</span>.
-By the Handshaking Lemma:</p>
-<p><span class="math display">\[2e = \sum d(v) \ge 6v \implies e \ge 3v\]</span></p>
-<p>However, Theorem 1 states that <span class="math inline">\(e \le 3v - 6\)</span>, creating a direct contradiction (<span class="math inline">\(3v \le e \le 3v - 6\)</span>). Therefore, <span class="math inline">\(G\)</span> must contain at least one vertex with <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<hr />
-</div>
-</div>
-<div id="characterizing-non-planar-graphs" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Characterizing Non-Planar Graphs<a href="planar-graphs.html#characterizing-non-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Not all graphs are planar. The two canonical non-planar graphs are:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong><span class="math inline">\(K_5\)</span></strong>: The complete graph on 5 vertices.</p></li>
-<li><p><strong><span class="math inline">\(K_{3,3}\)</span></strong>: The complete bipartite graph on 3+3 vertices (often called the <em>utility graph</em>).</p></li>
-</ol>
-<pre><code>         K5 (Complete Graph)              K3,3 (Utility Graph)
-               (1)                            (u1)   (u2)   (u3)
-              / | \                            | \   / | \   / |
-            (2) | (3)                          |  \ /  |  \ /  |
-            | \ | / |                          |   X   |   X   |
-            (4)-(5)-+                          |  / \  |  / \  |
-                                              (v1)   (v2)   (v3)
-</code></pre>
-<div class="float">
-<img src="fig/fig27.png" alt="Image credit:https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" />
-<div class="figcaption">Image credit:<a href="https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" class="uri">https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e</a></div>
-</div>
-<div id="proving-non-planarity" class="section level3 hasAnchor" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Proving Non-Planarity<a href="planar-graphs.html#proving-non-planarity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="example">
-<p><span id="exm:unnamed-chunk-31" class="example"><strong>Example 4.1  ($K_5$ is Non-Planar) </strong></span>For <span class="math inline">\(K_5\)</span>, <span class="math inline">\(v = 5\)</span> and <span class="math inline">\(e = \binom{5}{2} = 10\)</span>.
-Using Theorem 1 (<span class="math inline">\(e \le 3v - 6\)</span>):</p>
-<p><span class="math display">\[10 \le 3(5) - 6 = 9 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(10 \le 9\)</span> is false, <span class="math inline">\(K_5\)</span> cannot be planar.</p>
-</div>
-<div class="example">
-<p><span id="exm:unnamed-chunk-32" class="example"><strong>Example 4.2  ($K_{3,3}$ is Non-Planar) </strong></span>For <span class="math inline">\(K_{3,3}\)</span>, <span class="math inline">\(v = 6\)</span> and <span class="math inline">\(e = 3 \times 3 = 9\)</span>.
-Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no odd cycles (girth <span class="math inline">\(\ge 4\)</span>). Using Theorem 2 (<span class="math inline">\(e \le 2v - 4\)</span>):</p>
-<p><span class="math display">\[9 \le 2(6) - 4 = 8 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(9 \le 8\)</span> is false, <span class="math inline">\(K_{3,3}\)</span> cannot be planar.</p>
-</div>
-<hr />
-</div>
-<div id="kuratowskis-theorem" class="section level3 hasAnchor" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Kuratowski’s Theorem<a href="planar-graphs.html#kuratowskis-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>How can we determine if an arbitrary complex graph is planar?</p>
+<p><span class="math display">\[0 = \mu_1 \le \mu_2 \le \dots \le \mu_n\]</span></p>
 <ul>
-<li><strong>Edge Subdivision</strong>: Inserting a vertex of degree 2 into an edge, splitting it into two adjacent edges.</li>
-<li><strong>Subdivision of a Graph</strong>: A graph obtained by performing a sequence of edge subdivisions on <span class="math inline">\(G\)</span>.</li>
+<li><strong>Row/Column Sums</strong>: Every row and column sums to <span class="math inline">\(0\)</span>. Consequently, the all-ones vector <span class="math inline">\(\mathbf{1} = (1, 1, \dots, 1)^T\)</span> is always an eigenvector corresponding to eigenvalue <span class="math inline">\(\mu_1 = 0\)</span>.</li>
 </ul>
-<pre><code>     Original Edge               Subdivided Edge
-        (u)---(v)                 (u)---(w)---(v)
-</code></pre>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-33" class="theorem"><strong>Theorem 4.6  (Kuratowski's Theorem(1930)) </strong></span>A finite graph is planar <strong>if and only if</strong> it does not contain a subgraph that is a subdivision of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span>.</p>
-</div>
 <hr />
 </div>
 </div>
-<div id="chapter-4-summary-table" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Chapter 4 Summary Table<a href="planar-graphs.html#chapter-4-summary-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-normalized-laplacian-mathcall" class="section level3 hasAnchor" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> The Normalized Laplacian (<span class="math inline">\(\mathcal{L}\)</span>)<a href="spectral-algebraic-graph-theory.html#the-normalized-laplacian-mathcall" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To account for graphs with irregular degree distributions, the normalized Laplacian scales edges by vertex degrees:</p>
+<p><span class="math display">\[\mathcal{L} = D^{-1/2} L D^{-1/2} = I - D^{-1/2} A D^{-1/2}\]</span></p>
+<p>All eigenvalues of <span class="math inline">\(\mathcal{L}\)</span> lie within the interval <span class="math inline">\([0, 2]\)</span>.</p>
+<hr />
+</div>
+</div>
+<div id="graph-spectrum-and-structural-properties" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Graph Spectrum and Structural Properties<a href="spectral-algebraic-graph-theory.html#graph-spectrum-and-structural-properties" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <strong>spectrum</strong> of a graph is the multiset of its adjacency or Laplacian eigenvalues.</p>
+<div id="adjacency-spectrum-textspeca" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Adjacency Spectrum (<span class="math inline">\(\text{Spec}(A)\)</span>)<a href="spectral-algebraic-graph-theory.html#adjacency-spectrum-textspeca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Regular Graphs</strong>: If <span class="math inline">\(G\)</span> is <span class="math inline">\(k\)</span>-regular, its largest eigenvalue is <span class="math inline">\(\lambda_1 = k\)</span> with eigenvector <span class="math inline">\(\mathbf{1}\)</span>.</li>
+<li><strong>Bipartite Parity</strong>: A graph <span class="math inline">\(G\)</span> is bipartite <strong>if and only if</strong> its spectrum is symmetric around <span class="math inline">\(0\)</span> (i.e., <span class="math inline">\(\lambda\)</span> is an eigenvalue if and only if <span class="math inline">\(-\lambda\)</span> is an eigenvalue).</li>
+<li><strong>Spectral Radius Bound</strong>: The largest eigenvalue satisfies <span class="math inline">\(\text{avg}(d) \le \lambda_1 \le \Delta(G)\)</span>.</li>
+</ul>
+<pre><code>          Bipartite Symmetric Spectrum
+            -lambda_1       0       +lambda_1
+            ---|------------|------------|---&gt;
+</code></pre>
+<hr />
+</div>
+<div id="laplacian-spectrum-textspecl" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Laplacian Spectrum (<span class="math inline">\(\text{Spec}(L)\)</span>)<a href="spectral-algebraic-graph-theory.html#laplacian-spectrum-textspecl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The eigenvalues of <span class="math inline">\(L\)</span> (<span class="math inline">\(0 = \mu_1 \le \mu_2 \le \dots \le \mu_n\)</span>) encode connectivity characteristics:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Number of Connected Components</strong>:
+The multiplicity of <span class="math inline">\(0\)</span> as an eigenvalue of <span class="math inline">\(L\)</span> equals the exact number of connected components in <span class="math inline">\(G\)</span>.</li>
+</ol>
+<ul>
+<li><span class="math inline">\(G\)</span> is connected <span class="math inline">\(\iff \mu_2 &gt; 0\)</span>.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Algebraic Connectivity (<span class="math inline">\(\mu_2\)</span>)</strong>:
+The second smallest Laplacian eigenvalue <span class="math inline">\(\mu_2\)</span> is called the <strong>Fiedler value</strong> or <strong>algebraic connectivity</strong>.</li>
+</ol>
+<ul>
+<li><span class="math inline">\(\mu_2 &gt; 0\)</span> indicates a connected graph.</li>
+<li>Larger values of <span class="math inline">\(\mu_2\)</span> reflect higher connectivity and resistance to network partitioning.</li>
+<li>The corresponding eigenvector (the <strong>Fiedler vector</strong>) is used in spectral clustering to partition graphs into dense clusters.</li>
+</ul>
+<pre><code>                   Spectral Graph Partitioning
+              Fiedler Vector Entries (v_i)
+            Negative Values        Positive Values
+            [ Cluster A ]  &lt;----|----&gt;  [ Cluster B ]
+</code></pre>
+<hr />
+</div>
+</div>
+<div id="spectral-bounds-and-theorems" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Spectral Bounds and Theorems<a href="spectral-algebraic-graph-theory.html#spectral-bounds-and-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="spectral-bound-on-chromatic-number" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Spectral Bound on Chromatic Number<a href="spectral-algebraic-graph-theory.html#spectral-bound-on-chromatic-number" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Wilf proved that the adjacency spectrum provides a sharp upper bound on chromatic number:</p>
+<p><span class="math display">\[\chi(G) \le 1 + \lambda_1\]</span></p>
+<p>Hoffman’s lower bound utilizes the smallest eigenvalue <span class="math inline">\(\lambda_n\)</span>:</p>
+<p><span class="math display">\[\chi(G) \ge 1 + \frac{\lambda_1}{-\lambda_n}\]</span></p>
+<hr />
+</div>
+<div id="spectral-expanders-cheegers-inequality" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Spectral Expanders &amp; Cheeger’s Inequality<a href="spectral-algebraic-graph-theory.html#spectral-expanders-cheegers-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An <strong>expander graph</strong> is a sparse graph that maintains strong connectivity properties. Expansion is measured by the <strong>isoperimetric constant</strong> (or Cheeger constant) <span class="math inline">\(h(G)\)</span>:</p>
+<p><span class="math display">\[h(G) = \min_{S \subset V, 0 &lt; \vert{}S\vert{} \le \frac{n}{2}} \frac{\vert{}\partial S\vert{}}{\vert{}S\vert{}}\]</span></p>
+<p>where <span class="math inline">\(\vert{}\partial S\vert{}\)</span> is the number of edges leaving set <span class="math inline">\(S\)</span>.</p>
+<p><strong>Cheeger’s Inequality:</strong></p>
+<p>The expansion constant <span class="math inline">\(h(G)\)</span> is tightly bounded by the second Laplacian eigenvalue <span class="math inline">\(\mu_2\)</span>:</p>
+<p><span class="math display">\[\frac{\mu_2}{2} \le h(G) \le \sqrt{2 d_{\max} \mu_2}\]</span></p>
+<hr />
+</div>
+</div>
+<div id="chapter-8-summary-table" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Chapter 8 Summary Table<a href="spectral-algebraic-graph-theory.html#chapter-8-summary-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Property / Bound</th>
-<th>Formula / Condition</th>
-<th>Context / Application</th>
+<th>Matrix</th>
+<th>Definition</th>
+<th>Primary Eigenvalue Metric</th>
+<th>Structural Interpretation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Euler’s Formula</strong></td>
-<td><span class="math inline">\(v - e + r = 2\)</span><br></td>
-<td>Connected plane graphs</td>
+<td><strong>Adjacency (<span class="math inline">\(A\)</span>)</strong></td>
+<td><span class="math inline">\(A_{ij} = 1 \iff (v_i, v_j) \in E\)</span></td>
+<td><span class="math inline">\(\lambda_1\)</span> (Spectral Radius)</td>
+<td>Max degree, walks, regular graph degree</td>
 </tr>
 <tr class="even">
-<td><strong>General Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 3v - 6\)</span><br></td>
-<td>Simple planar graphs (<span class="math inline">\(v \ge 3\)</span>)</td>
+<td><strong>Laplacian (<span class="math inline">\(L\)</span>)</strong></td>
+<td><span class="math inline">\(L = D - A\)</span></td>
+<td><span class="math inline">\(\mu_1 = 0\)</span> multiplicity</td>
+<td>Exact count of connected components</td>
 </tr>
 <tr class="odd">
-<td><strong>Triangle-Free Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 2v - 4\)</span><br></td>
-<td>Planar graphs with girth <span class="math inline">\(\ge 4\)</span><br></td>
+<td><strong>Laplacian (<span class="math inline">\(L\)</span>)</strong></td>
+<td><span class="math inline">\(L = D - A\)</span></td>
+<td><span class="math inline">\(\mu_2\)</span> (Fiedler Value)</td>
+<td>Algebraic connectivity &amp; Cheeger expansion</td>
 </tr>
 <tr class="even">
-<td><strong>Minimum Degree Invariant</strong></td>
-<td><span class="math inline">\(\min d(v) \le 5\)</span><br></td>
-<td>All simple planar graphs</td>
-</tr>
-<tr class="odd">
-<td><strong>Non-Planarity Criterion</strong></td>
-<td>Subdivisions of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span><br></td>
-<td>Kuratowski’s Theorem</td>
+<td><strong>Normalized (<span class="math inline">\(\mathcal{L}\)</span>)</strong></td>
+<td><span class="math inline">\(\mathcal{L} = I - D^{-1/2} A D^{-1/2}\)</span></td>
+<td><span class="math inline">\(\text{Spec}(\mathcal{L}) \subseteq [0, 2]\)</span></td>
+<td>Spectral clustering &amp; random walks</td>
 </tr>
 </tbody>
 </table>
 <hr />
 </div>
-<div id="chapter-4-exercises" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Chapter 4 Exercises<a href="planar-graphs.html#chapter-4-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="chapter-8-exercises" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Chapter 8 Exercises<a href="spectral-algebraic-graph-theory.html#chapter-8-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
-<li><strong>Euler’s Formula Application</strong>: A connected plane graph has 12 vertices, and every vertex has degree 3. How many edges and regions does the graph have?</li>
-<li><strong>Polyhedron Proof</strong>: Prove that no convex polyhedron can be constructed such that every face is bounded by 6 or more edges.</li>
-<li><strong>Planarity Verification</strong>: A simple planar graph <span class="math inline">\(G\)</span> has 10 vertices and is bipartite. What is the maximum number of edges <span class="math inline">\(G\)</span> can have?</li>
-<li><strong>Kuratowski Subdivision</strong>: Draw <span class="math inline">\(K_5\)</span> and subdivide one of its edges by adding a new vertex. Is the resulting graph planar? Explain using Kuratowski’s Theorem.</li>
+<li><strong>Spectrum of Complete Graph</strong>: Compute the adjacency matrix <span class="math inline">\(A\)</span> and Laplacian matrix <span class="math inline">\(L\)</span> for <span class="math inline">\(K_3\)</span>. Find all eigenvalues for both matrices.</li>
+<li><strong>Walk Counting</strong>: Let <span class="math inline">\(A\)</span> be the adjacency matrix of a cycle <span class="math inline">\(C_4\)</span>. Calculate <span class="math inline">\(A^3\)</span> and verify how many closed walks of length 3 exist.</li>
+<li><strong>Algebraic Connectivity</strong>: Show that if <span class="math inline">\(G\)</span> is a disconnected graph with 3 components, its Laplacian matrix <span class="math inline">\(L\)</span> has at least 3 eigenvalues equal to zero.</li>
+<li><strong>Hoffman’s Bound</strong>: A regular graph <span class="math inline">\(G\)</span> has adjacency eigenvalues <span class="math inline">\(\text{Spec}(A) = \{3, 1, 1, -1, -2, -2\}\)</span>. Apply Hoffman’s bound to establish a lower bound for <span class="math inline">\(\chi(G)\)</span>.</li>
 </ol>
 
 </div>
@@ -652,8 +596,8 @@ Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no 
           </div>
         </div>
       </div>
-<a href="chapter-3-connectivity-graph-exploration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="trees-spanning-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="network-flows-matching.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-9-np-completeness-approximation-algorithms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -684,7 +628,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/03-ch4.Rmd",
+    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/07-ch8.Rmd",
     "text": "Edit"
   },
   "history": {

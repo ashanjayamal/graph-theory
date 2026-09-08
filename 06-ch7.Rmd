@@ -1,0 +1,205 @@
+# Network Flows & Matching
+
+## Flow Networks and Capacities
+
+Network flows extend graph theory into directed, weighted systems where quantities—such as data packets, fluid, traffic, or commodities—travel from a source to a destination through capacity-constrained channels.
+
+### Definitions
+
+* **Flow Network**: A directed graph $G = (V, E)$ with two special vertices: a **source** $s \in V$ (where flow originates) and a **sink** $t \in V$ (where flow terminates).
+* **Capacity Function $c(u, v)$**: A non-negative real mapping $c: E \to \mathbb{R}_{\ge 0}$ representing the maximum allowable flow along edge $(u, v)$.
+* **Flow Function $f(u, v)$**: A real-valued mapping $f: E \to \mathbb{R}_{\ge 0}$ satisfying three core conditions:
+
+```
+                  Capacity Constraint: f(u, v) <= c(u, v)
+                           Flow: 3 / Cap: 5
+                      (u)----------------->(v)
+
+```
+
+### Core Conditions for Valid Flows
+
+1. **Capacity Constraint**: For every edge $(u, v) \in E$:
+
+$$0 \le f(u, v) \le c(u, v)$$
+
+
+2. **Skew Symmetry**: $f(u, v) = -f(v, u)$.
+3. **Flow Conservation**: For every vertex $u \in V \setminus \{s, t\}$, the total incoming flow equals the total outgoing flow:
+
+$$\sum_{w \in V} f(w, u) = \sum_{v \in V} f(u, v)$$
+
+
+
+### Value of a Flow
+
+The **value** of a flow $\vert{}f\vert{}$ is the net flow leaving the source $s$ (which, by conservation, equals the net flow entering the sink $t$):
+
+
+$$\vert{}f\vert{} = \sum_{v \in V} f(s, v)$$
+
+---
+
+## Cuts and the Max-Flow Min-Cut Theorem
+
+To determine the absolute upper bound on flow through a network, we examine cuts that physically separate the source from the sink.
+
+### Definitions
+
+* **$s$-$t$ Cut**: A partition of the vertex set $V$ into two disjoint sets $S$ and $T$ such that $s \in S$ and $t \in T$.
+* **Capacity of a Cut $c(S, T)$**: The sum of capacities of all edges directed from $S$ to $T$:
+
+$$c(S, T) = \sum_{u \in S, v \in T, (u,v) \in E} c(u, v)$$
+
+
+
+*(Note: Edges directed from $T$ back to $S$ do NOT contribute to the capacity of the cut.)*
+
+```
+                       s-t Cut Partitioning
+         [ S Set (Source) ]          [ T Set (Sink) ]
+              (s)------(u)            (v)------(t)
+                        |              ^
+                        +------------->|  Edge (u, v) crosses cut
+                           c(u, v)
+
+```
+
+---
+
+### The Max-Flow Min-Cut Theorem
+
+The relationship between maximum flow values and minimum cut capacities forms the central foundation of network flow theory.
+
+**Theorem (Ford & Fulkerson, 1956):**
+
+In any flow network $G$, the maximum value of an $s$-$t$ flow is equal to the minimum capacity of an $s$-$t$ cut:
+
+
+$$\max \vert{}f\vert{} = \min c(S, T)$$
+
+#### Key Corollaries
+
+* For any valid flow $f$ and any valid $s$-$t$ cut $(S, T)$, $\vert{}f\vert{} \le c(S, T)$.
+* A flow $f$ is maximum **if and only if** its residual network contains no augmenting path.
+
+---
+
+## Algorithms for Computing Maximum Flow
+
+### The Ford-Fulkerson Method
+
+The Ford-Fulkerson method greedily increases flow by finding **augmenting paths** in a **residual network** $G_f$.
+
+* **Residual Capacity $c_f(u, v)$**:
+
+$$c_f(u, v) = c(u, v) - f(u, v)$$
+
+
+* Forward edge capacity: $c(u, v) - f(u, v)$ (remaining capacity).
+* Backward edge capacity: $f(u, v)$ (ability to push flow back and cancel it).
+
+
+* **Augmenting Path**: A directed path from $s$ to $t$ in the residual graph $G_f$ where every edge has positive residual capacity $c_f(u, v) > 0$.
+
+```
+                    Residual Graph Augmentation
+      Original Flow               Residual Edges
+     f=3 / c=5                   Forward: 2  (Remaining)
+    (u)--------->(v)   ======>  (u)=========>
+                                   <=========(v)
+                                 Backward: 3 (Cancelable)
+
+```
+
+* **Time Complexity**: $O(E \cdot \vert{}f^*\vert{})$, where $\vert{}f^*\vert{}$ is the maximum flow value. (If capacities are irrational, Ford-Fulkerson may fail to terminate or converge to the wrong value).
+
+---
+
+### The Edmonds-Karp Algorithm
+
+Edmonds and Karp specified that the augmenting path in the Ford-Fulkerson method should always be the **shortest path** (in terms of edge count) from $s$ to $t$ in $G_f$.
+
+* **Path Selection Strategy**: Breadth-First Search (BFS).
+* **Time Complexity**: $O(V \cdot E^2)$, independent of edge capacity values.
+
+---
+
+## Matching in Bipartite Graphs
+
+Network flows can directly solve matching problems in bipartite graphs, such as assigning workers to tasks, students to courses, or medical residents to hospitals.
+
+### Definitions
+
+* **Matching $M$**: A subset of edges $M \subseteq E$ such that no two edges in $M$ share a common vertex.
+* **Maximum Matching**: A matching containing the maximum possible number of edges.
+* **Perfect Matching**: A matching that covers every vertex in the graph ($\vert{}M\vert{} = \vert{}V\vert{} / 2$).
+
+```
+         Bipartite Matching                  Flow Network Transformation
+          Set A      Set B                   (s) ---> Set A ---> Set B ---> (t)
+           (a1)------(b1)                    All edge capacities = 1
+           (a2)------(b2)                    Max Flow = Max Matching
+           (a3)------(b3)
+
+```
+
+---
+
+### Converting Bipartite Matching to Network Flow
+
+To find the maximum matching in a bipartite graph $G = (A \cup B, E)$:
+
+1. Create a directed graph $G' = (V', E')$.
+2. Add a super source $s$ and draw directed edges $(s, a)$ with capacity $1$ for all $a \in A$.
+3. Direct all original edges from $A$ to $B$ with capacity $1$.
+4. Add a super sink $t$ and draw directed edges $(b, t)$ with capacity $1$ for all $b \in B$.
+5. Run Edmonds-Karp to compute maximum flow.
+
+**Theorem:**
+
+The maximum flow value $\vert{}f^*\vert{}$ in $G'$ equals the maximum matching size $\vert{}M^*\vert{}$ in $G$.
+
+---
+
+### Hall's Marriage Theorem
+
+Hall's Theorem provides the exact condition for when a bipartite graph contains a matching that covers all vertices of one partition.
+
+**Theorem (Hall's Condition, 1935):**
+
+Let $G = (A \cup B, E)$ be a bipartite graph. There exists a matching that covers every vertex in $A$ **if and only if** for every subset $S \subseteq A$, the size of its neighborhood $N(S)$ satisfies:
+
+
+$$\vert{}N(S)\vert{} \ge \vert{}S\vert{}$$
+
+```
+                   Hall's Condition Failure
+             Subset S (|S|=2)         Neighborhood N(S) (|N(S)|=1)
+                   (a1)----+
+                           |-------> (b1)
+                   (a2)----+
+             Condition Violated: |N(S)| < |S|  (1 < 2)
+
+```
+
+---
+
+## Chapter 7 Comparison Table
+
+| Concept / Algorithm | Primary Mechanism | Time Complexity / Formula | Key Application |
+| --- | --- | --- | --- |
+| **Max-Flow Min-Cut** | Duality of flows and cuts | $\max \Vert{}f\Vert{} = \min c(S, T)$ | System bottlenecks & capacities |
+| **Ford-Fulkerson** | Arbitrary residual augmentation | $O(E \cdot \Vert{}f^*\Vert{})$ | Small integer flow networks |
+| **Edmonds-Karp** | BFS shortest augmenting paths | $O(V \cdot E^2)$ | General maximum flow problems |
+| **Hall's Theorem** | Neighborhood size check | $\Vert{}N(S)\Vert{} \ge \Vert{}S\Vert{}$ | Bipartite matching existence |
+
+---
+
+## Chapter 7 Exercises
+
+1. **Max-Flow Calculation**: Given a flow network with source $s$, sink $t$, and capacities $(s,u)=4, (s,v)=2, (u,v)=1, (u,t)=3, (v,t)=5$, compute the maximum flow and identify the minimum $s$-$t$ cut.
+2. **Hall's Condition Application**: Check if a matching covering $A$ exists for $A = \{1, 2, 3\}, B = \{x, y, z\}$ with edges $(1,x), (1,y), (2,x), (3,x)$.
+3. **Cut Capacity Computation**: If $S = \{s, u\}$ and $T = \{v, t\}$, calculate $c(S, T)$ if edge capacities are $(s,v)=3, (u,v)=2, (u,t)=4, (v,u)=1$.
+4. **Bipartite Reduction**: Prove that if every vertex in a $k$-regular bipartite graph has degree $k \ge 1$, the graph contains a perfect matching.
+

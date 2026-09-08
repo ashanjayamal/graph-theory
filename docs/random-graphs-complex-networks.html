@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Planar Graphs | Graph Theory</title>
+  <title>Chapter 10 Random Graphs &amp; Complex Networks | Graph Theory</title>
   <meta name="description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta property="og:title" content="Chapter 10 Random Graphs &amp; Complex Networks | Graph Theory" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
   <meta property="og:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta name="twitter:title" content="Chapter 10 Random Graphs &amp; Complex Networks | Graph Theory" />
   
   <meta name="twitter:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="twitter:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-3-connectivity-graph-exploration.html"/>
-<link rel="next" href="trees-spanning-trees.html"/>
+<link rel="prev" href="chapter-9-np-completeness-approximation-algorithms.html"/>
+<link rel="next" href="graph-algorithms-dynamic-programming.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -419,180 +419,68 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="planar-graphs" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Planar Graphs<a href="planar-graphs.html#planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="planarity-and-embeddings" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Planarity and Embeddings<a href="planar-graphs.html#planarity-and-embeddings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In real-world applications—such as designing printed circuit boards (PCBs), microchip layouts, and urban road networks—it is often necessary to draw or construct a graph without any edges crossing over one another.</p>
-<div id="definitions-1" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Definitions<a href="planar-graphs.html#definitions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="definition">
-<p><span id="def:unnamed-chunk-22" class="definition"><strong>Definition 4.1  </strong></span></p>
-<ul>
-<li><p><strong>Planar Graph</strong>: A graph that can be drawn in a two-dimensional plane such that no two edges intersect except at a common vertex.</p></li>
-<li><p><strong>Plane Graph (Plane Embedding)</strong>: A specific drawing of a planar graph on a plane where no edges cross.</p></li>
-</ul>
-</div>
-<pre><code>  Non-Planar Representation of K4          Plane Embedding of K4
-              (1)---(2)                            (1)---(2)
-               | \ / |                              | \ / |
-               |  X  |                              |  (4) |
-               | / \ |                              | / \ |
-              (3)---(4)                            (3)-----+
-</code></pre>
-<p><em>(Note: <span class="math inline">\(K_4\)</span> drawn with crossed diagonal edges is still a planar graph because it is isomorphic to a plane embedding where one vertex is pulled outside.)</em></p>
-</div>
-<div id="fárys-theorem" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Fáry’s Theorem<a href="planar-graphs.html#f%C3%A1rys-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A natural question arises: if a graph can be drawn without crossing edges using curved lines, can it also be drawn using only straight lines?</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-23" class="theorem"><strong>Theorem 4.1  (Fáry's Theorem, 1948) </strong></span>Every simple planar graph can be embedded in the plane using straight-line segments for all of its edges.</p>
-</div>
-<hr />
-</div>
-</div>
-<div id="eulers-formula-and-regions" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Euler’s Formula and Regions<a href="planar-graphs.html#eulers-formula-and-regions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When a planar graph is drawn as a plane graph, its edges divide the plane into contiguous, enclosed areas called <strong>regions</strong> (or faces).</p>
-<ul>
-<li><strong>Boundary of a Region</strong>: The set of edges enclosing that region.</li>
-<li><strong>Unbounded (Outer) Region</strong>: The single infinite region surrounding the entire drawing. Every plane graph has exactly one outer region.</li>
-</ul>
-<div class="float">
-<img src="fig/fig26.png" style="width:30.0%" alt="Image Credit: gatevidyalay.com" />
-<div class="figcaption">Image Credit: gatevidyalay.com</div>
-</div>
-<p>In the plane graph above, there are 5 vertices (<span class="math inline">\(v=5\)</span>), 6 edges (<span class="math inline">\(e=6\)</span>), and 3 bounded regions plus 1 unbounded outer region, giving 4 total regions (<span class="math inline">\(r=4\)</span>).</p>
-<hr />
-<div id="eulers-formula" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Euler’s Formula<a href="planar-graphs.html#eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The fundamental relationship connecting the number of vertices, edges, and regions of a planar graph was discovered by Leonhard Euler.</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-24" class="theorem"><strong>Theorem 4.2  (Euler's Formula) </strong></span>For any connected plane graph with <span class="math inline">\(v\)</span> vertices, <span class="math inline">\(e\)</span> edges, and <span class="math inline">\(r\)</span> regions:</p>
-<p><span class="math display">\[v - e + r = 2\]</span></p>
-</div>
-<div id="generalized-eulers-formula" class="section level4 hasAnchor" number="4.2.1.1">
-<h4><span class="header-section-number">4.2.1.1</span> Generalized Euler’s Formula<a href="planar-graphs.html#generalized-eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>If a planar graph is disconnected and consists of <span class="math inline">\(c\)</span> connected components, the formula generalizes to:</p>
-<p><span class="math display">\[v - e + r = c + 1\]</span></p>
-</div>
-<div id="proof-of-eulers-formula-by-induction-on-edges" class="section level4 hasAnchor" number="4.2.1.2">
-<h4><span class="header-section-number">4.2.1.2</span> Proof of Euler’s Formula (By Induction on Edges)<a href="planar-graphs.html#proof-of-eulers-formula-by-induction-on-edges" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><strong>Base Case</strong>:</p>
-<p>Consider a connected graph with no cycles (a tree). A tree on <span class="math inline">\(v\)</span> vertices has <span class="math inline">\(e = v - 1\)</span> edges and creates no enclosed areas, leaving only <span class="math inline">\(1\)</span> outer region (<span class="math inline">\(r = 1\)</span>).</p>
-<p><span class="math display">\[v - (v - 1) + 1 = 2\]</span></p>
-<p>The formula holds for the base case.</p>
-<p><strong>Inductive Step</strong>:</p>
-<p>Assume <span class="math inline">\(v - e + r = 2\)</span> holds for all connected plane graphs with <span class="math inline">\(k\)</span> edges. Let <span class="math inline">\(G\)</span> be a connected plane graph with <span class="math inline">\(k + 1\)</span> edges.</p>
+<div id="random-graphs-complex-networks" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Random Graphs &amp; Complex Networks<a href="random-graphs-complex-networks.html#random-graphs-complex-networks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="the-erdősrényi-random-graph-models" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> The Erdős–Rényi Random Graph Models<a href="random-graphs-complex-networks.html#the-erd%C5%91sr%C3%A9nyi-random-graph-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Random graph theory studies the properties of graphs generated by probabilistic processes. Introduced by Paul Erdős and Alfréd Rényi in the late 1950s, these models serve as baseline structures for analyzing average-case algorithm performance and network connectivity.</p>
+<div id="model-formulations" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Model Formulations<a href="random-graphs-complex-networks.html#model-formulations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
-<li>Since <span class="math inline">\(G\)</span> is not a tree, it must contain at least one cycle.</li>
-<li>Select an edge <span class="math inline">\(e^*\)</span> that belongs to a cycle. Removing <span class="math inline">\(e^*\)</span> breaks the cycle, merging two adjacent regions into one.</li>
-<li>The new graph <span class="math inline">\(G&#39; = G \setminus \{e^*\}\)</span> has <span class="math inline">\(v&#39;=v\)</span> vertices, <span class="math inline">\(e&#39;=e-1\)</span> edges, and <span class="math inline">\(r&#39;=r-1\)</span> regions.</li>
-<li>By the induction hypothesis, <span class="math inline">\(v&#39; - e&#39; + r&#39; = 2\)</span>.</li>
-<li>Substituting the values: <span class="math inline">\(v - (e - 1) + (r - 1) = 2 \implies v - e + r = 2\)</span>.</li>
+<li><strong>The <span class="math inline">\(G(n, M)\)</span> Model</strong>:
+A fixed number of <span class="math inline">\(n\)</span> vertices and exactly <span class="math inline">\(M\)</span> edges are chosen uniformly at random from the set of all <span class="math inline">\(\binom{\binom{n}{2}}{M}\)</span> possible simple graphs.</li>
+<li><strong>The <span class="math inline">\(G(n, p)\)</span> Model</strong>:
+A graph on <span class="math inline">\(n\)</span> labeled vertices where each of the possible <span class="math inline">\(\binom{n}{2}\)</span> edges is included independently with probability <span class="math inline">\(p \in [0, 1]\)</span>.</li>
 </ol>
-<p>By mathematical induction, Euler’s formula holds for all connected plane graphs.</p>
-<hr />
-</div>
-</div>
-</div>
-<div id="invariants-and-non-planarity-bounds" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Invariants and Non-Planarity Bounds<a href="planar-graphs.html#invariants-and-non-planarity-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Euler’s formula allows us to derive strict upper bounds on how many edges a simple graph can have while remaining planar.</p>
-<div id="edge-bounds-for-simple-planar-graphs" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Edge Bounds for Simple Planar Graphs<a href="planar-graphs.html#edge-bounds-for-simple-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-25" class="theorem"><strong>Theorem 4.3  (General Edge Bound) </strong></span>In any simple connected planar graph with <span class="math inline">\(v \ge 3\)</span> vertices and <span class="math inline">\(e\)</span> edges:</p>
-<p><span class="math display">\[e \le 3v - 6\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-3" class="proof"><em>Proof</em>. </span></p>
-<ol style="list-style-type: decimal">
-<li>Every region in a simple planar graph must be bounded by at least 3 edges (since a simple graph has no self-loops or double edges, the smallest cycle length is 3).</li>
-<li>Summing the degree of all regions gives <span class="math inline">\(\sum \text{deg}(r_i) \ge 3r\)</span>.</li>
-<li>Since every edge bounds at most 2 regions, <span class="math inline">\(\sum \text{deg}(r_i) = 2e\)</span>. Thus, <span class="math inline">\(2e \ge 3r \implies r \le \frac{2}{3}e\)</span>.</li>
-<li>Substitute <span class="math inline">\(r \le \frac{2}{3}e\)</span> into Euler’s formula (<span class="math inline">\(v - e + r = 2\)</span>):</li>
-</ol>
-<p><span class="math display">\[v - e + \frac{2}{3}e \ge 2 \implies v - \frac{1}{3}e \ge 2 \implies e \le 3v - 6\]</span></p>
-</div>
-<hr />
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-27" class="theorem"><strong>Theorem 4.4  (Girth Bound) </strong></span>If a simple planar graph has a <strong>girth</strong> (length of its shortest cycle) of at least 4 (i.e., it contains no triangles), then:</p>
-<p><span class="math display">\[e \le 2v - 4\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-4" class="proof"><em>Proof</em>. </span>Since the graph has no triangles, every region is bounded by at least 4 edges. Therefore, <span class="math inline">\(2e \ge 4r \implies r \le \frac{1}{2}e\)</span>.
-Substituting this into Euler’s formula gives <span class="math inline">\(v - e + \frac{1}{2}e \ge 2 \implies e \le 2v - 4\)</span>.</p>
-</div>
-<hr />
-</div>
-<div id="degree-bounds" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Degree Bounds<a href="planar-graphs.html#degree-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-29" class="theorem"><strong>Theorem 4.5  </strong></span>Every simple planar graph contains at least one vertex with degree <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-5" class="proof"><em>Proof</em>. </span>Suppose every vertex in a simple planar graph <span class="math inline">\(G\)</span> has degree <span class="math inline">\(d(v) \ge 6\)</span>.
-By the Handshaking Lemma:</p>
-<p><span class="math display">\[2e = \sum d(v) \ge 6v \implies e \ge 3v\]</span></p>
-<p>However, Theorem 1 states that <span class="math inline">\(e \le 3v - 6\)</span>, creating a direct contradiction (<span class="math inline">\(3v \le e \le 3v - 6\)</span>). Therefore, <span class="math inline">\(G\)</span> must contain at least one vertex with <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<hr />
-</div>
-</div>
-<div id="characterizing-non-planar-graphs" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Characterizing Non-Planar Graphs<a href="planar-graphs.html#characterizing-non-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Not all graphs are planar. The two canonical non-planar graphs are:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong><span class="math inline">\(K_5\)</span></strong>: The complete graph on 5 vertices.</p></li>
-<li><p><strong><span class="math inline">\(K_{3,3}\)</span></strong>: The complete bipartite graph on 3+3 vertices (often called the <em>utility graph</em>).</p></li>
-</ol>
-<pre><code>         K5 (Complete Graph)              K3,3 (Utility Graph)
-               (1)                            (u1)   (u2)   (u3)
-              / | \                            | \   / | \   / |
-            (2) | (3)                          |  \ /  |  \ /  |
-            | \ | / |                          |   X   |   X   |
-            (4)-(5)-+                          |  / \  |  / \  |
-                                              (v1)   (v2)   (v3)
+<pre><code>                     G(n, p) Edge Inclusion
+               (1)                   (1)
+              .   .                 /   \       Prob = p (Included)
+             .     .     =====&gt;    /     \      
+            .       .             .       .     Prob = 1 - p (Omitted)
+           (2).....(3)           (2)     (3)
 </code></pre>
-<div class="float">
-<img src="fig/fig27.png" alt="Image credit:https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" />
-<div class="figcaption">Image credit:<a href="https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" class="uri">https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e</a></div>
-</div>
-<div id="proving-non-planarity" class="section level3 hasAnchor" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Proving Non-Planarity<a href="planar-graphs.html#proving-non-planarity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="example">
-<p><span id="exm:unnamed-chunk-31" class="example"><strong>Example 4.1  ($K_5$ is Non-Planar) </strong></span>For <span class="math inline">\(K_5\)</span>, <span class="math inline">\(v = 5\)</span> and <span class="math inline">\(e = \binom{5}{2} = 10\)</span>.
-Using Theorem 1 (<span class="math inline">\(e \le 3v - 6\)</span>):</p>
-<p><span class="math display">\[10 \le 3(5) - 6 = 9 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(10 \le 9\)</span> is false, <span class="math inline">\(K_5\)</span> cannot be planar.</p>
-</div>
-<div class="example">
-<p><span id="exm:unnamed-chunk-32" class="example"><strong>Example 4.2  ($K_{3,3}$ is Non-Planar) </strong></span>For <span class="math inline">\(K_{3,3}\)</span>, <span class="math inline">\(v = 6\)</span> and <span class="math inline">\(e = 3 \times 3 = 9\)</span>.
-Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no odd cycles (girth <span class="math inline">\(\ge 4\)</span>). Using Theorem 2 (<span class="math inline">\(e \le 2v - 4\)</span>):</p>
-<p><span class="math display">\[9 \le 2(6) - 4 = 8 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(9 \le 8\)</span> is false, <span class="math inline">\(K_{3,3}\)</span> cannot be planar.</p>
-</div>
-<hr />
-</div>
-<div id="kuratowskis-theorem" class="section level3 hasAnchor" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Kuratowski’s Theorem<a href="planar-graphs.html#kuratowskis-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>How can we determine if an arbitrary complex graph is planar?</p>
+<div id="basic-statistics-of-gn-p" class="section level4 hasAnchor" number="10.1.1.1">
+<h4><span class="header-section-number">10.1.1.1</span> Basic Statistics of <span class="math inline">\(G(n, p)\)</span><a href="random-graphs-complex-networks.html#basic-statistics-of-gn-p" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li><strong>Edge Subdivision</strong>: Inserting a vertex of degree 2 into an edge, splitting it into two adjacent edges.</li>
-<li><strong>Subdivision of a Graph</strong>: A graph obtained by performing a sequence of edge subdivisions on <span class="math inline">\(G\)</span>.</li>
+<li><strong>Expected Number of Edges</strong>:</li>
 </ul>
-<pre><code>     Original Edge               Subdivided Edge
-        (u)---(v)                 (u)---(w)---(v)
-</code></pre>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-33" class="theorem"><strong>Theorem 4.6  (Kuratowski's Theorem(1930)) </strong></span>A finite graph is planar <strong>if and only if</strong> it does not contain a subgraph that is a subdivision of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span>.</p>
-</div>
+<p><span class="math display">\[\mathbb{E}[\vert{}E\vert{}] = p \binom{n}{2} = \frac{p \cdot n(n-1)}{2}\]</span></p>
+<ul>
+<li><strong>Expected Degree of a Vertex</strong>:</li>
+</ul>
+<p><span class="math display">\[\mathbb{E}[d(v)] = (n - 1)p\]</span></p>
+<ul>
+<li><strong>Degree Distribution</strong>: The degree of any vertex follows a Binomial distribution <span class="math inline">\(d(v) \sim \text{Binom}(n - 1, p)\)</span>. For large <span class="math inline">\(n\)</span> and constant expected degree <span class="math inline">\(\lambda = np\)</span>, this converges to a Poisson distribution:</li>
+</ul>
+<p><span class="math display">\[P(d(v) = k) \approx e^{-\lambda} \frac{\lambda^k}{k!}\]</span></p>
 <hr />
 </div>
 </div>
-<div id="chapter-4-summary-table" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Chapter 4 Summary Table<a href="planar-graphs.html#chapter-4-summary-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="phase-transitions-threshold-functions" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Phase Transitions &amp; Threshold Functions<a href="random-graphs-complex-networks.html#phase-transitions-threshold-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the defining discoveries of random graph theory is that structural properties emerge suddenly as the edge probability <span class="math inline">\(p(n)\)</span> crosses critical threshold functions.</p>
+<div id="asymptotic-almost-surely-a.a.s." class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Asymptotic Almost Surely (a.a.s.)<a href="random-graphs-complex-networks.html#asymptotic-almost-surely-a.a.s." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A graph property <span class="math inline">\(P\)</span> holds <strong>asymptotically almost surely</strong> (a.a.s.) in <span class="math inline">\(G(n, p)\)</span> if the probability that <span class="math inline">\(G(n, p)\)</span> satisfies <span class="math inline">\(P\)</span> approaches <span class="math inline">\(1\)</span> as <span class="math inline">\(n \to \infty\)</span>:</p>
+<p><span class="math display">\[\lim_{n \to \infty} \mathbb{P}(G(n, p) \in P) = 1\]</span></p>
+</div>
+<div id="definition-of-threshold-function" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Definition of Threshold Function<a href="random-graphs-complex-networks.html#definition-of-threshold-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A function <span class="math inline">\(p_c(n)\)</span> is a <strong>threshold function</strong> for a graph property <span class="math inline">\(P\)</span> if:</p>
+<p><span class="math display">\[\lim_{n \to \infty} \mathbb{P}(G(n, p) \in P) = \begin{cases} 0 &amp; \text{if } p(n) \ll p_c(n) \\ 1 &amp; \text{if } p(n) \gg p_c(n) \end{cases}\]</span></p>
+<pre><code>                Phase Transition Threshold (p_c)
+       P(Property holds)
+             1.0 |                   /-----------
+                 |                  /
+                 |                 /
+             0.0 +----------------+-------------&gt; p(n)
+                                p_c(n)
+</code></pre>
+</div>
+<div id="classical-evolution-of-gn-p" class="section level3 hasAnchor" number="10.2.3">
+<h3><span class="header-section-number">10.2.3</span> Classical Evolution of <span class="math inline">\(G(n, p)\)</span><a href="random-graphs-complex-networks.html#classical-evolution-of-gn-p" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As <span class="math inline">\(p(n)\)</span> increases, the global structure of <span class="math inline">\(G(n, p)\)</span> undergoes distinct phase transitions:</p>
 <table>
 <colgroup>
 <col width="33%" />
@@ -601,49 +489,158 @@ Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no 
 </colgroup>
 <thead>
 <tr class="header">
-<th>Property / Bound</th>
-<th>Formula / Condition</th>
-<th>Context / Application</th>
+<th>Edge Probability <span class="math inline">\(p(n)\)</span></th>
+<th>Expected Degree <span class="math inline">\(\lambda = np\)</span></th>
+<th>Structural Emergence / Phase</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Euler’s Formula</strong></td>
-<td><span class="math inline">\(v - e + r = 2\)</span><br></td>
-<td>Connected plane graphs</td>
+<td><span class="math inline">\(p(n) = o(1/n)\)</span></td>
+<td><span class="math inline">\(\lambda \to 0\)</span></td>
+<td><strong>Subcritical Phase</strong>: Small isolated components (trees of size <span class="math inline">\(O(\log n)\)</span>).</td>
 </tr>
 <tr class="even">
-<td><strong>General Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 3v - 6\)</span><br></td>
-<td>Simple planar graphs (<span class="math inline">\(v \ge 3\)</span>)</td>
+<td><span class="math inline">\(p(n) = 1/n\)</span></td>
+<td><span class="math inline">\(\lambda = 1\)</span></td>
+<td><strong>Critical Window</strong>: A <strong>Giant Component</strong> of size <span class="math inline">\(O(n^{2/3})\)</span> emerges.</td>
 </tr>
 <tr class="odd">
-<td><strong>Triangle-Free Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 2v - 4\)</span><br></td>
-<td>Planar graphs with girth <span class="math inline">\(\ge 4\)</span><br></td>
+<td><span class="math inline">\(p(n) = c/n \ (c &gt; 1)\)</span></td>
+<td><span class="math inline">\(\lambda = c &gt; 1\)</span></td>
+<td><strong>Supercritical Phase</strong>: Unique Giant Component containing <span class="math inline">\(\Theta(n)\)</span> vertices.</td>
 </tr>
 <tr class="even">
-<td><strong>Minimum Degree Invariant</strong></td>
-<td><span class="math inline">\(\min d(v) \le 5\)</span><br></td>
-<td>All simple planar graphs</td>
-</tr>
-<tr class="odd">
-<td><strong>Non-Planarity Criterion</strong></td>
-<td>Subdivisions of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span><br></td>
-<td>Kuratowski’s Theorem</td>
+<td><span class="math inline">\(p(n) = \frac{\ln n}{n}\)</span></td>
+<td><span class="math inline">\(\lambda = \ln n\)</span></td>
+<td><strong>Connectivity Phase</strong>: Disappearance of last isolated vertex; <span class="math inline">\(G(n, p)\)</span> becomes connected a.a.s.</td>
 </tr>
 </tbody>
 </table>
 <hr />
 </div>
-<div id="chapter-4-exercises" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Chapter 4 Exercises<a href="planar-graphs.html#chapter-4-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="complex-networks-real-world-topologies" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Complex Networks &amp; Real-World Topologies<a href="random-graphs-complex-networks.html#complex-networks-real-world-topologies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While Erdős–Rényi graphs provide strong mathematical guarantees, real-world networks (social networks, biological pathways, the World Wide Web) exhibit structural traits that random <span class="math inline">\(G(n, p)\)</span> models fail to capture.</p>
+<pre><code>       Random Graph (Poisson)                 Scale-Free Network (Power Law)
+       - Homogeneous degrees                  - Heterogeneous: High-degree hubs
+       - Low clustering                       - High clustering + Small-world
+              (o)                                     ( HUB )
+             / | \                                   / / | \ \
+           (o)-(o)-(o)                            (o)(o)(o)(o)(o)
+</code></pre>
+<div id="structural-metrics-of-real-world-networks" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Structural Metrics of Real-World Networks<a href="random-graphs-complex-networks.html#structural-metrics-of-real-world-networks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
-<li><strong>Euler’s Formula Application</strong>: A connected plane graph has 12 vertices, and every vertex has degree 3. How many edges and regions does the graph have?</li>
-<li><strong>Polyhedron Proof</strong>: Prove that no convex polyhedron can be constructed such that every face is bounded by 6 or more edges.</li>
-<li><strong>Planarity Verification</strong>: A simple planar graph <span class="math inline">\(G\)</span> has 10 vertices and is bipartite. What is the maximum number of edges <span class="math inline">\(G\)</span> can have?</li>
-<li><strong>Kuratowski Subdivision</strong>: Draw <span class="math inline">\(K_5\)</span> and subdivide one of its edges by adding a new vertex. Is the resulting graph planar? Explain using Kuratowski’s Theorem.</li>
+<li><strong>Degree Distribution Heavy Tails</strong>: Real networks contain structural “hubs”—a small number of vertices with extraordinarily high degree.</li>
+<li><strong>High Clustering Coefficient</strong>: Neighboring nodes in social networks are much more likely to be connected to each other than in random graphs.</li>
+<li><strong>Small-World Phenomenon</strong>: Short average path lengths scale logarithmically with graph size (<span class="math inline">\(L \propto \log n\)</span>).</li>
 </ol>
+<hr />
+</div>
+</div>
+<div id="scale-free-networks-small-world-models" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Scale-Free Networks &amp; Small-World Models<a href="random-graphs-complex-networks.html#scale-free-networks-small-world-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To bridge the gap between pure random graphs and real-world networks, several generative network models were developed.</p>
+<div id="wattsstrogatz-small-world-model-1998" class="section level3 hasAnchor" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> Watts–Strogatz Small-World Model (1998)<a href="random-graphs-complex-networks.html#wattsstrogatz-small-world-model-1998" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Watts–Strogatz model generates graphs with both <strong>high clustering</strong> and <strong>short path lengths</strong>.</p>
+<div id="construction-steps" class="section level4 hasAnchor" number="10.4.1.1">
+<h4><span class="header-section-number">10.4.1.1</span> Construction Steps<a href="random-graphs-complex-networks.html#construction-steps" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Start with a regular ring lattice of <span class="math inline">\(n\)</span> vertices where each vertex is connected to its <span class="math inline">\(k\)</span> nearest neighbors.</li>
+<li>For every edge, re-wire its target vertex with probability <span class="math inline">\(p_{\text{rewire}}\)</span> to a randomly selected node.</li>
+</ol>
+<pre><code>      Ring Lattice (p = 0)        Small World (0 &lt; p &lt; 1)         Random Graph (p = 1)
+       High Clustering             High Clustering                 Low Clustering
+       Long Path Length            Short Path Length               Short Path Length
+</code></pre>
+<hr />
+</div>
+</div>
+<div id="barabásialbert-scale-free-model-1999" class="section level3 hasAnchor" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> Barabási–Albert Scale-Free Model (1999)<a href="random-graphs-complex-networks.html#barab%C3%A1sialbert-scale-free-model-1999" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Barabási–Albert model generates networks with a <strong>power-law degree distribution</strong> using preferential attachment.</p>
+<div id="power-law-degree-distribution" class="section level4 hasAnchor" number="10.4.2.1">
+<h4><span class="header-section-number">10.4.2.1</span> Power-Law Degree Distribution<a href="random-graphs-complex-networks.html#power-law-degree-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[P(k) \propto k^{-\gamma}\]</span></p>
+<p><em>(where <span class="math inline">\(\gamma\)</span> typically ranges between <span class="math inline">\(2\)</span> and <span class="math inline">\(3\)</span> in physical and social systems)</em>.</p>
+</div>
+<div id="construction-steps-1" class="section level4 hasAnchor" number="10.4.2.2">
+<h4><span class="header-section-number">10.4.2.2</span> Construction Steps<a href="random-graphs-complex-networks.html#construction-steps-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><strong>Growth</strong>: Start with a small seed graph of <span class="math inline">\(m_0\)</span> vertices. At each time step, add a new vertex with <span class="math inline">\(m \le m_0\)</span> edges.</li>
+<li><strong>Preferential Attachment</strong>: The probability <span class="math inline">\(\Pi(v_i)\)</span> that the new vertex connects to an existing vertex <span class="math inline">\(v_i\)</span> is proportional to <span class="math inline">\(v_i\)</span>’s degree <span class="math inline">\(d(v_i)\)</span>:</li>
+</ol>
+<p><span class="math display">\[\Pi(v_i) = \frac{d(v_i)}{\sum_{j} d(v_j)}\]</span></p>
+<pre><code>                   Preferential Attachment (&quot;Rich Get Richer&quot;)
+                  Existing Node A (d = 4)       Existing Node B (d = 1)
+                        \   /  \  /                      |
+                         (  A  )                        (B)
+                            ^
+                            |  High Connection Probability (4/5)
+                         [ New ]
+</code></pre>
+<hr />
+</div>
+</div>
+</div>
+<div id="chapter-10-comparison-table" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Chapter 10 Comparison Table<a href="random-graphs-complex-networks.html#chapter-10-comparison-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Degree Distribution</th>
+<th>Clustering Coefficient</th>
+<th>Average Path Length</th>
+<th>Key Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Erdős–Rényi <span class="math inline">\(G(n, p)\)</span></strong></td>
+<td>Binomial / Poisson</td>
+<td>Low (<span class="math inline">\(p\)</span>)</td>
+<td>Short (<span class="math inline">\(O(\log n)\)</span>)</td>
+<td>Analytical baseline &amp; phase transitions</td>
+</tr>
+<tr class="even">
+<td><strong>Watts–Strogatz</strong></td>
+<td>Homogeneous / Narrow</td>
+<td>High</td>
+<td>Short (<span class="math inline">\(O(\log n)\)</span>)</td>
+<td>Interpolates lattice and random graphs</td>
+</tr>
+<tr class="odd">
+<td><strong>Barabási–Albert</strong></td>
+<td>Power Law (<span class="math inline">\(P(k) \propto k^{-3}\)</span>)</td>
+<td>Moderate / Low</td>
+<td>Very Short (<span class="math inline">\(O(\log \log n)\)</span>)</td>
+<td>Growth &amp; preferential attachment</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="chapter-10-exercises" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Chapter 10 Exercises<a href="random-graphs-complex-networks.html#chapter-10-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><strong>Expected Edge Count</strong>: Compute the expected number of edges and the expected degree of a vertex in <span class="math inline">\(G(100, 0.05)\)</span>.</li>
+<li><strong>Phase Transition Threshold</strong>: Determine whether <span class="math inline">\(G(n, p)\)</span> is connected asymptotically almost surely when <span class="math inline">\(p(n) = \frac{2 \ln n}{n}\)</span>.</li>
+<li><strong>Power-Law Exponent Calculation</strong>: A scale-free network has <span class="math inline">\(P(k) = C k^{-2.5}\)</span>. If <span class="math inline">\(10^6\)</span> nodes exist, estimate the ratio of nodes with degree <span class="math inline">\(k=10\)</span> compared to degree <span class="math inline">\(k=100\)</span>.</li>
+<li><strong>Preferential Attachment Probability</strong>: A network has three vertices with degrees <span class="math inline">\(d(v_1)=5\)</span>, <span class="math inline">\(d(v_2)=3\)</span>, and <span class="math inline">\(d(v_3)=2\)</span>. Calculate the probability that a newly added vertex connects to <span class="math inline">\(v_1\)</span>.</li>
+</ol>
+<hr />
+<p>Would you like to draft an <strong>Epilogue / Appendix</strong> detailing key proof techniques in graph theory, or generate a <strong>Master Problem Set</strong> covering all 10 chapters?</p>
 
 </div>
 </div>
@@ -652,8 +649,8 @@ Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no 
           </div>
         </div>
       </div>
-<a href="chapter-3-connectivity-graph-exploration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="trees-spanning-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-9-np-completeness-approximation-algorithms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="graph-algorithms-dynamic-programming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -684,7 +681,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/03-ch4.Rmd",
+    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/09-ch10.Rmd",
     "text": "Edit"
   },
   "history": {

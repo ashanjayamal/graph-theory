@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Planar Graphs | Graph Theory</title>
+  <title>Chapter 14 Comprehensive Final Examination: Graph Theory | Graph Theory</title>
   <meta name="description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta property="og:title" content="Chapter 14 Comprehensive Final Examination: Graph Theory | Graph Theory" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
   <meta property="og:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta name="twitter:title" content="Chapter 14 Comprehensive Final Examination: Graph Theory | Graph Theory" />
   
   <meta name="twitter:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="twitter:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-3-connectivity-graph-exploration.html"/>
-<link rel="next" href="trees-spanning-trees.html"/>
+<link rel="prev" href="practice-problem-set-chapters-112.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -419,232 +419,322 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="planar-graphs" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Planar Graphs<a href="planar-graphs.html#planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="planarity-and-embeddings" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Planarity and Embeddings<a href="planar-graphs.html#planarity-and-embeddings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In real-world applications—such as designing printed circuit boards (PCBs), microchip layouts, and urban road networks—it is often necessary to draw or construct a graph without any edges crossing over one another.</p>
-<div id="definitions-1" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Definitions<a href="planar-graphs.html#definitions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="definition">
-<p><span id="def:unnamed-chunk-22" class="definition"><strong>Definition 4.1  </strong></span></p>
+<div id="comprehensive-final-examination-graph-theory" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Comprehensive Final Examination: Graph Theory<a href="comprehensive-final-examination-graph-theory.html#comprehensive-final-examination-graph-theory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>Course:</strong> Advanced Graph Theory: Principles, Algorithms &amp; Applications</p>
+<p><strong>Instructor:</strong> Ashan De Silva</p>
+<p><strong>Time Allowed:</strong> 3 Hours</p>
+<p><strong>Total Marks:</strong> 100 Marks</p>
+<hr />
+<div id="instructions" class="section level3 hasAnchor" number="14.0.1">
+<h3><span class="header-section-number">14.0.1</span> Instructions<a href="comprehensive-final-examination-graph-theory.html#instructions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p><strong>Planar Graph</strong>: A graph that can be drawn in a two-dimensional plane such that no two edges intersect except at a common vertex.</p></li>
-<li><p><strong>Plane Graph (Plane Embedding)</strong>: A specific drawing of a planar graph on a plane where no edges cross.</p></li>
+<li>Answer <strong>all six questions</strong>.</li>
+<li>Show all step-by-step mathematical proofs, derivations, and algorithmic traces clearly.</li>
+<li>Standard notation applies (<span class="math inline">\(V\)</span> for vertices, <span class="math inline">\(E\)</span> for edges, <span class="math inline">\(G=(V,E)\)</span>, <span class="math inline">\(A\)</span> for adjacency matrix, <span class="math inline">\(L\)</span> for Laplacian matrix).</li>
+</ul>
+<hr />
+</div>
+<div id="question-1-fundamentals-trees-structural-properties-15-marks" class="section level3 hasAnchor" number="14.0.2">
+<h3><span class="header-section-number">14.0.2</span> Question 1: Fundamentals, Trees &amp; Structural Properties (15 Marks)<a href="comprehensive-final-examination-graph-theory.html#question-1-fundamentals-trees-structural-properties-15-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>[5 Marks]</strong> Prove that in any simple graph <span class="math inline">\(G\)</span>, the number of vertices of odd degree is even.</li>
+<li><strong>[5 Marks]</strong> Let <span class="math inline">\(T = (V, E)\)</span> be a tree with <span class="math inline">\(\vert{}V\vert{} \ge 2\)</span>. Prove using induction or structural properties that <span class="math inline">\(T\)</span> contains at least two pendant vertices (leaves).</li>
+<li><strong>[5 Marks]</strong> Use Cayley’s Formula to determine the total number of labeled spanning trees for the complete graph <span class="math inline">\(K_6\)</span>. Draw two non-isomorphic spanning trees of <span class="math inline">\(K_6\)</span>.</li>
+</ol>
+<hr />
+</div>
+<div id="question-2-traversability-planarity-colorings-15-marks" class="section level3 hasAnchor" number="14.0.3">
+<h3><span class="header-section-number">14.0.3</span> Question 2: Traversability, Planarity &amp; Colorings (15 Marks)<a href="comprehensive-final-examination-graph-theory.html#question-2-traversability-planarity-colorings-15-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>[5 Marks]</strong> State necessary and sufficient conditions for a connected graph <span class="math inline">\(G\)</span> to contain an <strong>Eulerian Circuit</strong>. Prove the necessity direction.</li>
+<li><strong>[5 Marks]</strong> State Euler’s Formula for connected planar graphs. Use it to prove that for any simple planar graph with <span class="math inline">\(\vert{}V\vert{} \ge 3\)</span>, the edge count satisfies <span class="math inline">\(\vert{}E\vert{} \le 3\vert{}V\vert{} - 6\)</span>.</li>
+<li><strong>[5 Marks]</strong> Show that the utility graph <span class="math inline">\(K_{3,3}\)</span> is non-planar using Euler’s edge-bound inequality for bipartite planar graphs (<span class="math inline">\(\vert{}E\vert{} \le 2\vert{}V\vert{} - 4\)</span>).</li>
+</ol>
+<hr />
+</div>
+<div id="question-3-flows-connectivity-matchings-15-marks" class="section level3 hasAnchor" number="14.0.4">
+<h3><span class="header-section-number">14.0.4</span> Question 3: Flows, Connectivity &amp; Matchings (15 Marks)<a href="comprehensive-final-examination-graph-theory.html#question-3-flows-connectivity-matchings-15-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>[5 Marks]</strong> State the <strong>Max-Flow Min-Cut Theorem</strong>. Given an <span class="math inline">\(s\)</span>-<span class="math inline">\(t\)</span> network where a minimum cut capacity is 14, what is the theoretical upper bound on the maximum flow value?</li>
+<li><strong>[5 Marks]</strong> State <strong>Hall’s Marriage Theorem</strong>. Construct a bipartite graph <span class="math inline">\(G = (A \cup B, E)\)</span> with <span class="math inline">\(\vert{}A\vert{} = 4\)</span> and <span class="math inline">\(\vert{}B\vert{} = 4\)</span> that fails Hall’s Condition, explicitly identifying the subset <span class="math inline">\(S \subseteq A\)</span> where <span class="math inline">\(\vert{}N(S)\vert{} &lt; \vert{}S\vert{}\)</span>.</li>
+<li><strong>[5 Marks]</strong> Outline the reduction steps to convert a Bipartite Maximum Matching problem into a Maximum Flow problem on a directed network.</li>
+</ol>
+<hr />
+</div>
+<div id="question-4-spectral-algebraic-graph-theory-20-marks" class="section level3 hasAnchor" number="14.0.5">
+<h3><span class="header-section-number">14.0.5</span> Question 4: Spectral &amp; Algebraic Graph Theory (20 Marks)<a href="comprehensive-final-examination-graph-theory.html#question-4-spectral-algebraic-graph-theory-20-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>[5 Marks]</strong> Consider the complete graph <span class="math inline">\(K_4\)</span>.</li>
+</ol>
+<ul>
+<li>Write down its Adjacency Matrix <span class="math inline">\(A\)</span> and Degree Matrix <span class="math inline">\(D\)</span>.</li>
+<li>Formulate its Laplacian Matrix <span class="math inline">\(L = D - A\)</span>.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>[5 Marks]</strong> Prove that <span class="math inline">\(0\)</span> is always an eigenvalue of the Laplacian matrix <span class="math inline">\(L\)</span> for any graph <span class="math inline">\(G\)</span>, and state its corresponding eigenvector.</li>
+<li><strong>[5 Marks]</strong> Explain the structural significance of the <strong>Fiedler Value</strong> (<span class="math inline">\(\mu_2\)</span>, the second-smallest Laplacian eigenvalue). What does <span class="math inline">\(\mu_2 = 0\)</span> imply about the connectivity of <span class="math inline">\(G\)</span>?</li>
+<li><strong>[5 Marks]</strong> Let <span class="math inline">\(A\)</span> be the adjacency matrix of a cycle graph <span class="math inline">\(C_4\)</span>. Calculate <span class="math inline">\(A^3\)</span> and explain why the diagonal entries <span class="math inline">\(\text{Tr}(A^3)\)</span> equal zero.</li>
+</ol>
+<hr />
+</div>
+<div id="question-5-complexity-approximations-dynamic-programming-20-marks" class="section level3 hasAnchor" number="14.0.6">
+<h3><span class="header-section-number">14.0.6</span> Question 5: Complexity, Approximations &amp; Dynamic Programming (20 Marks)<a href="comprehensive-final-examination-graph-theory.html#question-5-complexity-approximations-dynamic-programming-20-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>[5 Marks]</strong> Define the complexity classes <strong>P</strong>, <strong>NP</strong>, and <strong>NP-Complete</strong>. Give one example of a graph problem in <strong>P</strong> and one in <strong>NP-Complete</strong>.</li>
+<li><strong>[5 Marks]</strong> Describe the 2-approximation algorithm for <strong>Minimum Vertex Cover</strong> using maximal matching. Prove that its approximation ratio <span class="math inline">\(\alpha\)</span> is at most <span class="math inline">\(2\)</span>.</li>
+<li><strong>[5 Marks]</strong> State the recurrence relation for the <strong>Floyd-Warshall algorithm</strong> for all-pairs shortest paths. What is its time and space complexity?</li>
+<li><strong>[5 Marks]</strong> Describe how Dynamic Programming can be used to compute the <strong>Maximum Independent Set</strong> on a rooted tree in <span class="math inline">\(O(V)\)</span> time. State the two states required for each node <span class="math inline">\(u\)</span>.</li>
+</ol>
+<hr />
+</div>
+<div id="question-6-random-graphs-networks-advanced-frontiers-15-marks" class="section level3 hasAnchor" number="14.0.7">
+<h3><span class="header-section-number">14.0.7</span> Question 6: Random Graphs, Networks &amp; Advanced Frontiers (15 Marks)<a href="comprehensive-final-examination-graph-theory.html#question-6-random-graphs-networks-advanced-frontiers-15-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>[5 Marks]</strong> In the Erdős–Rényi random graph model <span class="math inline">\(G(n, p)\)</span>, derive the expected number of edges <span class="math inline">\(\mathbb{E}[\vert{}E\vert{}]\)</span> and the expected degree <span class="math inline">\(\mathbb{E}[d(v)]\)</span> of a vertex.</li>
+<li><strong>[5 Marks]</strong> Explain the key difference in degree distribution between an <strong>Erdős–Rényi random graph</strong> (Poisson distribution) and a <strong>Barabási–Albert scale-free network</strong> (Power-law distribution).</li>
+<li><strong>[5 Marks]</strong> State the <strong>Reconstruction Conjecture</strong>. Briefly explain what constitutes the “deck” of a graph <span class="math inline">\(G\)</span>.</li>
+</ol>
+<hr />
+</div>
+<div id="comprehensive-final-examination-official-solutions-manual" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Comprehensive Final Examination: Official Solutions Manual<a href="comprehensive-final-examination-graph-theory.html#comprehensive-final-examination-official-solutions-manual" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<hr />
+<div id="question-1-fundamentals-trees-structural-properties" class="section level3 hasAnchor" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Question 1: Fundamentals, Trees &amp; Structural Properties<a href="comprehensive-final-examination-graph-theory.html#question-1-fundamentals-trees-structural-properties" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="odd-degree-vertices-handshaking-lemma" class="section level4 hasAnchor" number="14.1.1.1">
+<h4><span class="header-section-number">14.1.1.1</span> 1. Odd Degree Vertices (Handshaking Lemma)<a href="comprehensive-final-examination-graph-theory.html#odd-degree-vertices-handshaking-lemma" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Proof</strong>: By the Handshaking Lemma, the sum of all vertex degrees in a graph <span class="math inline">\(G = (V, E)\)</span> equals twice the number of edges:</li>
+</ul>
+<p><span class="math display">\[\sum_{v \in V} \deg(v) = 2\vert{}E\vert{}\]</span></p>
+<ul>
+<li>Partition <span class="math inline">\(V\)</span> into two sets: <span class="math inline">\(V_{\text{even}}\)</span> (vertices with even degree) and <span class="math inline">\(V_{\text{odd}}\)</span> (vertices with odd degree):</li>
+</ul>
+<p><span class="math display">\[\sum_{v \in V_{\text{even}}} \deg(v) + \sum_{v \in V_{\text{odd}}} \deg(v) = 2\vert{}E\vert{}\]</span></p>
+<ul>
+<li>The term <span class="math inline">\(\sum_{v \in V_{\text{even}}} \deg(v)\)</span> is even because it is a sum of even integers. The right-hand side <span class="math inline">\(2\vert{}E\vert{}\)</span> is also even.</li>
+<li>Therefore, <span class="math inline">\(\sum_{v \in V_{\text{odd}}} \deg(v) = 2\vert{}E\vert{} - \sum_{v \in V_{\text{even}}} \deg(v)\)</span> must be an even integer.</li>
+<li>Since the sum of odd integers can only be even if there is an <strong>even number of terms</strong>, the cardinality <span class="math inline">\(\vert{}V_{\text{odd}}\vert{}\)</span> must be even. <span class="math inline">\(\blacksquare\)</span></li>
 </ul>
 </div>
-<pre><code>  Non-Planar Representation of K4          Plane Embedding of K4
-              (1)---(2)                            (1)---(2)
-               | \ / |                              | \ / |
-               |  X  |                              |  (4) |
-               | / \ |                              | / \ |
-              (3)---(4)                            (3)-----+
-</code></pre>
-<p><em>(Note: <span class="math inline">\(K_4\)</span> drawn with crossed diagonal edges is still a planar graph because it is isomorphic to a plane embedding where one vertex is pulled outside.)</em></p>
-</div>
-<div id="fárys-theorem" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Fáry’s Theorem<a href="planar-graphs.html#f%C3%A1rys-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A natural question arises: if a graph can be drawn without crossing edges using curved lines, can it also be drawn using only straight lines?</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-23" class="theorem"><strong>Theorem 4.1  (Fáry's Theorem, 1948) </strong></span>Every simple planar graph can be embedded in the plane using straight-line segments for all of its edges.</p>
-</div>
-<hr />
-</div>
-</div>
-<div id="eulers-formula-and-regions" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Euler’s Formula and Regions<a href="planar-graphs.html#eulers-formula-and-regions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When a planar graph is drawn as a plane graph, its edges divide the plane into contiguous, enclosed areas called <strong>regions</strong> (or faces).</p>
+<div id="minimum-two-leaves-in-a-tree" class="section level4 hasAnchor" number="14.1.1.2">
+<h4><span class="header-section-number">14.1.1.2</span> 2. Minimum Two Leaves in a Tree<a href="comprehensive-final-examination-graph-theory.html#minimum-two-leaves-in-a-tree" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li><strong>Boundary of a Region</strong>: The set of edges enclosing that region.</li>
-<li><strong>Unbounded (Outer) Region</strong>: The single infinite region surrounding the entire drawing. Every plane graph has exactly one outer region.</li>
+<li><strong>Proof</strong>: Let <span class="math inline">\(T = (V, E)\)</span> be a tree with <span class="math inline">\(\vert{}V\vert{} = n \ge 2\)</span>.</li>
+<li>By definition of a tree, <span class="math inline">\(\vert{}E\vert{} = n - 1\)</span>. Applying the Handshaking Lemma:</li>
 </ul>
-<div class="float">
-<img src="fig/fig26.png" style="width:30.0%" alt="Image Credit: gatevidyalay.com" />
-<div class="figcaption">Image Credit: gatevidyalay.com</div>
-</div>
-<p>In the plane graph above, there are 5 vertices (<span class="math inline">\(v=5\)</span>), 6 edges (<span class="math inline">\(e=6\)</span>), and 3 bounded regions plus 1 unbounded outer region, giving 4 total regions (<span class="math inline">\(r=4\)</span>).</p>
-<hr />
-<div id="eulers-formula" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Euler’s Formula<a href="planar-graphs.html#eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The fundamental relationship connecting the number of vertices, edges, and regions of a planar graph was discovered by Leonhard Euler.</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-24" class="theorem"><strong>Theorem 4.2  (Euler's Formula) </strong></span>For any connected plane graph with <span class="math inline">\(v\)</span> vertices, <span class="math inline">\(e\)</span> edges, and <span class="math inline">\(r\)</span> regions:</p>
-<p><span class="math display">\[v - e + r = 2\]</span></p>
-</div>
-<div id="generalized-eulers-formula" class="section level4 hasAnchor" number="4.2.1.1">
-<h4><span class="header-section-number">4.2.1.1</span> Generalized Euler’s Formula<a href="planar-graphs.html#generalized-eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>If a planar graph is disconnected and consists of <span class="math inline">\(c\)</span> connected components, the formula generalizes to:</p>
-<p><span class="math display">\[v - e + r = c + 1\]</span></p>
-</div>
-<div id="proof-of-eulers-formula-by-induction-on-edges" class="section level4 hasAnchor" number="4.2.1.2">
-<h4><span class="header-section-number">4.2.1.2</span> Proof of Euler’s Formula (By Induction on Edges)<a href="planar-graphs.html#proof-of-eulers-formula-by-induction-on-edges" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><strong>Base Case</strong>:</p>
-<p>Consider a connected graph with no cycles (a tree). A tree on <span class="math inline">\(v\)</span> vertices has <span class="math inline">\(e = v - 1\)</span> edges and creates no enclosed areas, leaving only <span class="math inline">\(1\)</span> outer region (<span class="math inline">\(r = 1\)</span>).</p>
-<p><span class="math display">\[v - (v - 1) + 1 = 2\]</span></p>
-<p>The formula holds for the base case.</p>
-<p><strong>Inductive Step</strong>:</p>
-<p>Assume <span class="math inline">\(v - e + r = 2\)</span> holds for all connected plane graphs with <span class="math inline">\(k\)</span> edges. Let <span class="math inline">\(G\)</span> be a connected plane graph with <span class="math inline">\(k + 1\)</span> edges.</p>
-<ol style="list-style-type: decimal">
-<li>Since <span class="math inline">\(G\)</span> is not a tree, it must contain at least one cycle.</li>
-<li>Select an edge <span class="math inline">\(e^*\)</span> that belongs to a cycle. Removing <span class="math inline">\(e^*\)</span> breaks the cycle, merging two adjacent regions into one.</li>
-<li>The new graph <span class="math inline">\(G&#39; = G \setminus \{e^*\}\)</span> has <span class="math inline">\(v&#39;=v\)</span> vertices, <span class="math inline">\(e&#39;=e-1\)</span> edges, and <span class="math inline">\(r&#39;=r-1\)</span> regions.</li>
-<li>By the induction hypothesis, <span class="math inline">\(v&#39; - e&#39; + r&#39; = 2\)</span>.</li>
-<li>Substituting the values: <span class="math inline">\(v - (e - 1) + (r - 1) = 2 \implies v - e + r = 2\)</span>.</li>
-</ol>
-<p>By mathematical induction, Euler’s formula holds for all connected plane graphs.</p>
-<hr />
-</div>
-</div>
-</div>
-<div id="invariants-and-non-planarity-bounds" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Invariants and Non-Planarity Bounds<a href="planar-graphs.html#invariants-and-non-planarity-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Euler’s formula allows us to derive strict upper bounds on how many edges a simple graph can have while remaining planar.</p>
-<div id="edge-bounds-for-simple-planar-graphs" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Edge Bounds for Simple Planar Graphs<a href="planar-graphs.html#edge-bounds-for-simple-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-25" class="theorem"><strong>Theorem 4.3  (General Edge Bound) </strong></span>In any simple connected planar graph with <span class="math inline">\(v \ge 3\)</span> vertices and <span class="math inline">\(e\)</span> edges:</p>
-<p><span class="math display">\[e \le 3v - 6\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-3" class="proof"><em>Proof</em>. </span></p>
-<ol style="list-style-type: decimal">
-<li>Every region in a simple planar graph must be bounded by at least 3 edges (since a simple graph has no self-loops or double edges, the smallest cycle length is 3).</li>
-<li>Summing the degree of all regions gives <span class="math inline">\(\sum \text{deg}(r_i) \ge 3r\)</span>.</li>
-<li>Since every edge bounds at most 2 regions, <span class="math inline">\(\sum \text{deg}(r_i) = 2e\)</span>. Thus, <span class="math inline">\(2e \ge 3r \implies r \le \frac{2}{3}e\)</span>.</li>
-<li>Substitute <span class="math inline">\(r \le \frac{2}{3}e\)</span> into Euler’s formula (<span class="math inline">\(v - e + r = 2\)</span>):</li>
-</ol>
-<p><span class="math display">\[v - e + \frac{2}{3}e \ge 2 \implies v - \frac{1}{3}e \ge 2 \implies e \le 3v - 6\]</span></p>
-</div>
-<hr />
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-27" class="theorem"><strong>Theorem 4.4  (Girth Bound) </strong></span>If a simple planar graph has a <strong>girth</strong> (length of its shortest cycle) of at least 4 (i.e., it contains no triangles), then:</p>
-<p><span class="math display">\[e \le 2v - 4\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-4" class="proof"><em>Proof</em>. </span>Since the graph has no triangles, every region is bounded by at least 4 edges. Therefore, <span class="math inline">\(2e \ge 4r \implies r \le \frac{1}{2}e\)</span>.
-Substituting this into Euler’s formula gives <span class="math inline">\(v - e + \frac{1}{2}e \ge 2 \implies e \le 2v - 4\)</span>.</p>
-</div>
-<hr />
-</div>
-<div id="degree-bounds" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Degree Bounds<a href="planar-graphs.html#degree-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-29" class="theorem"><strong>Theorem 4.5  </strong></span>Every simple planar graph contains at least one vertex with degree <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-5" class="proof"><em>Proof</em>. </span>Suppose every vertex in a simple planar graph <span class="math inline">\(G\)</span> has degree <span class="math inline">\(d(v) \ge 6\)</span>.
-By the Handshaking Lemma:</p>
-<p><span class="math display">\[2e = \sum d(v) \ge 6v \implies e \ge 3v\]</span></p>
-<p>However, Theorem 1 states that <span class="math inline">\(e \le 3v - 6\)</span>, creating a direct contradiction (<span class="math inline">\(3v \le e \le 3v - 6\)</span>). Therefore, <span class="math inline">\(G\)</span> must contain at least one vertex with <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<hr />
-</div>
-</div>
-<div id="characterizing-non-planar-graphs" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Characterizing Non-Planar Graphs<a href="planar-graphs.html#characterizing-non-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Not all graphs are planar. The two canonical non-planar graphs are:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong><span class="math inline">\(K_5\)</span></strong>: The complete graph on 5 vertices.</p></li>
-<li><p><strong><span class="math inline">\(K_{3,3}\)</span></strong>: The complete bipartite graph on 3+3 vertices (often called the <em>utility graph</em>).</p></li>
-</ol>
-<pre><code>         K5 (Complete Graph)              K3,3 (Utility Graph)
-               (1)                            (u1)   (u2)   (u3)
-              / | \                            | \   / | \   / |
-            (2) | (3)                          |  \ /  |  \ /  |
-            | \ | / |                          |   X   |   X   |
-            (4)-(5)-+                          |  / \  |  / \  |
-                                              (v1)   (v2)   (v3)
-</code></pre>
-<div class="float">
-<img src="fig/fig27.png" alt="Image credit:https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" />
-<div class="figcaption">Image credit:<a href="https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" class="uri">https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e</a></div>
-</div>
-<div id="proving-non-planarity" class="section level3 hasAnchor" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Proving Non-Planarity<a href="planar-graphs.html#proving-non-planarity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="example">
-<p><span id="exm:unnamed-chunk-31" class="example"><strong>Example 4.1  ($K_5$ is Non-Planar) </strong></span>For <span class="math inline">\(K_5\)</span>, <span class="math inline">\(v = 5\)</span> and <span class="math inline">\(e = \binom{5}{2} = 10\)</span>.
-Using Theorem 1 (<span class="math inline">\(e \le 3v - 6\)</span>):</p>
-<p><span class="math display">\[10 \le 3(5) - 6 = 9 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(10 \le 9\)</span> is false, <span class="math inline">\(K_5\)</span> cannot be planar.</p>
-</div>
-<div class="example">
-<p><span id="exm:unnamed-chunk-32" class="example"><strong>Example 4.2  ($K_{3,3}$ is Non-Planar) </strong></span>For <span class="math inline">\(K_{3,3}\)</span>, <span class="math inline">\(v = 6\)</span> and <span class="math inline">\(e = 3 \times 3 = 9\)</span>.
-Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no odd cycles (girth <span class="math inline">\(\ge 4\)</span>). Using Theorem 2 (<span class="math inline">\(e \le 2v - 4\)</span>):</p>
-<p><span class="math display">\[9 \le 2(6) - 4 = 8 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(9 \le 8\)</span> is false, <span class="math inline">\(K_{3,3}\)</span> cannot be planar.</p>
-</div>
-<hr />
-</div>
-<div id="kuratowskis-theorem" class="section level3 hasAnchor" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Kuratowski’s Theorem<a href="planar-graphs.html#kuratowskis-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>How can we determine if an arbitrary complex graph is planar?</p>
+<p><span class="math display">\[\sum_{v \in V} \deg(v) = 2\vert{}E\vert{} = 2(n - 1) = 2n - 2\]</span></p>
 <ul>
-<li><strong>Edge Subdivision</strong>: Inserting a vertex of degree 2 into an edge, splitting it into two adjacent edges.</li>
-<li><strong>Subdivision of a Graph</strong>: A graph obtained by performing a sequence of edge subdivisions on <span class="math inline">\(G\)</span>.</li>
+<li>Assume for contradiction that <span class="math inline">\(T\)</span> has fewer than 2 leaves (vertices of degree 1). Since <span class="math inline">\(T\)</span> is connected and <span class="math inline">\(n \ge 2\)</span>, every vertex has degree at least 1 (<span class="math inline">\(\deg(v) \ge 1\)</span>).</li>
+<li><strong>Case 1</strong>: 0 leaves. Then <span class="math inline">\(\deg(v) \ge 2\)</span> for all <span class="math inline">\(v \in V\)</span>:</li>
 </ul>
-<pre><code>     Original Edge               Subdivided Edge
-        (u)---(v)                 (u)---(w)---(v)
-</code></pre>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-33" class="theorem"><strong>Theorem 4.6  (Kuratowski's Theorem(1930)) </strong></span>A finite graph is planar <strong>if and only if</strong> it does not contain a subgraph that is a subdivision of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span>.</p>
+<p><span class="math display">\[\sum_{v \in V} \deg(v) \ge 2n &gt; 2n - 2\]</span></p>
+<p>Contradiction.
+* <strong>Case 2</strong>: 1 leaf (<span class="math inline">\(v_1\)</span>). Then <span class="math inline">\(\deg(v_1) = 1\)</span> and <span class="math inline">\(\deg(v) \ge 2\)</span> for all other <span class="math inline">\(n - 1\)</span> vertices:</p>
+<p><span class="math display">\[\sum_{v \in V} \deg(v) \ge 1 + 2(n - 1) = 2n - 1 &gt; 2n - 2\]</span></p>
+<p>Contradiction.
+* Hence, <span class="math inline">\(T\)</span> must contain at least 2 vertices of degree 1 (leaves). <span class="math inline">\(\blacksquare\)</span></p>
 </div>
-<hr />
-</div>
-</div>
-<div id="chapter-4-summary-table" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Chapter 4 Summary Table<a href="planar-graphs.html#chapter-4-summary-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Property / Bound</th>
-<th>Formula / Condition</th>
-<th>Context / Application</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Euler’s Formula</strong></td>
-<td><span class="math inline">\(v - e + r = 2\)</span><br></td>
-<td>Connected plane graphs</td>
-</tr>
-<tr class="even">
-<td><strong>General Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 3v - 6\)</span><br></td>
-<td>Simple planar graphs (<span class="math inline">\(v \ge 3\)</span>)</td>
-</tr>
-<tr class="odd">
-<td><strong>Triangle-Free Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 2v - 4\)</span><br></td>
-<td>Planar graphs with girth <span class="math inline">\(\ge 4\)</span><br></td>
-</tr>
-<tr class="even">
-<td><strong>Minimum Degree Invariant</strong></td>
-<td><span class="math inline">\(\min d(v) \le 5\)</span><br></td>
-<td>All simple planar graphs</td>
-</tr>
-<tr class="odd">
-<td><strong>Non-Planarity Criterion</strong></td>
-<td>Subdivisions of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span><br></td>
-<td>Kuratowski’s Theorem</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
-<div id="chapter-4-exercises" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Chapter 4 Exercises<a href="planar-graphs.html#chapter-4-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="labeled-spanning-trees-of-k_6" class="section level4 hasAnchor" number="14.1.1.3">
+<h4><span class="header-section-number">14.1.1.3</span> 3. Labeled Spanning Trees of <span class="math inline">\(K_6\)</span><a href="comprehensive-final-examination-graph-theory.html#labeled-spanning-trees-of-k_6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Cayley’s Formula</strong>: <span class="math inline">\(n^{n-2}\)</span>. For <span class="math inline">\(n = 6\)</span>:</li>
+</ul>
+<p><span class="math display">\[6^{6-2} = 6^4 = 1296 \text{ labeled spanning trees.}\]</span></p>
+<ul>
+<li><strong>Non-Isomorphic Trees</strong>:</li>
+</ul>
 <ol style="list-style-type: decimal">
-<li><strong>Euler’s Formula Application</strong>: A connected plane graph has 12 vertices, and every vertex has degree 3. How many edges and regions does the graph have?</li>
-<li><strong>Polyhedron Proof</strong>: Prove that no convex polyhedron can be constructed such that every face is bounded by 6 or more edges.</li>
-<li><strong>Planarity Verification</strong>: A simple planar graph <span class="math inline">\(G\)</span> has 10 vertices and is bipartite. What is the maximum number of edges <span class="math inline">\(G\)</span> can have?</li>
-<li><strong>Kuratowski Subdivision</strong>: Draw <span class="math inline">\(K_5\)</span> and subdivide one of its edges by adding a new vertex. Is the resulting graph planar? Explain using Kuratowski’s Theorem.</li>
+<li><strong>Path Graph <span class="math inline">\(P_6\)</span></strong>: A linear chain <span class="math inline">\((1-2-3-4-5-6)\)</span> with diameter 5 and maximum degree 2.</li>
+<li><strong>Star Graph <span class="math inline">\(K_{1,5}\)</span></strong>: A central node connected to 5 leaf nodes, with diameter 2 and maximum degree 5.</li>
 </ol>
+<hr />
+</div>
+</div>
+<div id="question-2-traversability-planarity-colorings" class="section level3 hasAnchor" number="14.1.2">
+<h3><span class="header-section-number">14.1.2</span> Question 2: Traversability, Planarity &amp; Colorings<a href="comprehensive-final-examination-graph-theory.html#question-2-traversability-planarity-colorings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="eulerian-circuit-conditions-necessity-proof" class="section level4 hasAnchor" number="14.1.2.1">
+<h4><span class="header-section-number">14.1.2.1</span> 1. Eulerian Circuit Conditions &amp; Necessity Proof<a href="comprehensive-final-examination-graph-theory.html#eulerian-circuit-conditions-necessity-proof" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Theorem</strong>: A connected graph <span class="math inline">\(G\)</span> contains an Eulerian circuit <strong>if and only if</strong> every vertex in <span class="math inline">\(G\)</span> has an even degree.</li>
+<li><strong>Necessity Proof</strong>:</li>
+<li>Let <span class="math inline">\(C\)</span> be an Eulerian circuit in <span class="math inline">\(G\)</span>.</li>
+<li>For every vertex <span class="math inline">\(v \in V\)</span>, each time <span class="math inline">\(C\)</span> enters <span class="math inline">\(v\)</span> along an edge, it must leave <span class="math inline">\(v\)</span> along a distinct, previously unvisited edge.</li>
+<li>Thus, every arrival and departure contributes <span class="math inline">\(2\)</span> to the degree of <span class="math inline">\(v\)</span>.</li>
+<li>Since <span class="math inline">\(C\)</span> traverses every edge in <span class="math inline">\(E\)</span> exactly once and starts/ends at the same vertex, the total degree of every vertex must be even. <span class="math inline">\(\blacksquare\)</span></li>
+</ul>
+</div>
+<div id="eulers-formula-edge-upper-bound" class="section level4 hasAnchor" number="14.1.2.2">
+<h4><span class="header-section-number">14.1.2.2</span> 2. Euler’s Formula &amp; Edge Upper Bound<a href="comprehensive-final-examination-graph-theory.html#eulers-formula-edge-upper-bound" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Euler’s Formula</strong>: For any connected planar graph with <span class="math inline">\(V\)</span> vertices, <span class="math inline">\(E\)</span> edges, and <span class="math inline">\(F\)</span> faces:</li>
+</ul>
+<p><span class="math display">\[V - E + F = 2\]</span></p>
+<ul>
+<li><strong>Proof of <span class="math inline">\(\vert{}E\vert{} \le 3V - 6\)</span></strong>:</li>
+<li>Each face is bounded by at least 3 edges in a simple planar graph.</li>
+<li>Since each edge borders at most 2 faces:</li>
+</ul>
+<p><span class="math display">\[2E = \sum_{f \in \text{Faces}} \text{deg}(f) \ge 3F \implies F \le \frac{2}{3}E\]</span></p>
+<ul>
+<li>Substitute into Euler’s formula:</li>
+</ul>
+<p><span class="math display">\[V - E + \frac{2}{3}E \ge 2 \implies V - \frac{1}{3}E \ge 2 \implies E \le 3V - 6 \quad \blacksquare\]</span></p>
+</div>
+<div id="non-planarity-of-k_33" class="section level4 hasAnchor" number="14.1.2.3">
+<h4><span class="header-section-number">14.1.2.3</span> 3. Non-Planarity of <span class="math inline">\(K_{3,3}\)</span><a href="comprehensive-final-examination-graph-theory.html#non-planarity-of-k_33" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><span class="math inline">\(K_{3,3}\)</span> has <span class="math inline">\(V = 6\)</span> vertices and <span class="math inline">\(E = 9\)</span> edges.</li>
+<li>Because <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no odd cycles (no triangles). Thus, every face must be bounded by at least 4 edges:</li>
+</ul>
+<p><span class="math display">\[2E \ge 4F \implies F \le \frac{1}{2}E\]</span></p>
+<ul>
+<li>Substituting into Euler’s formula (<span class="math inline">\(V - E + F = 2\)</span>):</li>
+</ul>
+<p><span class="math display">\[V - E + \frac{1}{2}E \ge 2 \implies E \le 2V - 4\]</span></p>
+<ul>
+<li>For <span class="math inline">\(K_{3,3}\)</span>, <span class="math inline">\(2V - 4 = 2(6) - 4 = 8\)</span>.</li>
+<li>Since <span class="math inline">\(E = 9 &gt; 8\)</span>, <span class="math inline">\(K_{3,3}\)</span> violates the bipartite planar edge bound and is non-planar. <span class="math inline">\(\blacksquare\)</span></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="question-3-flows-connectivity-matchings" class="section level3 hasAnchor" number="14.1.3">
+<h3><span class="header-section-number">14.1.3</span> Question 3: Flows, Connectivity &amp; Matchings<a href="comprehensive-final-examination-graph-theory.html#question-3-flows-connectivity-matchings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="max-flow-min-cut-application" class="section level4 hasAnchor" number="14.1.3.1">
+<h4><span class="header-section-number">14.1.3.1</span> 1. Max-Flow Min-Cut Application<a href="comprehensive-final-examination-graph-theory.html#max-flow-min-cut-application" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Theorem</strong>: <span class="math inline">\(\max \vert{}f\vert{} = \min c(S, T)\)</span>.</li>
+<li><strong>Upper Bound</strong>: If the minimum cut capacity is 14, the maximum possible flow value is <strong>14</strong>.</li>
+</ul>
+</div>
+<div id="halls-marriage-theorem-counterexample" class="section level4 hasAnchor" number="14.1.3.2">
+<h4><span class="header-section-number">14.1.3.2</span> 2. Hall’s Marriage Theorem Counterexample<a href="comprehensive-final-examination-graph-theory.html#halls-marriage-theorem-counterexample" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Hall’s Theorem</strong>: A bipartite graph <span class="math inline">\(G = (A \cup B, E)\)</span> has a matching covering <span class="math inline">\(A\)</span> iff <span class="math inline">\(\vert{}N(S)\vert{} \ge \vert{}S\vert{}\)</span> for all <span class="math inline">\(S \subseteq A\)</span>.</li>
+<li><strong>Failure Example</strong>:</li>
+<li>Let <span class="math inline">\(A = \{a_1, a_2, a_3, a_4\}\)</span> and <span class="math inline">\(B = \{b_1, b_2, b_3, b_4\}\)</span>.</li>
+<li>Define edges such that <span class="math inline">\(a_1, a_2, a_3\)</span> all connect <strong>only</strong> to <span class="math inline">\(b_1\)</span>:</li>
+</ul>
+<p><span class="math display">\[E = \{(a_1, b_1), (a_2, b_1), (a_3, b_1), (a_4, b_2)\}\]</span></p>
+<ul>
+<li>Choose subset <span class="math inline">\(S = \{a_1, a_2, a_3\} \subseteq A\)</span>.</li>
+<li>Neighborhood <span class="math inline">\(N(S) = \{b_1\}\)</span>, so <span class="math inline">\(\vert{}S\vert{} = 3\)</span> and <span class="math inline">\(\vert{}N(S)\vert{} = 1\)</span>.</li>
+<li>Since <span class="math inline">\(\vert{}N(S)\vert{} = 1 &lt; 3 = \vert{}S\vert{}\)</span>, Hall’s condition fails and no complete matching exists.</li>
+</ul>
+</div>
+<div id="bipartite-matching-to-network-flow-reduction" class="section level4 hasAnchor" number="14.1.3.3">
+<h4><span class="header-section-number">14.1.3.3</span> 3. Bipartite Matching to Network Flow Reduction<a href="comprehensive-final-examination-graph-theory.html#bipartite-matching-to-network-flow-reduction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Construct directed network <span class="math inline">\(G&#39; = (V&#39;, E&#39;)\)</span>.</li>
+<li>Add super-source <span class="math inline">\(s\)</span> and super-sink <span class="math inline">\(t\)</span>.</li>
+<li>Add directed edges <span class="math inline">\((s, a)\)</span> with capacity <span class="math inline">\(1\)</span> for all <span class="math inline">\(a \in A\)</span>.</li>
+<li>Direct all original edges from <span class="math inline">\(A \to B\)</span> with capacity <span class="math inline">\(1\)</span>.</li>
+<li>Add directed edges <span class="math inline">\((b, t)\)</span> with capacity <span class="math inline">\(1\)</span> for all <span class="math inline">\(b \in B\)</span>.</li>
+<li>Solve max flow; maximum flow value <span class="math inline">\(\vert{}f^*\vert{}\)</span> equals maximum matching size <span class="math inline">\(\vert{}M^*\vert{}\)</span>.</li>
+</ol>
+<hr />
+</div>
+</div>
+<div id="question-4-spectral-algebraic-graph-theory" class="section level3 hasAnchor" number="14.1.4">
+<h3><span class="header-section-number">14.1.4</span> Question 4: Spectral &amp; Algebraic Graph Theory<a href="comprehensive-final-examination-graph-theory.html#question-4-spectral-algebraic-graph-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="matrices-for-k_4" class="section level4 hasAnchor" number="14.1.4.1">
+<h4><span class="header-section-number">14.1.4.1</span> 1. Matrices for <span class="math inline">\(K_4\)</span><a href="comprehensive-final-examination-graph-theory.html#matrices-for-k_4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[A = \begin{pmatrix} 0 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; 0 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 0 &amp; 1 \\ 1 &amp; 1 &amp; 1 &amp; 0 \end{pmatrix}, \quad  D = \begin{pmatrix} 3 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 3 \end{pmatrix}\]</span></p>
+<p><span class="math display">\[L = D - A = \begin{pmatrix} 3 &amp; -1 &amp; -1 &amp; -1 \\ -1 &amp; 3 &amp; -1 &amp; -1 \\ -1 &amp; -1 &amp; 3 &amp; -1 \\ -1 &amp; -1 &amp; -1 &amp; 3 \end{pmatrix}\]</span></p>
+</div>
+<div id="proof-that-0-is-a-laplacian-eigenvalue" class="section level4 hasAnchor" number="14.1.4.2">
+<h4><span class="header-section-number">14.1.4.2</span> 2. Proof that 0 is a Laplacian Eigenvalue<a href="comprehensive-final-examination-graph-theory.html#proof-that-0-is-a-laplacian-eigenvalue" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Every row of <span class="math inline">\(L = D - A\)</span> sums to zero because <span class="math inline">\(L_{ii} = d(v_i)\)</span> and <span class="math inline">\(\sum_{j \neq i} L_{ij} = -d(v_i)\)</span>.</li>
+<li>Consider the all-ones vector <span class="math inline">\(\mathbf{1} = (1, 1, 1, 1)^T\)</span>:</li>
+</ul>
+<p><span class="math display">\[(L \mathbf{1})_i = \sum_{j=1}^n L_{ij} \cdot 1 = 0 = 0 \cdot 1_i\]</span></p>
+<ul>
+<li>Thus, <span class="math inline">\(L \mathbf{1} = 0 \cdot \mathbf{1}\)</span>, proving <span class="math inline">\(\mu_1 = 0\)</span> is an eigenvalue with eigenvector <span class="math inline">\(\mathbf{1}\)</span>. <span class="math inline">\(\blacksquare\)</span></li>
+</ul>
+</div>
+<div id="fiedler-value-mu_2-significance" class="section level4 hasAnchor" number="14.1.4.3">
+<h4><span class="header-section-number">14.1.4.3</span> 3. Fiedler Value (<span class="math inline">\(\mu_2\)</span>) Significance<a href="comprehensive-final-examination-graph-theory.html#fiedler-value-mu_2-significance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><span class="math inline">\(\mu_2\)</span> measures <strong>algebraic connectivity</strong>.</li>
+<li>If <span class="math inline">\(\mu_2 = 0\)</span>, the graph <span class="math inline">\(G\)</span> has at least 2 connected components (i.e., <span class="math inline">\(G\)</span> is <strong>disconnected</strong>).</li>
+</ul>
+</div>
+<div id="a3-traces-on-c_4" class="section level4 hasAnchor" number="14.1.4.4">
+<h4><span class="header-section-number">14.1.4.4</span> 4. <span class="math inline">\(A^3\)</span> Traces on <span class="math inline">\(C_4\)</span><a href="comprehensive-final-examination-graph-theory.html#a3-traces-on-c_4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>For <span class="math inline">\(C_4\)</span>, <span class="math inline">\(A^3_{ii}\)</span> counts closed walks of length 3 starting and ending at <span class="math inline">\(v_i\)</span>.</li>
+<li>Because <span class="math inline">\(C_4\)</span> is bipartite, it contains no odd-length cycles (no 3-cycles).</li>
+<li>Therefore, <span class="math inline">\(A^3_{ii} = 0\)</span> for all <span class="math inline">\(i\)</span>, and <span class="math inline">\(\text{Tr}(A^3) = 0\)</span>.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="question-5-complexity-approximations-dynamic-programming" class="section level3 hasAnchor" number="14.1.5">
+<h3><span class="header-section-number">14.1.5</span> Question 5: Complexity, Approximations &amp; Dynamic Programming<a href="comprehensive-final-examination-graph-theory.html#question-5-complexity-approximations-dynamic-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="complexity-classes-1" class="section level4 hasAnchor" number="14.1.5.1">
+<h4><span class="header-section-number">14.1.5.1</span> 1. Complexity Classes<a href="comprehensive-final-examination-graph-theory.html#complexity-classes-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>P</strong>: Problems solvable in polynomial time <span class="math inline">\(O(n^k)\)</span> (e.g., <em>Shortest Path</em> via Dijkstra).</li>
+<li><strong>NP</strong>: Decision problems verifiable in polynomial time.</li>
+<li><strong>NP-Complete</strong>: Hardest problems in NP (e.g., <em>Hamiltonian Cycle</em>).</li>
+</ul>
+</div>
+<div id="vertex-cover-2-approximation-proof" class="section level4 hasAnchor" number="14.1.5.2">
+<h4><span class="header-section-number">14.1.5.2</span> 2. Vertex Cover 2-Approximation Proof<a href="comprehensive-final-examination-graph-theory.html#vertex-cover-2-approximation-proof" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Algorithm selects maximal matching <span class="math inline">\(M \subseteq E\)</span> and takes both endpoints of every edge in <span class="math inline">\(M\)</span>, giving <span class="math inline">\(\vert{}C\vert{} = 2\vert{}M\vert{}\)</span>.</li>
+<li>Any valid cover <span class="math inline">\(\text{OPT}\)</span> must pick at least one endpoint from each disjoint matching edge in <span class="math inline">\(M\)</span>, so <span class="math inline">\(\vert{}\text{OPT}\vert{} \ge \vert{}M\vert{}\)</span>.</li>
+<li>Combining inequalities: <span class="math inline">\(\vert{}C\vert{} = 2\vert{}M\vert{} \le 2\vert{}\text{OPT}\vert{} \implies \alpha = 2\)</span>. <span class="math inline">\(\blacksquare\)</span></li>
+</ul>
+</div>
+<div id="floyd-warshall-recurrence" class="section level4 hasAnchor" number="14.1.5.3">
+<h4><span class="header-section-number">14.1.5.3</span> 3. Floyd-Warshall Recurrence<a href="comprehensive-final-examination-graph-theory.html#floyd-warshall-recurrence" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[d_k(i, j) = \min \left( d_{k-1}(i, j), \; d_{k-1}(i, k) + d_{k-1}(k, j) \right)\]</span></p>
+<ul>
+<li><strong>Time Complexity</strong>: <span class="math inline">\(O(V^3)\)</span></li>
+<li><strong>Space Complexity</strong>: <span class="math inline">\(O(V^2)\)</span></li>
+</ul>
+</div>
+<div id="tree-dynamic-programming-1" class="section level4 hasAnchor" number="14.1.5.4">
+<h4><span class="header-section-number">14.1.5.4</span> 4. Tree Dynamic Programming<a href="comprehensive-final-examination-graph-theory.html#tree-dynamic-programming-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>Root the tree at an arbitrary node.</p></li>
+<li><p><strong>States for node <span class="math inline">\(u\)</span></strong>:</p></li>
+<li><p><span class="math inline">\(DP[u][0]\)</span>: Max independent set size in <span class="math inline">\(u\)</span>’s subtree when <span class="math inline">\(u\)</span> is <strong>excluded</strong>.</p></li>
+<li><p><span class="math inline">\(DP[u][1]\)</span>: Max independent set size in <span class="math inline">\(u\)</span>’s subtree when <span class="math inline">\(u\)</span> is <strong>included</strong>.</p></li>
+<li><p>Compute in post-order bottom-up traversal in <span class="math inline">\(O(V)\)</span> total time.</p></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="question-6-random-graphs-networks-advanced-frontiers" class="section level3 hasAnchor" number="14.1.6">
+<h3><span class="header-section-number">14.1.6</span> Question 6: Random Graphs, Networks &amp; Advanced Frontiers<a href="comprehensive-final-examination-graph-theory.html#question-6-random-graphs-networks-advanced-frontiers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="erdősrényi-expectations" class="section level4 hasAnchor" number="14.1.6.1">
+<h4><span class="header-section-number">14.1.6.1</span> 1. Erdős–Rényi Expectations<a href="comprehensive-final-examination-graph-theory.html#erd%C5%91sr%C3%A9nyi-expectations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Expected Edges</strong>: <span class="math inline">\(\mathbb{E}[\vert{}E\vert{}] = p \binom{n}{2} = \frac{p \cdot n(n-1)}{2}\)</span></li>
+<li><strong>Expected Degree</strong>: <span class="math inline">\(\mathbb{E}[d(v)] = p(n - 1)\)</span></li>
+</ul>
+</div>
+<div id="degree-distribution-comparison" class="section level4 hasAnchor" number="14.1.6.2">
+<h4><span class="header-section-number">14.1.6.2</span> 2. Degree Distribution Comparison<a href="comprehensive-final-examination-graph-theory.html#degree-distribution-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Erdős–Rényi <span class="math inline">\(G(n, p)\)</span></strong>: Binomial/Poisson distribution. Nodes have homogeneous degrees clustered tightly around the mean; large hubs are exponentially unlikely.</li>
+<li><strong>Barabási–Albert</strong>: Power-law distribution <span class="math inline">\(P(k) \propto k^{-3}\)</span>. Scale-free and highly heterogeneous, featuring a small number of ultra-connected hubs.</li>
+</ul>
+</div>
+<div id="reconstruction-conjecture" class="section level4 hasAnchor" number="14.1.6.3">
+<h4><span class="header-section-number">14.1.6.3</span> 3. Reconstruction Conjecture<a href="comprehensive-final-examination-graph-theory.html#reconstruction-conjecture" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Conjecture</strong>: Every simple graph <span class="math inline">\(G\)</span> with <span class="math inline">\(\vert{}V\vert{} \ge 3\)</span> is uniquely determined up to isomorphism by its deck.</li>
+<li><strong>Deck</strong>: The multiset of all <span class="math inline">\(\vert{}V\vert{}\)</span> unlabeled vertex-deleted subgraphs <span class="math inline">\(\{G - v : v \in V\}\)</span>.</li>
+</ul>
 
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -652,8 +742,8 @@ Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no 
           </div>
         </div>
       </div>
-<a href="chapter-3-connectivity-graph-exploration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="trees-spanning-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="practice-problem-set-chapters-112.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -684,7 +774,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/03-ch4.Rmd",
+    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/13-exam.Rmd",
     "text": "Edit"
   },
   "history": {

@@ -1,0 +1,152 @@
+# Spectral & Algebraic Graph Theory
+
+## Matrices Associated with Graphs
+
+Algebraic graph theory uses linear algebra to study graph structure. By representing graphs as matrices, structural invariants like connectivity, number of components, walks, and spanning trees can be analyzed through matrix properties and eigenvalues.
+
+### The Adjacency Matrix ($A$)
+
+For a simple, undirected graph $G = (V, E)$ with $n$ vertices:
+
+$$A_{ij} = \begin{cases} 1 & \text{if } (v_i, v_j) \in E \\ 0 & \text{otherwise} \end{cases}$$
+
+#### Key Properties
+
+* **Symmetry**: $A = A^T$, meaning all $n$ eigenvalues $\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n$ are real numbers.
+* **Trace**: $\text{Tr}(A) = \sum_{i=1}^n A_{ii} = 0$ (since simple graphs have no self-loops).
+* **Walk Counting**: The $(i, j)$-th entry of $A^k$ gives the exact number of walks of length $k$ between vertex $v_i$ and vertex $v_j$.
+* **Edge Sum**: $\text{Tr}(A^2) = 2\vert{}E\vert{}$, and $\text{Tr}(A^3) = 6 \times (\text{Number of Triangles in } G)$.
+
+---
+
+### The Degree Matrix ($D$)
+
+A diagonal $n \times n$ matrix containing vertex degrees along its main diagonal:
+
+$$D_{ij} = \begin{cases} d(v_i) & \text{if } i = j \\ 0 & \text{if } i \neq j \end{cases}$$
+
+---
+
+### The Laplacian Matrix ($L$)
+
+The Laplacian matrix bridges graph topology and differential operators on graphs:
+
+$$L = D - A$$
+
+$$L_{ij} = \begin{cases} d(v_i) & \text{if } i = j \\ -1 & \text{if } i \neq j \text{ and } (v_i, v_j) \in E \\ 0 & \text{otherwise} \end{cases}$$
+
+#### Key Properties
+
+* **Symmetric & Positive Semi-Definite**: All eigenvalues of $L$ are real and non-negative:
+
+$$0 = \mu_1 \le \mu_2 \le \dots \le \mu_n$$
+
+
+* **Row/Column Sums**: Every row and column sums to $0$. Consequently, the all-ones vector $\mathbf{1} = (1, 1, \dots, 1)^T$ is always an eigenvector corresponding to eigenvalue $\mu_1 = 0$.
+
+---
+
+### The Normalized Laplacian ($\mathcal{L}$)
+
+To account for graphs with irregular degree distributions, the normalized Laplacian scales edges by vertex degrees:
+
+$$\mathcal{L} = D^{-1/2} L D^{-1/2} = I - D^{-1/2} A D^{-1/2}$$
+
+All eigenvalues of $\mathcal{L}$ lie within the interval $[0, 2]$.
+
+---
+
+## Graph Spectrum and Structural Properties
+
+The **spectrum** of a graph is the multiset of its adjacency or Laplacian eigenvalues.
+
+### Adjacency Spectrum ($\text{Spec}(A)$)
+
+* **Regular Graphs**: If $G$ is $k$-regular, its largest eigenvalue is $\lambda_1 = k$ with eigenvector $\mathbf{1}$.
+* **Bipartite Parity**: A graph $G$ is bipartite **if and only if** its spectrum is symmetric around $0$ (i.e., $\lambda$ is an eigenvalue if and only if $-\lambda$ is an eigenvalue).
+* **Spectral Radius Bound**: The largest eigenvalue satisfies $\text{avg}(d) \le \lambda_1 \le \Delta(G)$.
+
+```
+          Bipartite Symmetric Spectrum
+            -lambda_1       0       +lambda_1
+            ---|------------|------------|--->
+
+```
+
+---
+
+### Laplacian Spectrum ($\text{Spec}(L)$)
+
+The eigenvalues of $L$ ($0 = \mu_1 \le \mu_2 \le \dots \le \mu_n$) encode connectivity characteristics:
+
+1. **Number of Connected Components**:
+The multiplicity of $0$ as an eigenvalue of $L$ equals the exact number of connected components in $G$.
+* $G$ is connected $\iff \mu_2 > 0$.
+
+
+2. **Algebraic Connectivity ($\mu_2$)**:
+The second smallest Laplacian eigenvalue $\mu_2$ is called the **Fiedler value** or **algebraic connectivity**.
+* $\mu_2 > 0$ indicates a connected graph.
+* Larger values of $\mu_2$ reflect higher connectivity and resistance to network partitioning.
+* The corresponding eigenvector (the **Fiedler vector**) is used in spectral clustering to partition graphs into dense clusters.
+
+
+
+```
+                   Spectral Graph Partitioning
+              Fiedler Vector Entries (v_i)
+            Negative Values        Positive Values
+            [ Cluster A ]  <----|---->  [ Cluster B ]
+
+```
+
+---
+
+## Spectral Bounds and Theorems
+
+### Spectral Bound on Chromatic Number
+
+Wilf proved that the adjacency spectrum provides a sharp upper bound on chromatic number:
+
+$$\chi(G) \le 1 + \lambda_1$$
+
+Hoffman's lower bound utilizes the smallest eigenvalue $\lambda_n$:
+
+$$\chi(G) \ge 1 + \frac{\lambda_1}{-\lambda_n}$$
+
+---
+
+### Spectral Expanders & Cheeger's Inequality
+
+An **expander graph** is a sparse graph that maintains strong connectivity properties. Expansion is measured by the **isoperimetric constant** (or Cheeger constant) $h(G)$:
+
+$$h(G) = \min_{S \subset V, 0 < \vert{}S\vert{} \le \frac{n}{2}} \frac{\vert{}\partial S\vert{}}{\vert{}S\vert{}}$$
+
+where $\vert{}\partial S\vert{}$ is the number of edges leaving set $S$.
+
+**Cheeger's Inequality:**
+
+The expansion constant $h(G)$ is tightly bounded by the second Laplacian eigenvalue $\mu_2$:
+
+$$\frac{\mu_2}{2} \le h(G) \le \sqrt{2 d_{\max} \mu_2}$$
+
+---
+
+## Chapter 8 Summary Table
+
+| Matrix | Definition | Primary Eigenvalue Metric | Structural Interpretation |
+| --- | --- | --- | --- |
+| **Adjacency ($A$)** | $A_{ij} = 1 \iff (v_i, v_j) \in E$ | $\lambda_1$ (Spectral Radius) | Max degree, walks, regular graph degree |
+| **Laplacian ($L$)** | $L = D - A$ | $\mu_1 = 0$ multiplicity | Exact count of connected components |
+| **Laplacian ($L$)** | $L = D - A$ | $\mu_2$ (Fiedler Value) | Algebraic connectivity & Cheeger expansion |
+| **Normalized ($\mathcal{L}$)** | $\mathcal{L} = I - D^{-1/2} A D^{-1/2}$ | $\text{Spec}(\mathcal{L}) \subseteq [0, 2]$ | Spectral clustering & random walks |
+
+---
+
+## Chapter 8 Exercises
+
+1. **Spectrum of Complete Graph**: Compute the adjacency matrix $A$ and Laplacian matrix $L$ for $K_3$. Find all eigenvalues for both matrices.
+2. **Walk Counting**: Let $A$ be the adjacency matrix of a cycle $C_4$. Calculate $A^3$ and verify how many closed walks of length 3 exist.
+3. **Algebraic Connectivity**: Show that if $G$ is a disconnected graph with 3 components, its Laplacian matrix $L$ has at least 3 eigenvalues equal to zero.
+4. **Hoffman's Bound**: A regular graph $G$ has adjacency eigenvalues $\text{Spec}(A) = \{3, 1, 1, -1, -2, -2\}$. Apply Hoffman's bound to establish a lower bound for $\chi(G)$.
+

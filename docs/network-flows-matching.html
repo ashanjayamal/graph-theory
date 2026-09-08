@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Planar Graphs | Graph Theory</title>
+  <title>Chapter 7 Network Flows &amp; Matching | Graph Theory</title>
   <meta name="description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta property="og:title" content="Chapter 7 Network Flows &amp; Matching | Graph Theory" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
   <meta property="og:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Planar Graphs | Graph Theory" />
+  <meta name="twitter:title" content="Chapter 7 Network Flows &amp; Matching | Graph Theory" />
   
   <meta name="twitter:description" content="Notes for undergraduate studies in Graph Theory." />
   <meta name="twitter:image" content="https://ashanjayamal.github.io/graph-theory/fig/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-3-connectivity-graph-exploration.html"/>
-<link rel="next" href="trees-spanning-trees.html"/>
+<link rel="prev" href="chapter-6-graph-colorings-chromatic-numbers.html"/>
+<link rel="next" href="spectral-algebraic-graph-theory.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -419,230 +419,215 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="planar-graphs" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Planar Graphs<a href="planar-graphs.html#planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="planarity-and-embeddings" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Planarity and Embeddings<a href="planar-graphs.html#planarity-and-embeddings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In real-world applications—such as designing printed circuit boards (PCBs), microchip layouts, and urban road networks—it is often necessary to draw or construct a graph without any edges crossing over one another.</p>
-<div id="definitions-1" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Definitions<a href="planar-graphs.html#definitions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="definition">
-<p><span id="def:unnamed-chunk-22" class="definition"><strong>Definition 4.1  </strong></span></p>
+<div id="network-flows-matching" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Network Flows &amp; Matching<a href="network-flows-matching.html#network-flows-matching" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="flow-networks-and-capacities" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Flow Networks and Capacities<a href="network-flows-matching.html#flow-networks-and-capacities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Network flows extend graph theory into directed, weighted systems where quantities—such as data packets, fluid, traffic, or commodities—travel from a source to a destination through capacity-constrained channels.</p>
+<div id="definitions-5" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Definitions<a href="network-flows-matching.html#definitions-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p><strong>Planar Graph</strong>: A graph that can be drawn in a two-dimensional plane such that no two edges intersect except at a common vertex.</p></li>
-<li><p><strong>Plane Graph (Plane Embedding)</strong>: A specific drawing of a planar graph on a plane where no edges cross.</p></li>
+<li><strong>Flow Network</strong>: A directed graph <span class="math inline">\(G = (V, E)\)</span> with two special vertices: a <strong>source</strong> <span class="math inline">\(s \in V\)</span> (where flow originates) and a <strong>sink</strong> <span class="math inline">\(t \in V\)</span> (where flow terminates).</li>
+<li><strong>Capacity Function <span class="math inline">\(c(u, v)\)</span></strong>: A non-negative real mapping <span class="math inline">\(c: E \to \mathbb{R}_{\ge 0}\)</span> representing the maximum allowable flow along edge <span class="math inline">\((u, v)\)</span>.</li>
+<li><strong>Flow Function <span class="math inline">\(f(u, v)\)</span></strong>: A real-valued mapping <span class="math inline">\(f: E \to \mathbb{R}_{\ge 0}\)</span> satisfying three core conditions:</li>
 </ul>
-</div>
-<pre><code>  Non-Planar Representation of K4          Plane Embedding of K4
-              (1)---(2)                            (1)---(2)
-               | \ / |                              | \ / |
-               |  X  |                              |  (4) |
-               | / \ |                              | / \ |
-              (3)---(4)                            (3)-----+
+<pre><code>                  Capacity Constraint: f(u, v) &lt;= c(u, v)
+                           Flow: 3 / Cap: 5
+                      (u)-----------------&gt;(v)
 </code></pre>
-<p><em>(Note: <span class="math inline">\(K_4\)</span> drawn with crossed diagonal edges is still a planar graph because it is isomorphic to a plane embedding where one vertex is pulled outside.)</em></p>
 </div>
-<div id="fárys-theorem" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Fáry’s Theorem<a href="planar-graphs.html#f%C3%A1rys-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A natural question arises: if a graph can be drawn without crossing edges using curved lines, can it also be drawn using only straight lines?</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-23" class="theorem"><strong>Theorem 4.1  (Fáry's Theorem, 1948) </strong></span>Every simple planar graph can be embedded in the plane using straight-line segments for all of its edges.</p>
+<div id="core-conditions-for-valid-flows" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Core Conditions for Valid Flows<a href="network-flows-matching.html#core-conditions-for-valid-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Capacity Constraint</strong>: For every edge <span class="math inline">\((u, v) \in E\)</span>:</li>
+</ol>
+<p><span class="math display">\[0 \le f(u, v) \le c(u, v)\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Skew Symmetry</strong>: <span class="math inline">\(f(u, v) = -f(v, u)\)</span>.</li>
+<li><strong>Flow Conservation</strong>: For every vertex <span class="math inline">\(u \in V \setminus \{s, t\}\)</span>, the total incoming flow equals the total outgoing flow:</li>
+</ol>
+<p><span class="math display">\[\sum_{w \in V} f(w, u) = \sum_{v \in V} f(u, v)\]</span></p>
 </div>
+<div id="value-of-a-flow" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Value of a Flow<a href="network-flows-matching.html#value-of-a-flow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>value</strong> of a flow <span class="math inline">\(\vert{}f\vert{}\)</span> is the net flow leaving the source <span class="math inline">\(s\)</span> (which, by conservation, equals the net flow entering the sink <span class="math inline">\(t\)</span>):</p>
+<p><span class="math display">\[\vert{}f\vert{} = \sum_{v \in V} f(s, v)\]</span></p>
 <hr />
 </div>
 </div>
-<div id="eulers-formula-and-regions" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Euler’s Formula and Regions<a href="planar-graphs.html#eulers-formula-and-regions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When a planar graph is drawn as a plane graph, its edges divide the plane into contiguous, enclosed areas called <strong>regions</strong> (or faces).</p>
+<div id="cuts-and-the-max-flow-min-cut-theorem" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Cuts and the Max-Flow Min-Cut Theorem<a href="network-flows-matching.html#cuts-and-the-max-flow-min-cut-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To determine the absolute upper bound on flow through a network, we examine cuts that physically separate the source from the sink.</p>
+<div id="definitions-6" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Definitions<a href="network-flows-matching.html#definitions-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><strong>Boundary of a Region</strong>: The set of edges enclosing that region.</li>
-<li><strong>Unbounded (Outer) Region</strong>: The single infinite region surrounding the entire drawing. Every plane graph has exactly one outer region.</li>
+<li><strong><span class="math inline">\(s\)</span>-<span class="math inline">\(t\)</span> Cut</strong>: A partition of the vertex set <span class="math inline">\(V\)</span> into two disjoint sets <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span> such that <span class="math inline">\(s \in S\)</span> and <span class="math inline">\(t \in T\)</span>.</li>
+<li><strong>Capacity of a Cut <span class="math inline">\(c(S, T)\)</span></strong>: The sum of capacities of all edges directed from <span class="math inline">\(S\)</span> to <span class="math inline">\(T\)</span>:</li>
 </ul>
-<div class="float">
-<img src="fig/fig26.png" style="width:30.0%" alt="Image Credit: gatevidyalay.com" />
-<div class="figcaption">Image Credit: gatevidyalay.com</div>
-</div>
-<p>In the plane graph above, there are 5 vertices (<span class="math inline">\(v=5\)</span>), 6 edges (<span class="math inline">\(e=6\)</span>), and 3 bounded regions plus 1 unbounded outer region, giving 4 total regions (<span class="math inline">\(r=4\)</span>).</p>
-<hr />
-<div id="eulers-formula" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Euler’s Formula<a href="planar-graphs.html#eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The fundamental relationship connecting the number of vertices, edges, and regions of a planar graph was discovered by Leonhard Euler.</p>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-24" class="theorem"><strong>Theorem 4.2  (Euler's Formula) </strong></span>For any connected plane graph with <span class="math inline">\(v\)</span> vertices, <span class="math inline">\(e\)</span> edges, and <span class="math inline">\(r\)</span> regions:</p>
-<p><span class="math display">\[v - e + r = 2\]</span></p>
-</div>
-<div id="generalized-eulers-formula" class="section level4 hasAnchor" number="4.2.1.1">
-<h4><span class="header-section-number">4.2.1.1</span> Generalized Euler’s Formula<a href="planar-graphs.html#generalized-eulers-formula" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>If a planar graph is disconnected and consists of <span class="math inline">\(c\)</span> connected components, the formula generalizes to:</p>
-<p><span class="math display">\[v - e + r = c + 1\]</span></p>
-</div>
-<div id="proof-of-eulers-formula-by-induction-on-edges" class="section level4 hasAnchor" number="4.2.1.2">
-<h4><span class="header-section-number">4.2.1.2</span> Proof of Euler’s Formula (By Induction on Edges)<a href="planar-graphs.html#proof-of-eulers-formula-by-induction-on-edges" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><strong>Base Case</strong>:</p>
-<p>Consider a connected graph with no cycles (a tree). A tree on <span class="math inline">\(v\)</span> vertices has <span class="math inline">\(e = v - 1\)</span> edges and creates no enclosed areas, leaving only <span class="math inline">\(1\)</span> outer region (<span class="math inline">\(r = 1\)</span>).</p>
-<p><span class="math display">\[v - (v - 1) + 1 = 2\]</span></p>
-<p>The formula holds for the base case.</p>
-<p><strong>Inductive Step</strong>:</p>
-<p>Assume <span class="math inline">\(v - e + r = 2\)</span> holds for all connected plane graphs with <span class="math inline">\(k\)</span> edges. Let <span class="math inline">\(G\)</span> be a connected plane graph with <span class="math inline">\(k + 1\)</span> edges.</p>
-<ol style="list-style-type: decimal">
-<li>Since <span class="math inline">\(G\)</span> is not a tree, it must contain at least one cycle.</li>
-<li>Select an edge <span class="math inline">\(e^*\)</span> that belongs to a cycle. Removing <span class="math inline">\(e^*\)</span> breaks the cycle, merging two adjacent regions into one.</li>
-<li>The new graph <span class="math inline">\(G&#39; = G \setminus \{e^*\}\)</span> has <span class="math inline">\(v&#39;=v\)</span> vertices, <span class="math inline">\(e&#39;=e-1\)</span> edges, and <span class="math inline">\(r&#39;=r-1\)</span> regions.</li>
-<li>By the induction hypothesis, <span class="math inline">\(v&#39; - e&#39; + r&#39; = 2\)</span>.</li>
-<li>Substituting the values: <span class="math inline">\(v - (e - 1) + (r - 1) = 2 \implies v - e + r = 2\)</span>.</li>
-</ol>
-<p>By mathematical induction, Euler’s formula holds for all connected plane graphs.</p>
-<hr />
-</div>
-</div>
-</div>
-<div id="invariants-and-non-planarity-bounds" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Invariants and Non-Planarity Bounds<a href="planar-graphs.html#invariants-and-non-planarity-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Euler’s formula allows us to derive strict upper bounds on how many edges a simple graph can have while remaining planar.</p>
-<div id="edge-bounds-for-simple-planar-graphs" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Edge Bounds for Simple Planar Graphs<a href="planar-graphs.html#edge-bounds-for-simple-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-25" class="theorem"><strong>Theorem 4.3  (General Edge Bound) </strong></span>In any simple connected planar graph with <span class="math inline">\(v \ge 3\)</span> vertices and <span class="math inline">\(e\)</span> edges:</p>
-<p><span class="math display">\[e \le 3v - 6\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-3" class="proof"><em>Proof</em>. </span></p>
-<ol style="list-style-type: decimal">
-<li>Every region in a simple planar graph must be bounded by at least 3 edges (since a simple graph has no self-loops or double edges, the smallest cycle length is 3).</li>
-<li>Summing the degree of all regions gives <span class="math inline">\(\sum \text{deg}(r_i) \ge 3r\)</span>.</li>
-<li>Since every edge bounds at most 2 regions, <span class="math inline">\(\sum \text{deg}(r_i) = 2e\)</span>. Thus, <span class="math inline">\(2e \ge 3r \implies r \le \frac{2}{3}e\)</span>.</li>
-<li>Substitute <span class="math inline">\(r \le \frac{2}{3}e\)</span> into Euler’s formula (<span class="math inline">\(v - e + r = 2\)</span>):</li>
-</ol>
-<p><span class="math display">\[v - e + \frac{2}{3}e \ge 2 \implies v - \frac{1}{3}e \ge 2 \implies e \le 3v - 6\]</span></p>
-</div>
-<hr />
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-27" class="theorem"><strong>Theorem 4.4  (Girth Bound) </strong></span>If a simple planar graph has a <strong>girth</strong> (length of its shortest cycle) of at least 4 (i.e., it contains no triangles), then:</p>
-<p><span class="math display">\[e \le 2v - 4\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-4" class="proof"><em>Proof</em>. </span>Since the graph has no triangles, every region is bounded by at least 4 edges. Therefore, <span class="math inline">\(2e \ge 4r \implies r \le \frac{1}{2}e\)</span>.
-Substituting this into Euler’s formula gives <span class="math inline">\(v - e + \frac{1}{2}e \ge 2 \implies e \le 2v - 4\)</span>.</p>
-</div>
-<hr />
-</div>
-<div id="degree-bounds" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Degree Bounds<a href="planar-graphs.html#degree-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-29" class="theorem"><strong>Theorem 4.5  </strong></span>Every simple planar graph contains at least one vertex with degree <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-5" class="proof"><em>Proof</em>. </span>Suppose every vertex in a simple planar graph <span class="math inline">\(G\)</span> has degree <span class="math inline">\(d(v) \ge 6\)</span>.
-By the Handshaking Lemma:</p>
-<p><span class="math display">\[2e = \sum d(v) \ge 6v \implies e \ge 3v\]</span></p>
-<p>However, Theorem 1 states that <span class="math inline">\(e \le 3v - 6\)</span>, creating a direct contradiction (<span class="math inline">\(3v \le e \le 3v - 6\)</span>). Therefore, <span class="math inline">\(G\)</span> must contain at least one vertex with <span class="math inline">\(d(v) \le 5\)</span>.</p>
-</div>
-<hr />
-</div>
-</div>
-<div id="characterizing-non-planar-graphs" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Characterizing Non-Planar Graphs<a href="planar-graphs.html#characterizing-non-planar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Not all graphs are planar. The two canonical non-planar graphs are:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong><span class="math inline">\(K_5\)</span></strong>: The complete graph on 5 vertices.</p></li>
-<li><p><strong><span class="math inline">\(K_{3,3}\)</span></strong>: The complete bipartite graph on 3+3 vertices (often called the <em>utility graph</em>).</p></li>
-</ol>
-<pre><code>         K5 (Complete Graph)              K3,3 (Utility Graph)
-               (1)                            (u1)   (u2)   (u3)
-              / | \                            | \   / | \   / |
-            (2) | (3)                          |  \ /  |  \ /  |
-            | \ | / |                          |   X   |   X   |
-            (4)-(5)-+                          |  / \  |  / \  |
-                                              (v1)   (v2)   (v3)
+<p><span class="math display">\[c(S, T) = \sum_{u \in S, v \in T, (u,v) \in E} c(u, v)\]</span></p>
+<p><em>(Note: Edges directed from <span class="math inline">\(T\)</span> back to <span class="math inline">\(S\)</span> do NOT contribute to the capacity of the cut.)</em></p>
+<pre><code>                       s-t Cut Partitioning
+         [ S Set (Source) ]          [ T Set (Sink) ]
+              (s)------(u)            (v)------(t)
+                        |              ^
+                        +-------------&gt;|  Edge (u, v) crosses cut
+                           c(u, v)
 </code></pre>
-<div class="float">
-<img src="fig/fig27.png" alt="Image credit:https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" />
-<div class="figcaption">Image credit:<a href="https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e" class="uri">https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e</a></div>
-</div>
-<div id="proving-non-planarity" class="section level3 hasAnchor" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Proving Non-Planarity<a href="planar-graphs.html#proving-non-planarity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="example">
-<p><span id="exm:unnamed-chunk-31" class="example"><strong>Example 4.1  ($K_5$ is Non-Planar) </strong></span>For <span class="math inline">\(K_5\)</span>, <span class="math inline">\(v = 5\)</span> and <span class="math inline">\(e = \binom{5}{2} = 10\)</span>.
-Using Theorem 1 (<span class="math inline">\(e \le 3v - 6\)</span>):</p>
-<p><span class="math display">\[10 \le 3(5) - 6 = 9 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(10 \le 9\)</span> is false, <span class="math inline">\(K_5\)</span> cannot be planar.</p>
-</div>
-<div class="example">
-<p><span id="exm:unnamed-chunk-32" class="example"><strong>Example 4.2  ($K_{3,3}$ is Non-Planar) </strong></span>For <span class="math inline">\(K_{3,3}\)</span>, <span class="math inline">\(v = 6\)</span> and <span class="math inline">\(e = 3 \times 3 = 9\)</span>.
-Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no odd cycles (girth <span class="math inline">\(\ge 4\)</span>). Using Theorem 2 (<span class="math inline">\(e \le 2v - 4\)</span>):</p>
-<p><span class="math display">\[9 \le 2(6) - 4 = 8 \quad \text{(False)}\]</span></p>
-<p>Since <span class="math inline">\(9 \le 8\)</span> is false, <span class="math inline">\(K_{3,3}\)</span> cannot be planar.</p>
-</div>
 <hr />
 </div>
-<div id="kuratowskis-theorem" class="section level3 hasAnchor" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Kuratowski’s Theorem<a href="planar-graphs.html#kuratowskis-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>How can we determine if an arbitrary complex graph is planar?</p>
+<div id="the-max-flow-min-cut-theorem" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> The Max-Flow Min-Cut Theorem<a href="network-flows-matching.html#the-max-flow-min-cut-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The relationship between maximum flow values and minimum cut capacities forms the central foundation of network flow theory.</p>
+<p><strong>Theorem (Ford &amp; Fulkerson, 1956):</strong></p>
+<p>In any flow network <span class="math inline">\(G\)</span>, the maximum value of an <span class="math inline">\(s\)</span>-<span class="math inline">\(t\)</span> flow is equal to the minimum capacity of an <span class="math inline">\(s\)</span>-<span class="math inline">\(t\)</span> cut:</p>
+<p><span class="math display">\[\max \vert{}f\vert{} = \min c(S, T)\]</span></p>
+<div id="key-corollaries" class="section level4 hasAnchor" number="7.2.2.1">
+<h4><span class="header-section-number">7.2.2.1</span> Key Corollaries<a href="network-flows-matching.html#key-corollaries" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li><strong>Edge Subdivision</strong>: Inserting a vertex of degree 2 into an edge, splitting it into two adjacent edges.</li>
-<li><strong>Subdivision of a Graph</strong>: A graph obtained by performing a sequence of edge subdivisions on <span class="math inline">\(G\)</span>.</li>
+<li>For any valid flow <span class="math inline">\(f\)</span> and any valid <span class="math inline">\(s\)</span>-<span class="math inline">\(t\)</span> cut <span class="math inline">\((S, T)\)</span>, <span class="math inline">\(\vert{}f\vert{} \le c(S, T)\)</span>.</li>
+<li>A flow <span class="math inline">\(f\)</span> is maximum <strong>if and only if</strong> its residual network contains no augmenting path.</li>
 </ul>
-<pre><code>     Original Edge               Subdivided Edge
-        (u)---(v)                 (u)---(w)---(v)
-</code></pre>
-<div class="theorem">
-<p><span id="thm:unnamed-chunk-33" class="theorem"><strong>Theorem 4.6  (Kuratowski's Theorem(1930)) </strong></span>A finite graph is planar <strong>if and only if</strong> it does not contain a subgraph that is a subdivision of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span>.</p>
-</div>
 <hr />
 </div>
 </div>
-<div id="chapter-4-summary-table" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Chapter 4 Summary Table<a href="planar-graphs.html#chapter-4-summary-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="algorithms-for-computing-maximum-flow" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Algorithms for Computing Maximum Flow<a href="network-flows-matching.html#algorithms-for-computing-maximum-flow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-ford-fulkerson-method" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> The Ford-Fulkerson Method<a href="network-flows-matching.html#the-ford-fulkerson-method" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Ford-Fulkerson method greedily increases flow by finding <strong>augmenting paths</strong> in a <strong>residual network</strong> <span class="math inline">\(G_f\)</span>.</p>
+<ul>
+<li><strong>Residual Capacity <span class="math inline">\(c_f(u, v)\)</span></strong>:</li>
+</ul>
+<p><span class="math display">\[c_f(u, v) = c(u, v) - f(u, v)\]</span></p>
+<ul>
+<li><p>Forward edge capacity: <span class="math inline">\(c(u, v) - f(u, v)\)</span> (remaining capacity).</p></li>
+<li><p>Backward edge capacity: <span class="math inline">\(f(u, v)\)</span> (ability to push flow back and cancel it).</p></li>
+<li><p><strong>Augmenting Path</strong>: A directed path from <span class="math inline">\(s\)</span> to <span class="math inline">\(t\)</span> in the residual graph <span class="math inline">\(G_f\)</span> where every edge has positive residual capacity <span class="math inline">\(c_f(u, v) &gt; 0\)</span>.</p></li>
+</ul>
+<pre><code>                    Residual Graph Augmentation
+      Original Flow               Residual Edges
+     f=3 / c=5                   Forward: 2  (Remaining)
+    (u)---------&gt;(v)   ======&gt;  (u)=========&gt;
+                                   &lt;=========(v)
+                                 Backward: 3 (Cancelable)
+</code></pre>
+<ul>
+<li><strong>Time Complexity</strong>: <span class="math inline">\(O(E \cdot \vert{}f^*\vert{})\)</span>, where <span class="math inline">\(\vert{}f^*\vert{}\)</span> is the maximum flow value. (If capacities are irrational, Ford-Fulkerson may fail to terminate or converge to the wrong value).</li>
+</ul>
+<hr />
+</div>
+<div id="the-edmonds-karp-algorithm" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> The Edmonds-Karp Algorithm<a href="network-flows-matching.html#the-edmonds-karp-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Edmonds and Karp specified that the augmenting path in the Ford-Fulkerson method should always be the <strong>shortest path</strong> (in terms of edge count) from <span class="math inline">\(s\)</span> to <span class="math inline">\(t\)</span> in <span class="math inline">\(G_f\)</span>.</p>
+<ul>
+<li><strong>Path Selection Strategy</strong>: Breadth-First Search (BFS).</li>
+<li><strong>Time Complexity</strong>: <span class="math inline">\(O(V \cdot E^2)\)</span>, independent of edge capacity values.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="matching-in-bipartite-graphs" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Matching in Bipartite Graphs<a href="network-flows-matching.html#matching-in-bipartite-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Network flows can directly solve matching problems in bipartite graphs, such as assigning workers to tasks, students to courses, or medical residents to hospitals.</p>
+<div id="definitions-7" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Definitions<a href="network-flows-matching.html#definitions-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Matching <span class="math inline">\(M\)</span></strong>: A subset of edges <span class="math inline">\(M \subseteq E\)</span> such that no two edges in <span class="math inline">\(M\)</span> share a common vertex.</li>
+<li><strong>Maximum Matching</strong>: A matching containing the maximum possible number of edges.</li>
+<li><strong>Perfect Matching</strong>: A matching that covers every vertex in the graph (<span class="math inline">\(\vert{}M\vert{} = \vert{}V\vert{} / 2\)</span>).</li>
+</ul>
+<pre><code>         Bipartite Matching                  Flow Network Transformation
+          Set A      Set B                   (s) ---&gt; Set A ---&gt; Set B ---&gt; (t)
+           (a1)------(b1)                    All edge capacities = 1
+           (a2)------(b2)                    Max Flow = Max Matching
+           (a3)------(b3)
+</code></pre>
+<hr />
+</div>
+<div id="converting-bipartite-matching-to-network-flow" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Converting Bipartite Matching to Network Flow<a href="network-flows-matching.html#converting-bipartite-matching-to-network-flow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To find the maximum matching in a bipartite graph <span class="math inline">\(G = (A \cup B, E)\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Create a directed graph <span class="math inline">\(G&#39; = (V&#39;, E&#39;)\)</span>.</li>
+<li>Add a super source <span class="math inline">\(s\)</span> and draw directed edges <span class="math inline">\((s, a)\)</span> with capacity <span class="math inline">\(1\)</span> for all <span class="math inline">\(a \in A\)</span>.</li>
+<li>Direct all original edges from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> with capacity <span class="math inline">\(1\)</span>.</li>
+<li>Add a super sink <span class="math inline">\(t\)</span> and draw directed edges <span class="math inline">\((b, t)\)</span> with capacity <span class="math inline">\(1\)</span> for all <span class="math inline">\(b \in B\)</span>.</li>
+<li>Run Edmonds-Karp to compute maximum flow.</li>
+</ol>
+<p><strong>Theorem:</strong></p>
+<p>The maximum flow value <span class="math inline">\(\vert{}f^*\vert{}\)</span> in <span class="math inline">\(G&#39;\)</span> equals the maximum matching size <span class="math inline">\(\vert{}M^*\vert{}\)</span> in <span class="math inline">\(G\)</span>.</p>
+<hr />
+</div>
+<div id="halls-marriage-theorem" class="section level3 hasAnchor" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Hall’s Marriage Theorem<a href="network-flows-matching.html#halls-marriage-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Hall’s Theorem provides the exact condition for when a bipartite graph contains a matching that covers all vertices of one partition.</p>
+<p><strong>Theorem (Hall’s Condition, 1935):</strong></p>
+<p>Let <span class="math inline">\(G = (A \cup B, E)\)</span> be a bipartite graph. There exists a matching that covers every vertex in <span class="math inline">\(A\)</span> <strong>if and only if</strong> for every subset <span class="math inline">\(S \subseteq A\)</span>, the size of its neighborhood <span class="math inline">\(N(S)\)</span> satisfies:</p>
+<p><span class="math display">\[\vert{}N(S)\vert{} \ge \vert{}S\vert{}\]</span></p>
+<pre><code>                   Hall&#39;s Condition Failure
+             Subset S (|S|=2)         Neighborhood N(S) (|N(S)|=1)
+                   (a1)----+
+                           |-------&gt; (b1)
+                   (a2)----+
+             Condition Violated: |N(S)| &lt; |S|  (1 &lt; 2)
+</code></pre>
+<hr />
+</div>
+</div>
+<div id="chapter-7-comparison-table" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Chapter 7 Comparison Table<a href="network-flows-matching.html#chapter-7-comparison-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Property / Bound</th>
-<th>Formula / Condition</th>
-<th>Context / Application</th>
+<th>Concept / Algorithm</th>
+<th>Primary Mechanism</th>
+<th>Time Complexity / Formula</th>
+<th>Key Application</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Euler’s Formula</strong></td>
-<td><span class="math inline">\(v - e + r = 2\)</span><br></td>
-<td>Connected plane graphs</td>
+<td><strong>Max-Flow Min-Cut</strong></td>
+<td>Duality of flows and cuts</td>
+<td><span class="math inline">\(\max \Vert{}f\Vert{} = \min c(S, T)\)</span></td>
+<td>System bottlenecks &amp; capacities</td>
 </tr>
 <tr class="even">
-<td><strong>General Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 3v - 6\)</span><br></td>
-<td>Simple planar graphs (<span class="math inline">\(v \ge 3\)</span>)</td>
+<td><strong>Ford-Fulkerson</strong></td>
+<td>Arbitrary residual augmentation</td>
+<td><span class="math inline">\(O(E \cdot \Vert{}f^*\Vert{})\)</span></td>
+<td>Small integer flow networks</td>
 </tr>
 <tr class="odd">
-<td><strong>Triangle-Free Edge Bound</strong></td>
-<td><span class="math inline">\(e \le 2v - 4\)</span><br></td>
-<td>Planar graphs with girth <span class="math inline">\(\ge 4\)</span><br></td>
+<td><strong>Edmonds-Karp</strong></td>
+<td>BFS shortest augmenting paths</td>
+<td><span class="math inline">\(O(V \cdot E^2)\)</span></td>
+<td>General maximum flow problems</td>
 </tr>
 <tr class="even">
-<td><strong>Minimum Degree Invariant</strong></td>
-<td><span class="math inline">\(\min d(v) \le 5\)</span><br></td>
-<td>All simple planar graphs</td>
-</tr>
-<tr class="odd">
-<td><strong>Non-Planarity Criterion</strong></td>
-<td>Subdivisions of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span><br></td>
-<td>Kuratowski’s Theorem</td>
+<td><strong>Hall’s Theorem</strong></td>
+<td>Neighborhood size check</td>
+<td><span class="math inline">\(\Vert{}N(S)\Vert{} \ge \Vert{}S\Vert{}\)</span></td>
+<td>Bipartite matching existence</td>
 </tr>
 </tbody>
 </table>
 <hr />
 </div>
-<div id="chapter-4-exercises" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Chapter 4 Exercises<a href="planar-graphs.html#chapter-4-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="chapter-7-exercises" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Chapter 7 Exercises<a href="network-flows-matching.html#chapter-7-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
-<li><strong>Euler’s Formula Application</strong>: A connected plane graph has 12 vertices, and every vertex has degree 3. How many edges and regions does the graph have?</li>
-<li><strong>Polyhedron Proof</strong>: Prove that no convex polyhedron can be constructed such that every face is bounded by 6 or more edges.</li>
-<li><strong>Planarity Verification</strong>: A simple planar graph <span class="math inline">\(G\)</span> has 10 vertices and is bipartite. What is the maximum number of edges <span class="math inline">\(G\)</span> can have?</li>
-<li><strong>Kuratowski Subdivision</strong>: Draw <span class="math inline">\(K_5\)</span> and subdivide one of its edges by adding a new vertex. Is the resulting graph planar? Explain using Kuratowski’s Theorem.</li>
+<li><strong>Max-Flow Calculation</strong>: Given a flow network with source <span class="math inline">\(s\)</span>, sink <span class="math inline">\(t\)</span>, and capacities <span class="math inline">\((s,u)=4, (s,v)=2, (u,v)=1, (u,t)=3, (v,t)=5\)</span>, compute the maximum flow and identify the minimum <span class="math inline">\(s\)</span>-<span class="math inline">\(t\)</span> cut.</li>
+<li><strong>Hall’s Condition Application</strong>: Check if a matching covering <span class="math inline">\(A\)</span> exists for <span class="math inline">\(A = \{1, 2, 3\}, B = \{x, y, z\}\)</span> with edges <span class="math inline">\((1,x), (1,y), (2,x), (3,x)\)</span>.</li>
+<li><strong>Cut Capacity Computation</strong>: If <span class="math inline">\(S = \{s, u\}\)</span> and <span class="math inline">\(T = \{v, t\}\)</span>, calculate <span class="math inline">\(c(S, T)\)</span> if edge capacities are <span class="math inline">\((s,v)=3, (u,v)=2, (u,t)=4, (v,u)=1\)</span>.</li>
+<li><strong>Bipartite Reduction</strong>: Prove that if every vertex in a <span class="math inline">\(k\)</span>-regular bipartite graph has degree <span class="math inline">\(k \ge 1\)</span>, the graph contains a perfect matching.</li>
 </ol>
 
 </div>
@@ -652,8 +637,8 @@ Since <span class="math inline">\(K_{3,3}\)</span> is bipartite, it contains no 
           </div>
         </div>
       </div>
-<a href="chapter-3-connectivity-graph-exploration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="trees-spanning-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-6-graph-colorings-chromatic-numbers.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="spectral-algebraic-graph-theory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -684,7 +669,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/03-ch4.Rmd",
+    "link": "https://github.com/ahanjaymal/REPO/edit/BRANCH/06-ch7.Rmd",
     "text": "Edit"
   },
   "history": {

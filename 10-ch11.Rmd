@@ -1,0 +1,167 @@
+# Graph Algorithms & Dynamic Programming
+
+## Shortest Path Algorithms
+
+Shortest path algorithms form the backbone of routing protocols, spatial navigation, and network optimization. Given a weighted graph $G = (V, E, w)$, the objective is to find a path between vertices that minimizes the sum of edge weights.
+
+### Single-Source Shortest Paths (SSSP)
+
+#### Dijkstra's Algorithm
+
+Dijkstra's algorithm solves SSSP for graphs with **non-negative edge weights** ($w(e) \ge 0$). It uses a greedy strategy, maintaining a set of settled vertices whose shortest distance from the source is known.
+
+* **Edge Relaxation Step**: For an edge $(u, v)$ with weight $w(u, v)$:
+
+$$\text{if } d[u] + w(u, v) < d[v] \implies d[v] = d[u] + w(u, v)$$
+
+
+
+```
+                     Edge Relaxation Principle
+          Current d[v] = 10                  Relaxes to d[v] = 7
+                 (v)                                (v)
+                /                                  /
+         w=3   /                            w=3   /
+              /                                  /
+            (u)  d[u] = 4                      (u)  d[u] = 4
+
+```
+
+* **Data Structure & Complexity**:
+* Binary Heap: $O((V + E) \log V)$
+* Fibonacci Heap: $O(E + V \log V)$
+
+
+
+---
+
+#### Bellman-Ford Algorithm
+
+When a graph contains **negative edge weights**, Dijkstra's algorithm fails. The Bellman-Ford algorithm relaxes all $E$ edges up to $V - 1$ times.
+
+* **Negative Cycle Detection**: If an edge can still be relaxed during a $V$-th iteration, the graph contains a **negative-weight cycle** (meaning a shortest path is undefined as cost can approach $-\infty$).
+* **Time Complexity**: $O(V \cdot E)$
+
+---
+
+### All-Pairs Shortest Paths (APSP)
+
+#### The Floyd-Warshall Algorithm
+
+Floyd-Warshall uses dynamic programming to compute the shortest paths between all pairs of vertices simultaneously.
+
+* **State Definition**: Let $d_k(i, j)$ be the shortest path distance from $i$ to $j$ using only intermediate vertices from $\{1, 2, \dots, k\}$.
+* **Recurrence Relation**:
+
+$$d_k(i, j) = \min \Big( d_{k-1}(i, j), \; d_{k-1}(i, k) + d_{k-1}(k, j) \Big)$$
+
+
+
+```
+                  Floyd-Warshall Intermediate Node (k)
+                              ( k )
+                             ^     \
+                            /       \  d_{k-1}(k, j)
+             d_{k-1}(i, k) /         v
+                         (i)--------->(j)
+                           d_{k-1}(i, j)
+
+```
+
+* **Time Complexity**: $O(V^3)$
+* **Space Complexity**: $O(V^2)$
+
+---
+
+## Topological Sorting & DAG Dynamic Programming
+
+Directed Acyclic Graphs (DAGs) represent networks with strict causal dependencies, such as course prerequisites, job scheduling, and compilation pipelines.
+
+### Topological Sort
+
+A linear ordering of vertices in a DAG such that for every directed edge $(u, v)$, vertex $u$ comes before vertex $v$.
+
+* **Kahn's Algorithm (In-Degree Approach)**:
+1. Compute in-degrees for all vertices.
+2. Enqueue all vertices with $\text{in-degree} = 0$.
+3. Dequeue $u$, append to ordering, and decrement in-degrees of $u$'s neighbors. Repeat until queue is empty.
+
+
+* **Complexity**: $O(V + E)$
+
+```
+                    Topological Dependency Order
+          (Math 1) -------> (Math 2) -------> (Graph Theory)
+             \                                      ^
+              +-------------------------------------+
+
+```
+
+---
+
+### Dynamic Programming on DAGs
+
+Because DAGs contain no cycles, subproblems can be ordered topological-wise, enabling optimal evaluation in linear time $O(V + E)$.
+
+1. **Longest Path in a DAG**:
+
+$$\text{dist}[v] = \max_{(u, v) \in E} \big( \text{dist}[u] + w(u, v) \big)$$
+
+
+2. **Counting Paths in a DAG**:
+
+$$\text{paths}[v] = \sum_{(u, v) \in E} \text{paths}[u]$$
+
+
+
+---
+
+## 11.3 Dynamic Programming: Graph Decomposition
+
+Complex graph problems that are NP-hard on arbitrary graphs can often be solved in linear or polynomial time on trees and low-treewidth graphs using dynamic programming.
+
+### Tree Dynamic Programming
+
+To solve problems on trees, we process subtrees bottom-up from leaves to the root.
+
+#### Example: Maximum Independent Set on a Tree
+
+Let $T$ be a rooted tree. For every vertex $u$, define two states:
+
+* $DP[u][0]$: Size of maximum independent set in $u$'s subtree when $u$ is **not included**.
+* $DP[u][1]$: Size of maximum independent set in $u$'s subtree when $u$ **is included**.
+
+```
+                   Tree DP Recurrence Hierarchy
+                              (u)  <-- Root
+                             /   \
+                           (v1)  (v2) <-- Children
+
+```
+
+#### Recurrence Equations
+
+$$\begin{aligned} DP[u][0] &= \sum_{v \in \text{children}(u)} \max \Big( DP[v][0], \; DP[v][1] \Big) \\ DP[u][1] &= 1 + \sum_{v \in \text{children}(u)} DP[v][0] \end{aligned}$$
+
+* **Time Complexity**: $O(V)$, since every node is processed once in post-order traversal.
+
+---
+
+## Chapter 11 Comparison Table
+
+| Algorithm / Technique | Graph Constraints | Dynamic Programming Strategy / State | Time Complexity |
+| --- | --- | --- | --- |
+| **Dijkstra** | $w(e) \ge 0$ | Greedy / Min-Priority Queue | $O((V+E)\log V)$ |
+| **Bellman-Ford** | General weights | Iterative relaxation across all edges | $O(V \cdot E)$ |
+| **Floyd-Warshall** | General weights (No -ve cycles) | Intermediate vertex set $k \in \{1 \dots n\}$ | $O(V^3)$ |
+| **DAG Shortest/Longest Path** | Acyclic (DAG) | Topological order progression | $O(V + E)$ |
+| **Tree DP (Indep. Set)** | Trees | Rooted subtree inclusion/exclusion | $O(V)$ |
+
+---
+
+## Chapter 11 Exercises
+
+1. **Shortest Path Execution**: Trace Dijkstra's algorithm starting from vertex $A$ on a directed graph with edge weights $(A,B)=3, (A,C)=1, (C,B)=1, (B,D)=4, (C,D)=6$.
+2. **Negative Cycle Detection**: Run one full pass of Bellman-Ford relaxation on a 3-cycle $A \to B \to C \to A$ with weights $2, -4, 1$. Does a negative-weight cycle exist?
+3. **DAG Path Counting**: How many distinct paths exist from the source to the sink in a DAG with edges $(s, a), (s, b), (a, c), (b, c), (c, t)$?
+4. **Tree DP Computation**: Compute the Maximum Independent Set on a path tree $P_4 = (1 - 2 - 3 - 4)$ using the bottom-up tree DP recurrences.
