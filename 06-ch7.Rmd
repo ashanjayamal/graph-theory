@@ -6,9 +6,12 @@ Network flows extend graph theory into directed, weighted systems where quantiti
 
 ### Definitions
 
+```{definition}
 * **Flow Network**: A directed graph $G = (V, E)$ with two special vertices: a **source** $s \in V$ (where flow originates) and a **sink** $t \in V$ (where flow terminates).
 * **Capacity Function $c(u, v)$**: A non-negative real mapping $c: E \to \mathbb{R}_{\ge 0}$ representing the maximum allowable flow along edge $(u, v)$.
 * **Flow Function $f(u, v)$**: A real-valued mapping $f: E \to \mathbb{R}_{\ge 0}$ satisfying three core conditions:
+```
+
 
 ```
                   Capacity Constraint: f(u, v) <= c(u, v)

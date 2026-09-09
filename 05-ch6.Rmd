@@ -1,11 +1,12 @@
-# Chapter 6: Graph Colorings & Chromatic Numbers
+# Graph Colorings & Chromatic Numbers
 
-## 6.1 Vertex Coloring and Chromatic Number
+## Vertex Coloring and Chromatic Number
 
 Graph coloring is one of the most widely studied areas of graph theory, with applications ranging from scheduling algorithms and register allocation in compilers to radio frequency assignment.
 
 ### Definitions
 
+```{definition}
 * **Proper Vertex $k$-Coloring**: An assignment of $k$ colors to the vertices of a graph $G = (V, E)$ such that no two adjacent vertices share the same color.
 
 $$f: V \to \{1, 2, \dots, k\} \quad \text{such that } (u, v) \in E \implies f(u) \neq f(v)$$
@@ -13,16 +14,27 @@ $$f: V \to \{1, 2, \dots, k\} \quad \text{such that } (u, v) \in E \implies f(u)
 
 * **$k$-Colorable**: A graph $G$ is $k$-colorable if it admits a proper vertex $k$-coloring.
 * **Chromatic Number $\chi(G)$**: The minimum number of colors required to properly color the vertices of $G$.
-
 ```
-       Proper 3-Coloring of C5                    Color Classes
-               (Red)                              Color 1 (Red):   {1}
-              /     \                             Color 2 (Blue):  {2, 4}
-        (Blue)       (Green)                      Color 3 (Green): {3, 5}
-         |               |
-       (Green)-------(Blue)
 
-```
+
+<div style="display: flex; align-items: flex-start; gap: 20px;">
+
+<div>
+<img src="fig/fig32.png" width="450"/>
+</div>
+
+<div>
+
+**Color Classes**
+
+- **Color 1 (Red):** {1, 4}  
+- **Color 2 (Blue):** {2}  
+- **Color 3 (Green):** {3,5}
+
+</div>
+
+</div>
+
 
 ### Independent Sets and Color Classes
 
@@ -38,7 +50,7 @@ $$\chi(G) \ge \frac{\vert{}V\vert{}}{\alpha(G)}$$
 
 ---
 
-## 6.2 Chromatic Numbers for Standard Graph Families
+## Chromatic Numbers for Standard Graph Families
 
 The chromatic number varies significantly depending on the structural symmetry and density of the graph.
 
@@ -53,7 +65,7 @@ The chromatic number varies significantly depending on the structural symmetry a
 
 ---
 
-## 6.3 Bounds on Chromatic Numbers
+## Bounds on Chromatic Numbers
 
 Determining the exact chromatic number $\chi(G)$ for arbitrary graphs is an NP-hard problem. Consequently, we rely on structural invariants to establish upper and lower bounds.
 
@@ -98,7 +110,7 @@ $$\chi(G) \le \Delta(G)$$
 
 ---
 
-## 6.4 Planar Graph Coloring and Map Theorems
+## Planar Graph Coloring and Map Theorems
 
 Map coloring was the historical driving force behind the development of graph coloring theory.
 
@@ -135,25 +147,20 @@ $$\text{If } G \text{ is planar} \implies \chi(G) \le 4$$
 
 ---
 
-## 6.5 Edge Coloring & Chromatic Index
+## Edge Coloring & Chromatic Index
 
 Instead of coloring vertices, edge coloring assigns colors to edges such that no two adjacent edges (edges sharing a common vertex) have the same color.
 
 ### Definitions
 
+```{definition}
 * **Proper Edge $k$-Coloring**: A mapping $c: E \to \{1, 2, \dots, k\}$ such that $e_1 \cap e_2 \neq \emptyset \implies c(e_1) \neq c(e_2)$.
 * **Chromatic Index $\chi'(G)$**: The minimum number of colors needed to properly color the edges of $G$.
-
 ```
-         Proper Edge Coloring of K3               Vizing's Bound
-                   (1)                            Delta(G) = 2
-                  /   \                           Chi'(G)  = 3
-           Red   /     \  Blue                    Class 1: Chi'(G) = Delta(G)
-                /       \                         Class 2: Chi'(G) = Delta(G) + 1
-              (2)-------(3)
-                 Green
 
-```
+|Proper Edge Coloring of K3 |Vizing's Bound|
+|-|-|
+|![](fig/fig33.png)|$\Delta(G) = 2$<br>$\chi'(G) = 3$<br>Class 1: $\chi'(G) = \Delta(G)$<br>Class 2: $\chi'(G) = \Delta(G) + 1$|
 
 ### Fundamental Bounds on Edge Coloring
 

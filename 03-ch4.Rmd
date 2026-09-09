@@ -14,15 +14,7 @@ In real-world applications—such as designing printed circuit boards (PCBs), mi
 ```
 
 
-```
-  Non-Planar Representation of K4          Plane Embedding of K4
-              (1)---(2)                            (1)---(2)
-               | \ / |                              | \ / |
-               |  X  |                              |  (4) |
-               | / \ |                              | / \ |
-              (3)---(4)                            (3)-----+
-
-```
+![](fig/fig30.png)
 
 *(Note: $K_4$ drawn with crossed diagonal edges is still a planar graph because it is isomorphic to a plane embedding where one vertex is pulled outside.)*
 
@@ -38,10 +30,12 @@ Every simple planar graph can be embedded in the plane using straight-line segme
 
 ## Euler's Formula and Regions
 
+```{definition}
 When a planar graph is drawn as a plane graph, its edges divide the plane into contiguous, enclosed areas called **regions** (or faces).
 
 * **Boundary of a Region**: The set of edges enclosing that region.
 * **Unbounded (Outer) Region**: The single infinite region surrounding the entire drawing. Every plane graph has exactly one outer region.
+```
 
 ![Image Credit: gatevidyalay.com](fig/fig26.png){width=30%}
 
@@ -68,8 +62,8 @@ If a planar graph is disconnected and consists of $c$ connected components, the 
 $$v - e + r = c + 1$$
 
 #### Proof of Euler's Formula (By Induction on Edges)
-
-**Base Case**:
+```{proof}
+* **Base Case**:
 
 Consider a connected graph with no cycles (a tree). A tree on $v$ vertices has $e = v - 1$ edges and creates no enclosed areas, leaving only $1$ outer region ($r = 1$).
 
@@ -79,18 +73,18 @@ $$v - (v - 1) + 1 = 2$$
 
 The formula holds for the base case.
 
-**Inductive Step**:
+* **Inductive Step**:
 
 Assume $v - e + r = 2$ holds for all connected plane graphs with $k$ edges. Let $G$ be a connected plane graph with $k + 1$ edges.
 
-1. Since $G$ is not a tree, it must contain at least one cycle.
-2. Select an edge $e^*$ that belongs to a cycle. Removing $e^*$ breaks the cycle, merging two adjacent regions into one.
-3. The new graph $G' = G \setminus \{e^*\}$ has $v'=v$ vertices, $e'=e-1$ edges, and $r'=r-1$ regions.
-4. By the induction hypothesis, $v' - e' + r' = 2$.
-5. Substituting the values: $v - (e - 1) + (r - 1) = 2 \implies v - e + r = 2$.
+  1. Since $G$ is not a tree, it must contain at least one cycle.
+  2. Select an edge $e^*$ that belongs to a cycle. Removing $e^*$ breaks the cycle, merging two adjacent regions into one.
+  3. The new graph $G' = G \setminus \{e^*\}$ has $v'=v$ vertices, $e'=e-1$ edges, and $r'=r-1$ regions.
+  4. By the induction hypothesis, $v' - e' + r' = 2$.
+  5. Substituting the values: $v - (e - 1) + (r - 1) = 2 \implies v - e + r = 2$.
 
 By mathematical induction, Euler's formula holds for all connected plane graphs.
-
+```
 ---
 
 ## Invariants and Non-Planarity Bounds
@@ -167,16 +161,7 @@ Not all graphs are planar. The two canonical non-planar graphs are:
 
 
 
-```
-         K5 (Complete Graph)              K3,3 (Utility Graph)
-               (1)                            (u1)   (u2)   (u3)
-              / | \                            | \   / | \   / |
-            (2) | (3)                          |  \ /  |  \ /  |
-            | \ | / |                          |   X   |   X   |
-            (4)-(5)-+                          |  / \  |  / \  |
-                                              (v1)   (v2)   (v3)
 
-```
 
 ![Image credit:https://medium.com/math-simplified/graph-theory-101-why-all-non-planar-graphs-contain-k%E2%82%81-or-k%E2%82%83-%E2%82%83-c3ad48d6798e](fig/fig27.png)
 
@@ -218,11 +203,7 @@ How can we determine if an arbitrary complex graph is planar?
 * **Edge Subdivision**: Inserting a vertex of degree 2 into an edge, splitting it into two adjacent edges.
 * **Subdivision of a Graph**: A graph obtained by performing a sequence of edge subdivisions on $G$.
 
-```
-     Original Edge               Subdivided Edge
-        (u)---(v)                 (u)---(w)---(v)
-
-```
+![](fig/fig31.png)
 
 ```{theorem ,name="Kuratowski's Theorem(1930)"}
 

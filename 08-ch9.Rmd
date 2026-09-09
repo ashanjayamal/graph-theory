@@ -1,6 +1,6 @@
-# Chapter 9: NP-Completeness & Approximation Algorithms
+# NP-Completeness & Approximation Algorithms
 
-## 9.1 Computational Complexity in Graph Theory
+## Computational Complexity in Graph Theory
 
 Graph problems vary significantly in computational difficulty. While some problems (like finding shortest paths or minimum spanning trees) can be solved efficiently in polynomial time, many fundamental graph decision problems are believed to be computationally intractable for large inputs.
 
@@ -44,54 +44,69 @@ Graph problems vary significantly in computational difficulty. While some proble
 
 ```
 
+![](fig/fig34.png)
+
+
 ---
 
-## 9.2 Canonical NP-Complete Graph Problems
+## Canonical NP-Complete Graph Problems
 
 Most proofs of NP-completeness rely on **polynomial-time reductions** ($A \le_p B$), showing that if a polynomial algorithm existed for problem $B$, it could solve problem $A$ in polynomial time as well.
 
-### 1. Independent Set, Clique, and Vertex Cover
+### Independent Set, Clique, and Vertex Cover
 
 Three fundamental problems linked by simple dualities:
 
+```{definition}
 * **Independent Set**: Given $G = (V, E)$ and integer $k$, does $G$ contain a set $I \subseteq V$ of size $\vert{}I\vert{} \ge k$ with no pairwise edges?
 * **Clique**: Given $G = (V, E)$ and integer $k$, does $G$ contain a subset $C \subseteq V$ of size $\vert{}C\vert{} \ge k$ where every pair of vertices is connected?
 * **Vertex Cover**: Given $G = (V, E)$ and integer $k$, does $G$ contain a subset $S \subseteq V$ of size $\vert{}S\vert{} \le k$ such that every edge $e \in E$ has at least one endpoint in $S$?
-
-```
-                  Equivalence Duality
-     Original Graph G                Complement Graph G-bar
-   Independent Set (I)    <=======>        Clique (C)
-   
-                      Complement Set
-   Independent Set (I)    <=======>   Vertex Cover (V \ I)
-
 ```
 
-**Theorem (Structural Duality):**
+
+
+\[
+\textbf{Equivalence Duality}
+\]
+
+\[\begin{array}{ccc}
+\text{Original Graph } G & & \text{Complement Graph } \overline{G} \\[6pt]
+\text{Independent Set } (I) & \Longleftrightarrow & \text{Clique } (C) 
+\end{array}\]
+
+\[\textbf{Complement Set} \]
+\[\begin{array}{ccc}
+\text{Independent Set } (I) & \Longleftrightarrow & \text{Vertex Cover } (V \setminus I)
+\end{array}\]
+
+
+
+
+```{theorem,name="Structural Duality"}
 
 For any graph $G = (V, E)$ and subset $S \subseteq V$:
 
 1. $S$ is an **Independent Set** in $G$ $\iff$ $S$ is a **Clique** in the complement graph $\overline{G}$.
 2. $S$ is an **Independent Set** in $G$ $\iff$ $V \setminus S$ is a **Vertex Cover** in $G$.
-
+```
 ---
 
-### 2. Hamiltonian Cycle vs. Eulerian Tour
+### Hamiltonian Cycle vs. Eulerian Tour
 
+```{definition}
 * **Eulerian Tour** (Visits every *edge* once): Solvable in $O(V + E)$ time by checking vertex degree parity.
 * **Hamiltonian Cycle** (Visits every *vertex* once): **NP-Complete**. No polynomial-time necessary and sufficient condition is known.
-
+```
 ---
 
-### 3. Graph Coloring ($k$-Colorability)
+### Graph Coloring ($k$-Colorability)
 
 * **2-Colorability**: Solvable in $O(V + E)$ time (checking if $G$ is bipartite via BFS/DFS).
 * **$k$-Colorability ($k \ge 3$)**: **NP-Complete**. Determining if a general planar graph is 3-colorable is NP-complete.
 
 ---
 
-## 9.3 Approximation Algorithms for NP-Hard Problems
+## Approximation Algorithms for NP-Hard Problems
 
 Because NP-hard problems are unlikely to have exact polynomial-time solutions ($P \neq NP$), we design **approximation algorithms** that run in polynomial time and guarantee a solution within a bounded factor of the optimal value.
 
@@ -107,7 +122,7 @@ $$\max \left( \frac{C}{\text{OPT}}, \frac{\text{OPT}}{C} \right) \le \alpha$$
 
 ---
 
-### 1. 2-Approximation for Minimum Vertex Cover
+### 2-Approximation for Minimum Vertex Cover
 
 A greedy strategy of repeatedly picking the highest-degree vertex fails to achieve a constant approximation bound. However, a simple edge-matching heuristic guarantees a **2-approximation**.
 
@@ -132,11 +147,12 @@ A greedy strategy of repeatedly picking the highest-degree vertex fails to achie
 
 ```
 
-**Theorem:**
+```{theorem}
 
 The algorithm runs in $O(V + E)$ time and returns a vertex cover $C$ such that $\vert{}C\vert{} \le 2 \cdot \vert{}\text{OPT}\vert{}$.
+```
 
-**Proof:**
+```{proof}
 
 Let $M \subseteq E$ be the set of edges selected in step 3. No two edges in $M$ share a vertex (they form a matching). To cover the edges in $M$, any valid vertex cover $\text{OPT}$ must pick at least one vertex per matching edge:
 
@@ -148,7 +164,7 @@ Since our algorithm adds both endpoints for every edge in $M$:
 
 
 $$\vert{}C\vert{} = 2\vert{}M\vert{} \le 2 \cdot \vert{}\text{OPT}\vert{}$$
-
+```
 ---
 
 ### 2. Metric Travelling Salesperson Problem (Metric TSP)

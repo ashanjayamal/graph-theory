@@ -1,6 +1,6 @@
-# Chapter 3: Connectivity & Graph Exploration
+# Connectivity & Graph Exploration
 
-## 3.1 Graph Connectivity
+## Graph Connectivity
 
 Understanding how vertices are linked to one another is a fundamental concept in graph theory. Connectivity determines whether information, traffic, or signals can flow between different points in a network.
 
@@ -28,7 +28,7 @@ In an undirected graph $G = (V, E)$, two vertices $u$ and $v$ are connected if t
 
 Because $\sim$ is an equivalence relation, it partitions the set of vertices $V$ into disjoint equivalence classes called **connected components**.
 
-![](fig/fig22.png)
+![](fig/fig22.png){width=50%}
 
 A graph is **connected** if it consists of exactly one connected component (meaning every vertex can reach every other vertex). Otherwise, it is **disconnected**.
 
@@ -124,22 +124,10 @@ Depth-First Search explores a graph by going as deep as possible along each bran
 * **Strategy**: Pick a start vertex, move to an unvisited neighbor, and immediately continue exploring from that new neighbor. When a vertex has no unvisited neighbors, backtrack to the previous vertex.
 
 
-
-```
-                     DFS Exploration Order
-                              (1)
-                             /   \
-                           [1]   [4]
-                           /       \
-                         (2)       (4)
-                        /
-                      [2]
-                      /
-                    (3)
-
-```
-
+<center>
 ![Animated example of a depth-first search (Image Source: Wikipedia](fig\fig24.gif)
+</center>
+
 
 #### DFS Algorithm Steps
 

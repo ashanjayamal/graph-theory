@@ -15,7 +15,7 @@ Trees are among the most fundamental and heavily utilized graph structures in ma
 ![](fig/fig28.png)
 
 
---
+---
 
 ### Equivalent Characterizations of Trees
 
@@ -181,32 +181,34 @@ If all edge weights in $G$ are distinct, $G$ has a **unique** Minimum Spanning T
 
 Kruskal's algorithm builds the MST by adding edges in increasing order of weight, avoiding cycles at every step.
 
-```
-                     Kruskal's Algorithm Step
-  1. Sort all edges by weight.
-  2. Pick the smallest edge. If it forms a cycle with the 
-     current forest, discard it; otherwise, add it.
-  3. Repeat until n - 1 edges are selected.
+**Kruskal's Algorithm Step**:
 
-```
+1. Sort all edges by weight.
+2. Pick the smallest edge. If it forms a cycle with the current forest, discard it; otherwise, add it.
+3. Repeat until n - 1 edges are selected.
+
+
+
 
 * **Data Structure:** Disjoint-Set Union (DSU / Find-Union).
 * **Time Complexity:** $O(E \log E)$ or $O(E \log V)$ due to edge sorting.
 
+```{example}
+![Image Credit: thealgorists.com](fig/fig35.gif)
+```
 ---
 
 #### Prim's Algorithm (Vertex-Centric)
 
 Prim's algorithm grows a single tree component outwards from an arbitrary starting vertex.
 
-```
-                      Prim's Algorithm Step
-  1. Start with a single vertex in tree set S.
-  2. Find the minimum-weight edge (u, v) such that u in S and v not in S.
-  3. Add v to S and include (u, v) in the tree.
-  4. Repeat until S contains all vertices.
+**Prim's Algorithm Step**:
 
-```
+1. Start with a single vertex in tree set S.
+2. Find the minimum-weight edge (u, v) such that u in S and v not in S.
+3. Add v to S and include (u, v) in the tree.
+4. Repeat until S contains all vertices.
+
 
 * **Data Structure:** Priority Queue / Binary Heap.
 * **Time Complexity:** $O(E \log V)$ with a binary heap, or $O(E + V \log V)$ using a Fibonacci heap.

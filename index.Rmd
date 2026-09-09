@@ -21,11 +21,15 @@ At its core, **graph theory** is the study of relationships. Whenever we have a 
 
 Unlike the graphs you might recall from introductory algebra (like $y = x^2$ or sine waves), a graph in discrete mathematics is a structural map. It consists of individual points and the lines that connect them.
 
-
+<center>
 ![A graph with 6 vertices and edges *(Image Credit: Wikipedia)*](fig/fig1.png)
+</center>
 
 The objects are represented as points called **vertices** (or **nodes**), and the connections between them are called **edges**.
+
+<center>
 ![](fig/fig 2.png){width=50%}
+</center>
 
 Graphs give us a unified mathematical language to represent networks. Whether we are analyzing social networks, computer communication grids, or transit maps, graph theory provides the core framework to understand how systems are connected.
 
@@ -37,12 +41,26 @@ To appreciate graph theory, it helps to understand the historical puzzles that s
 
 ### The Seven Bridges of Königsberg (1736)
 
-Graph theory was born in the Prussian city of Königsberg (now Kaliningrad, Russia). The city was divided by the Pregel River, creating two large islands connected to each other and to the mainland riverbanks by seven bridges.
+<div style="display: flex; align-items: center; gap: 30px;">
 
-![Image Source: Wikipedia](fig/fig12.png)
+<div style="flex: 1;">
+Graph theory was born in the Prussian city of Königsberg (now Kaliningrad, Russia).  
+The city was divided by the Pregel River, creating two large islands connected to each other and to the mainland riverbanks by seven bridges.
+</div>
+<div style="flex: 1;">
+<img src="fig/fig12.png" width="70%">
+</div>
+</div>
 
+<div style="display: flex; align-items: center; gap: 1px;">
+<div style="flex: 1;">
+<img src="fig/fig14.jpg" alt="Leonhard Euler (Image Credit: Wikipedia)" width="50%">
+</div>
+<div style="flex: 1;">
 The citizens posed a classic recreational puzzle: *Is it possible to take a walk through the city in such a way that you cross every single one of the seven bridges exactly once, and end up back where you started?*
-![Leonhard Euler *(Image Credit: Wikipedia)*](fig/fig14.jpg)
+</div>
+</div>
+
 
 In 1736, the Swiss mathematician **Leonhard Euler** solved this problem. He realized that the specific distances, land shapes, and physical geography did not matter; only the **connections** mattered. Euler simplified the map by replacing each landmass with a point (vertex) and each bridge with a line (edge).
 
@@ -52,15 +70,25 @@ By abstracting the geography into a mathematical structure, Euler proved that su
 
 ### Hamilton’s Icosian Game (1859)
 
+<div style="display: flex; align-items: center; gap: 1px;">
+
+<div style="flex: 1;">
+
+<img src="fig/fig13.png" alt="Portrait of Sir William Rowan Hamilton" width="50%">
+
+</div>
+
+<div style="flex: 1;">
+
 Over a century later, in 1859, Irish mathematician **Sir William Rowan Hamilton** created a commercial puzzle called the *Icosian Game*.
 
-![Porteat of Sir William Rowan Hamilton (Image Credit: Wikipedia)](fig/fig13.png)
+</div>
 
+</div>
+
+
+The game used a solid wooden regular dodecahedron a 12-faced polyhedron with 20 corners. Each of the 20 corners was labeled with the name of a famous world city. The objective was to find a route along the edges of the dodecahedron that visited **every city exactly once** and returned to the starting point.
 ![The Icosian Game(Image Credit: puzzlemuseum)](https://www.puzzlemuseum.com/month/picm02/200201hamilton.jpg)
-
-The game used a solid wooden regular dodecahedron—a 12-faced polyhedron with 20 corners. Each of the 20 corners was labeled with the name of a famous world city. The objective was to find a route along the edges of the dodecahedron that visited **every city exactly once** and returned to the starting point.
-
-
 
 While Euler’s bridge problem focused on visiting every *edge* once, Hamilton’s game focused on visiting every *vertex* once. These two historical problems led directly to two major areas of graph theory: **Eulerian paths** and **Hamiltonian cycles**.
 
@@ -204,7 +232,10 @@ Certain graph structures appear frequently throughout graph theory and computer 
 ```{definition}
 A **complete graph** on $n$ vertices, denoted by $K_n$, is a simple graph in which every pair of distinct vertices is connected by an edge.
 ```
-![Complete graphs: wolfram math world](https://mathworld.wolfram.com/images/eps-svg/CompleteGraphs.svg)
+
+<center>
+![Complete graphs: wolfram mathworld world](https://mathworld.wolfram.com/images/eps-svg/CompleteGraphs.svg)
+</center>
 
 * **Number of Edges in $K_n$**:
 To find the total number of edges, we count how many ways we can pick a pair of vertices from $n$ available vertices:
@@ -232,7 +263,10 @@ $$n \cdot k = 2\vert{}E\vert{} \implies \vert{}E\vert{} = \frac{n \cdot k}{2}$$
 ```{definition}
 A graph $G = (V, E)$ is **bipartite** if its vertex set $V$ can be partitioned into two disjoint subsets, $V_1$ and $V_2$ ($V = V_1 \cup V_2$ and $V_1 \cap V_2 = \emptyset$), such that every edge in $E$ connects a vertex in $V_1$ to a vertex in $V_2$. No edges exist between two vertices within $V_1$ or within $V_2$.
 ```
+
+<center>
 ![Image Credit: Mathworld Wolfarm ](https://mathworld.wolfram.com/images/eps-svg/BipartiteGraph.svg)
+</center>
 
 #### Complete Bipartite Graphs ($K_{n_1, n_2}$)
 
@@ -259,7 +293,9 @@ A graph $G$ is bipartite **if and only if** it contains **no cycles of odd lengt
 
 To navigate through a graph, we need clear definitions for moving along vertices and edges.
 
+<center>
 ![](fig/fig8.png)
+</center>
 
 
 ### Definitions
@@ -291,7 +327,10 @@ In many real-world networks, connections are one-way streets. For example, a web
 ```{definition}
 A **directed graph** (or **digraph**) consists of a vertex set $V$ and an edge set $E$ containing **ordered pairs** of vertices. An edge $e = (u, v)$ goes **from $u$ to $v$**.
 ```
+
+<center>
 ![](fig/fig9.png)
+</center>
 
 ### In-Degree and Out-Degree
 
@@ -301,7 +340,9 @@ Because edges have direction in a digraph, we split vertex degree into two separ
 * **In-degree ($d_{\text{in}}(v)$)**: The number of directed edges coming **into** vertex $v$.
 * **Out-degree ($d_{\text{out}}(v)$)**: The number of directed edges going **out of** vertex $v$.
 
+<center>
 ![](fig/fig10.png)
+</center>
 ```
 
 In the example above:

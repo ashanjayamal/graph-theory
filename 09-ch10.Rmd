@@ -54,19 +54,38 @@ $$\lim_{n \to \infty} \mathbb{P}(G(n, p) \in P) = 1$$
 
 ### Definition of Threshold Function
 
+```{definition}
 A function $p_c(n)$ is a **threshold function** for a graph property $P$ if:
 
 
 $$\lim_{n \to \infty} \mathbb{P}(G(n, p) \in P) = \begin{cases} 0 & \text{if } p(n) \ll p_c(n) \\ 1 & \text{if } p(n) \gg p_c(n) \end{cases}$$
-
 ```
-                Phase Transition Threshold (p_c)
-       P(Property holds)
-             1.0 |                   /-----------
-                 |                  /
-                 |                 /
-             0.0 +----------------+-------------> p(n)
-                                p_c(n)
+
+
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+
+pc <- 0.3  # threshold p_c
+
+# create data: p from 0 to 1, with a sharp transition near p_c
+p_vals <- seq(0, 1, length.out = 200)
+prob_P <- 1 / (1 + exp(-50 * (p_vals - pc)))  # steep sigmoid
+
+df <- data.frame(p = p_vals, prob = prob_P)
+
+ggplot(df, aes(x = p, y = prob)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_vline(xintercept = pc, linetype = "dashed", color = "red") +
+  annotate("text", x = pc, y = 0.05, label = "p_c(n)", color = "red", vjust = 1.5) +
+  labs(
+    x = "p(n)",
+    y = "P(Property holds)",
+    title = "Phase Transition Threshold p_c(n)"
+  ) +
+  theme_minimal(base_size = 14)
 
 ```
 
@@ -118,12 +137,11 @@ The Watts–Strogatz model generates graphs with both **high clustering** and **
 1. Start with a regular ring lattice of $n$ vertices where each vertex is connected to its $k$ nearest neighbors.
 2. For every edge, re-wire its target vertex with probability $p_{\text{rewire}}$ to a randomly selected node.
 
-```
-      Ring Lattice (p = 0)        Small World (0 < p < 1)         Random Graph (p = 1)
-       High Clustering             High Clustering                 Low Clustering
-       Long Path Length            Short Path Length               Short Path Length
+| Ring Lattice (p = 0) | Small World (0 < p < 1) | Random Graph (p = 1) |
+|----------------------|--------------------------|------------------------|
+| High Clustering      | High Clustering          | Low Clustering         |
+| Long Path Length     | Short Path Length        | Short Path Length      |
 
-```
 
 ---
 
@@ -177,6 +195,3 @@ $$\Pi(v_i) = \frac{d(v_i)}{\sum_{j} d(v_j)}$$
 3. **Power-Law Exponent Calculation**: A scale-free network has $P(k) = C k^{-2.5}$. If $10^6$ nodes exist, estimate the ratio of nodes with degree $k=10$ compared to degree $k=100$.
 4. **Preferential Attachment Probability**: A network has three vertices with degrees $d(v_1)=5$, $d(v_2)=3$, and $d(v_3)=2$. Calculate the probability that a newly added vertex connects to $v_1$.
 
----
-
-Would you like to draft an **Epilogue / Appendix** detailing key proof techniques in graph theory, or generate a **Master Problem Set** covering all 10 chapters?
